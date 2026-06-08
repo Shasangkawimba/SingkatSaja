@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Redis;
 
 class StoreLinkRequest extends FormRequest
 {
@@ -22,7 +23,7 @@ class StoreLinkRequest extends FormRequest
      */
     public function rules(): array
     {
-        $reserved = ['login', 'register', 'logout', 'dashboard', 'settings', 'analytics', 'links', 'api', 'admin'];
+        $reserved = config('singkatsaja.reserved_aliases', []);
 
         return [
             'destination_url' => ['required', 'url', 'max:2048'],
@@ -41,5 +42,24 @@ class StoreLinkRequest extends FormRequest
             ],
             'expires_at' => ['nullable', 'date', 'after:now'],
         ];
+    }
+
+    /**
+     * Configure the validator instance and enforce creation rate limits.
+     */
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            $user = $this->user();
+            if ($user) {
+                $redisKey = "rl:create:user:{$user->id}";
+                $count = Redis::get($redisKey);
+                $limit = config('singkatsaja.rate_limits.links_per_hour', 30);
+
+                if ($count && $count >= $limit) {
+                    $validator->errors()->add('short_code', "Rate limit exceeded. You can only create {$limit} links per hour.");
+                }
+            }
+        });
     }
 }

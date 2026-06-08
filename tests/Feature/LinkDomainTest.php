@@ -29,6 +29,9 @@ test('create link action saves in DB and caches to Redis without TTL', function 
             return $data['destination_url'] === 'https://example.com';
         }));
 
+    Redis::shouldReceive('incr')->once()->with("rl:create:user:{$user->id}")->andReturn(1);
+    Redis::shouldReceive('expire')->once()->with("rl:create:user:{$user->id}", 3600)->andReturn(true);
+
     $action = app(CreateLinkAction::class);
     $link = $action->execute($user, [
         'destination_url' => 'https://example.com',
@@ -49,6 +52,9 @@ test('create link action with expires_at sets Redis TTL', function () {
             $data = json_decode($json, true);
             return $data['expires_at'] === $expiresAt->toIso8601String();
         }));
+
+    Redis::shouldReceive('incr')->once()->with("rl:create:user:{$user->id}")->andReturn(1);
+    Redis::shouldReceive('expire')->once()->with("rl:create:user:{$user->id}", 3600)->andReturn(true);
 
     $action = app(CreateLinkAction::class);
     $link = $action->execute($user, [

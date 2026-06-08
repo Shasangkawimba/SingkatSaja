@@ -27,8 +27,21 @@ class CreateLinkAction
         ]);
 
         $this->cacheLink($link);
+        $this->incrementRateLimit($user);
 
         return $link;
+    }
+
+    /**
+     * Increment the user's hourly creation limit key in Redis.
+     */
+    protected function incrementRateLimit(User $user): void
+    {
+        $redisKey = "rl:create:user:{$user->id}";
+        $count = Redis::incr($redisKey);
+        if ($count == 1) {
+            Redis::expire($redisKey, 3600);
+        }
     }
 
     /**

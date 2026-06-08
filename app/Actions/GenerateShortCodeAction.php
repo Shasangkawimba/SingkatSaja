@@ -8,7 +8,6 @@ class GenerateShortCodeAction
 {
     private const CHARACTERS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     private const LENGTH = 7;
-    private const RESERVED = ['login', 'register', 'logout', 'dashboard', 'settings', 'analytics', 'links', 'api', 'admin'];
 
     /**
      * Generate a unique collision-safe short code.
@@ -30,7 +29,9 @@ class GenerateShortCodeAction
      */
     private function isCollision(string $code): bool
     {
-        if (in_array(strtolower($code), self::RESERVED, true)) {
+        $reserved = config('singkatsaja.reserved_aliases', []);
+
+        if (in_array(strtolower($code), $reserved, true)) {
             return true;
         }
 
