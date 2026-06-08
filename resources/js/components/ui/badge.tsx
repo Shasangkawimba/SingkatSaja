@@ -17,6 +17,16 @@ const badgeVariants = cva(
           "border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
           "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+        eyebrow:
+          "border-transparent bg-frost-gray text-graphite dark:bg-pale-lilac/10 dark:text-pure-white rounded-pills px-3.5 py-1 text-[13px] font-medium tracking-tight",
+        yellow:
+          "bg-sunlit-yellow text-graphite border-sunlit-yellow rounded-badges px-2.5 py-1 font-bold text-[11px] tracking-tight",
+        success:
+          "border-transparent bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400 rounded-pills px-3 py-0.5 text-[13px] font-medium",
+        warning:
+          "border-transparent bg-sunlit-yellow/20 text-amber-800 dark:bg-sunlit-yellow/10 dark:text-sunlit-yellow rounded-pills px-3 py-0.5 text-[13px] font-medium",
+        danger:
+          "border-transparent bg-rose-50 text-rose-700 dark:bg-rose-500/10 dark:text-rose-400 rounded-pills px-3 py-0.5 text-[13px] font-medium",
       },
     },
     defaultVariants: {
