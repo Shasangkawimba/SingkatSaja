@@ -9,3 +9,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 require __DIR__.'/settings.php';
+
+Route::get('/{short_code}', [\App\Http\Controllers\RedirectController::class, 'redirect'])->name('redirect');
+
