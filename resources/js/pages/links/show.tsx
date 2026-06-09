@@ -1,5 +1,2 @@
-import React from 'react';
-
-export default function Show() {
-    return null;
-}
+import Analytics from './analytics';
+export default Analytics;
