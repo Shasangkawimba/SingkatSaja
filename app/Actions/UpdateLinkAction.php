@@ -17,7 +17,11 @@ class UpdateLinkAction
             'expires_at' => $data['expires_at'] ?? null,
         ]);
 
-        $this->refreshCache($link);
+        try {
+            $this->refreshCache($link);
+        } catch (\Throwable $e) {
+            report($e);
+        }
 
         return $link;
     }

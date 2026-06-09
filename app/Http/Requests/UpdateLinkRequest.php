@@ -22,7 +22,7 @@ class UpdateLinkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'destination_url' => ['required', 'url', 'max:2048'],
+            'destination_url' => ['required', 'url', 'max:2048', 'starts_with:http://,https://'],
             'expires_at' => ['nullable', 'date', 'after:now'],
         ];
     }

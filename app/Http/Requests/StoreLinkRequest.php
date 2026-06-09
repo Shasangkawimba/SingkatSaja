@@ -26,7 +26,7 @@ class StoreLinkRequest extends FormRequest
         $reserved = config('singkatsaja.reserved_aliases', []);
 
         return [
-            'destination_url' => ['required', 'url', 'max:2048'],
+            'destination_url' => ['required', 'url', 'max:2048', 'starts_with:http://,https://'],
             'short_code' => [
                 'nullable',
                 'string',

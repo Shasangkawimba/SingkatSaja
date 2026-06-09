@@ -53,19 +53,6 @@ class LogClickJob implements ShouldQueue
      */
     public function handle(UserAgentParser $parser): void
     {
-        $linkId = $this->payload['link_id'];
-        $ip = $this->payload['ip_address'] ?? 'unknown';
-        $redisKey = "dedup:{$linkId}:{$ip}";
-
-        // Enforce 60-second Redis-based deduplication window
-        $window = config('singkatsaja.deduplication.window_seconds', 60);
-        $acquired = Redis::set($redisKey, 1, 'EX', $window, 'NX');
-
-        if (!$acquired) {
-            // Duplicate click within 60-second window - discard event
-            return;
-        }
-
         $parsed = $parser->parse($this->payload['user_agent'] ?? null);
         $clickedAt = Carbon::createFromTimestamp($this->payload['timestamp'] ?? time());
         $dateStr = $clickedAt->toDateString();

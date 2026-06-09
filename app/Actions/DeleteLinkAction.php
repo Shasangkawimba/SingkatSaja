@@ -12,7 +12,11 @@ class DeleteLinkAction
      */
     public function execute(Link $link): void
     {
-        Redis::del("short:{$link->short_code}");
+        try {
+            Redis::del("short:{$link->short_code}");
+        } catch (\Throwable $e) {
+            report($e);
+        }
 
         $link->delete();
     }

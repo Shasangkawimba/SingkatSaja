@@ -8,6 +8,7 @@ use App\Jobs\LogClickJob;
 use App\Actions\CreateLinkAction;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -57,6 +58,8 @@ test('successful link creation increments creation rate limit in Redis', functio
 });
 
 test('analytics deduplication discards second hit within 60s from same IP', function () {
+    Queue::fake();
+
     $user = User::factory()->create();
     $link = Link::create([
         'user_id' => $user->id,
@@ -64,35 +67,28 @@ test('analytics deduplication discards second hit within 60s from same IP', func
         'destination_url' => 'https://example.com'
     ]);
 
-    $payload = [
-        'link_id' => $link->id,
-        'ip_address' => '1.1.1.1',
-        'user_agent' => 'Mozilla/5.0 ...',
-        'timestamp' => now()->timestamp,
-    ];
+    // Mock resolve action cache checks
+    Redis::shouldReceive('get')->twice()->with('short:dedupcode')->andReturn(null);
+    Redis::shouldReceive('set')->twice()->with('short:dedupcode', Mockery::any())->andReturn(true);
 
     // First click: Redis allows it (set returns true)
     Redis::shouldReceive('set')
         ->once()
-        ->with("dedup:{$link->id}:1.1.1.1", 1, 'EX', 60, 'NX')
+        ->with("dedup:{$link->id}:127.0.0.1", 1, 'EX', 60, 'NX')
         ->andReturn(true);
-
-    $job1 = new LogClickJob($payload);
-    app()->call([$job1, 'handle']);
-
-    expect(ClickEvent::count())->toBe(1)
-        ->and(DailyStat::first()->clicks_count)->toBe(1);
 
     // Second click: Redis blocks it (set returns false/null)
     Redis::shouldReceive('set')
         ->once()
-        ->with("dedup:{$link->id}:1.1.1.1", 1, 'EX', 60, 'NX')
+        ->with("dedup:{$link->id}:127.0.0.1", 1, 'EX', 60, 'NX')
         ->andReturn(false);
 
-    $job2 = new LogClickJob($payload);
-    app()->call([$job2, 'handle']);
+    // Perform first redirect (dispatches job)
+    $this->get('/dedupcode')->assertStatus(302);
 
-    // Counts remain 1 (no duplicate log or stats aggregate increment)
-    expect(ClickEvent::count())->toBe(1)
-        ->and(DailyStat::first()->clicks_count)->toBe(1);
+    // Perform second redirect (does not dispatch job due to deduplication)
+    $this->get('/dedupcode')->assertStatus(302);
+
+    // Assert the job was pushed exactly once
+    Queue::assertPushed(LogClickJob::class, 1);
 });

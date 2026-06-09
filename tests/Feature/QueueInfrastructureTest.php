@@ -5,6 +5,7 @@ use App\Models\Link;
 use App\Models\User;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -28,6 +29,14 @@ test('redirecting dispatches log click job to dedicated queue and connection', f
         'short_code' => 'infrapage',
         'destination_url' => 'https://example.com'
     ]);
+
+    // Mock Redis for the redirect request lifecycle
+    Redis::shouldReceive('get')->once()->with("short:infrapage")->andReturn(null);
+    Redis::shouldReceive('set')->once()->with("short:infrapage", Mockery::any())->andReturn(true);
+    Redis::shouldReceive('set')
+        ->once()
+        ->with("dedup:{$link->id}:127.0.0.1", 1, 'EX', 60, 'NX')
+        ->andReturn(true);
 
     // Perform redirect
     $response = $this->get("/{$link->short_code}");

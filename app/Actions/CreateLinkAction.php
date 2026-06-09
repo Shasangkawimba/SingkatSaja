@@ -17,17 +17,41 @@ class CreateLinkAction
      */
     public function execute(User $user, array $data): Link
     {
-        $shortCode = $data['short_code'] ?? $this->generateShortCode->execute();
+        $isCustomAlias = isset($data['short_code']) && $data['short_code'] !== '';
+        $maxAttempts = 3;
+        $attempts = 0;
 
-        /** @var Link $link */
-        $link = $user->links()->create([
-            'short_code' => $shortCode,
-            'destination_url' => $data['destination_url'],
-            'expires_at' => $data['expires_at'] ?? null,
-        ]);
+        do {
+            try {
+                $shortCode = $data['short_code'] ?? $this->generateShortCode->execute();
 
-        $this->cacheLink($link);
-        $this->incrementRateLimit($user);
+                /** @var Link $link */
+                $link = $user->links()->create([
+                    'short_code' => $shortCode,
+                    'destination_url' => $data['destination_url'],
+                    'expires_at' => $data['expires_at'] ?? null,
+                ]);
+
+                break;
+            } catch (\Illuminate\Database\QueryException $e) {
+                $isUniqueViolation = $e->getCode() === '23505' 
+                    || str_contains($e->getMessage(), 'unique constraint') 
+                    || str_contains($e->getMessage(), 'UNIQUE constraint failed');
+
+                if ($isUniqueViolation && !$isCustomAlias && ++$attempts < $maxAttempts) {
+                    continue;
+                }
+
+                throw $e;
+            }
+        } while (true);
+
+        try {
+            $this->cacheLink($link);
+            $this->incrementRateLimit($user);
+        } catch (\Throwable $e) {
+            report($e);
+        }
 
         return $link;
     }

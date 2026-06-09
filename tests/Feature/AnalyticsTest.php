@@ -63,12 +63,6 @@ test('log click job ingests events and aggregates stats transactionally', functi
         'timestamp' => now()->timestamp,
     ];
 
-    // First click: Redis allows it (set returns true)
-    Redis::shouldReceive('set')
-        ->once()
-        ->with("dedup:{$link->id}:192.168.1.1", 1, 'EX', 60, 'NX')
-        ->andReturn(true);
-
     // Run first ingestion
     $job = new LogClickJob($payload);
     app()->call([$job, 'handle']);
@@ -80,13 +74,7 @@ test('log click job ingests events and aggregates stats transactionally', functi
     expect($stat->clicks_count)->toBe(1)
         ->and($stat->link_id)->toBe($link->id);
 
-    // Second click: Redis allows it (set returns true because of different IP)
-    Redis::shouldReceive('set')
-        ->once()
-        ->with("dedup:{$link->id}:192.168.1.2", 1, 'EX', 60, 'NX')
-        ->andReturn(true);
-
-    // Run second ingestion on the same day with a different IP to verify upsert increment (and bypass 60s same-IP dedup)
+    // Run second ingestion on the same day with a different IP to verify upsert increment
     $payload2 = $payload;
     $payload2['ip_address'] = '192.168.1.2';
     $job2 = new LogClickJob($payload2);
