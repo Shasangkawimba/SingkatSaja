@@ -1,5 +1,5 @@
-import React from 'react';
 import { Head, usePage } from '@inertiajs/react';
+import React from 'react';
 
 interface SEOProps {
     title?: string;
@@ -21,9 +21,15 @@ export function SEO({
     twitterCard = 'summary_large_image',
 }: SEOProps) {
     const { url, props } = usePage();
-    const appUrl = (props.app_url as string) || (typeof window !== 'undefined' ? window.location.origin : 'http://localhost');
+    const appUrl =
+        (props.app_url as string) ||
+        (typeof window !== 'undefined'
+            ? window.location.origin
+            : 'http://localhost');
     const currentUrl = canonical || `${appUrl}${url}`;
-    const fullTitle = title ? `${title} | SingkatSaja` : 'SingkatSaja — Confident & Fast URL Shortener';
+    const fullTitle = title
+        ? `${title} | SingkatSaja`
+        : 'SingkatSaja — Confident & Fast URL Shortener';
 
     return (
         <Head>
@@ -37,13 +43,23 @@ export function SEO({
             <meta property="og:title" content={fullTitle} />
             <meta property="og:description" content={description} />
             <meta property="og:url" content={currentUrl} />
-            <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `${appUrl}${ogImage}`} />
+            <meta
+                property="og:image"
+                content={
+                    ogImage.startsWith('http') ? ogImage : `${appUrl}${ogImage}`
+                }
+            />
 
             {/* Twitter */}
             <meta name="twitter:card" content={twitterCard} />
             <meta name="twitter:title" content={fullTitle} />
             <meta name="twitter:description" content={description} />
-            <meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `${appUrl}${ogImage}`} />
+            <meta
+                name="twitter:image"
+                content={
+                    ogImage.startsWith('http') ? ogImage : `${appUrl}${ogImage}`
+                }
+            />
         </Head>
     );
 }

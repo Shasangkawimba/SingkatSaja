@@ -1,0 +1,59 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - link "SingkatSaja" [ref=e6] [cursor=pointer]:
+        - /url: /dashboard
+        - generic [ref=e7]:
+          - img [ref=e9]
+          - generic [ref=e12]: SingkatSaja
+      - navigation "Main" [ref=e14]:
+        - list [ref=e16]:
+          - listitem [ref=e17]:
+            - link "Dashboard" [ref=e18] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e19]
+              - text: Dashboard
+          - listitem [ref=e24]:
+            - link "My Links" [ref=e25] [cursor=pointer]:
+              - /url: /links
+              - img [ref=e26]
+              - text: My Links
+      - generic [ref=e29]:
+        - button [ref=e31] [cursor=pointer]:
+          - img
+        - button "TU" [ref=e32]:
+          - generic [ref=e34]: TU
+    - main [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e39]:
+            - heading "Create Short Link" [level=2] [ref=e40]
+            - paragraph [ref=e41]: Shorten target URLs and configure custom options.
+          - link "Back to Links" [ref=e43] [cursor=pointer]:
+            - /url: /links
+            - img
+            - text: Back to Links
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]: Destination URL
+            - textbox "Destination URL" [ref=e51]:
+              - /placeholder: https://example.com/long-target-url
+            - generic [ref=e52]: The target URL to redirect visitors to. Must start with http:// or https://
+          - generic [ref=e53]:
+            - generic [ref=e54]: Custom Alias (Optional)
+            - generic [ref=e55]:
+              - generic [ref=e56]: singkat.saja/
+              - textbox "Custom Alias (Optional)" [ref=e57]:
+                - /placeholder: custom-name
+            - generic [ref=e58]: Custom names must be alphanumeric and cannot match system paths (like admin, dashboard).
+          - generic [ref=e59]:
+            - generic [ref=e60]: Expiration Date (Optional)
+            - textbox "Expiration Date (Optional)" [ref=e61]
+            - generic [ref=e62]: After this timestamp, the shortcode resolves to a 404 response.
+          - generic [ref=e63]:
+            - link "Cancel" [ref=e64] [cursor=pointer]:
+              - /url: /links
+            - button "Generate Link" [ref=e65]:
+              - img
+              - text: Generate Link
+  - region "Notifications alt+T"

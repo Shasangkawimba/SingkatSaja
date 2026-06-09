@@ -1,4 +1,4 @@
-import { Link } from './link';
+import type { Link } from './link';
 
 export type DailyStatRecord = {
     readonly date: string;
@@ -32,4 +32,3 @@ export type LinkAnalytics = {
 export type AnalyticsProps = {
     readonly analytics: LinkAnalytics;
 };
-

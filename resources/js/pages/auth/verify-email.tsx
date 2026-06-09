@@ -1,4 +1,3 @@
-// Components
 import { Form, Head } from '@inertiajs/react';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
@@ -12,27 +11,32 @@ export default function VerifyEmail({ status }: { status?: string }) {
             <Head title="Email verification" />
 
             {status === 'verification-link-sent' && (
-                <div className="mb-4 text-center text-sm font-medium text-green-600">
+                <div className="mb-20 rounded-lg border border-emerald-100 bg-emerald-50/50 p-12 text-center text-sm font-medium text-emerald-600">
                     A new verification link has been sent to the email address
-                    you provided during registration.
+                    you provided.
                 </div>
             )}
 
-            <Form {...send.form()} className="space-y-6 text-center">
+            <Form {...send.form()} className="flex flex-col gap-20 text-center">
                 {({ processing }) => (
-                    <>
-                        <Button disabled={processing} variant="secondary">
-                            {processing && <Spinner />}
+                    <div className="flex flex-col items-center justify-center gap-20">
+                        <Button
+                            disabled={processing}
+                            className="h-10 w-full rounded-lg bg-vivid-indigo font-medium text-pure-white shadow-xs hover:bg-vivid-indigo/90"
+                        >
+                            {processing && <Spinner className="mr-8 size-16" />}
                             Resend verification email
                         </Button>
 
-                        <TextLink
-                            href={logout()}
-                            className="mx-auto block text-sm"
-                        >
-                            Log out
-                        </TextLink>
-                    </>
+                        <div className="mt-4 w-full border-t border-neutral-100 pt-16 text-center text-[13px] font-medium text-slate">
+                            <TextLink
+                                href={logout()}
+                                className="font-bold text-vivid-indigo hover:underline"
+                            >
+                                Log out
+                            </TextLink>
+                        </div>
+                    </div>
                 )}
             </Form>
         </>

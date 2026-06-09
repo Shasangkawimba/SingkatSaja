@@ -1,0 +1,17 @@
+[     305ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://[::1]:5173/node_modules/.vite/deps/@inertiajs_react.js?v=fa28684d:20864
+[    7183ms] TypeError: Cannot convert undefined or null to object
+    at sort (<anonymous>)
+    at mountStateImpl (http://[::1]:5173/node_modules/.vite/deps/@inertiajs_react.js?v=fa28684d:11115:20)
+    at mountState (http://[::1]:5173/node_modules/.vite/deps/@inertiajs_react.js?v=fa28684d:11136:19)
+    at Object.useState (http://[::1]:5173/node_modules/.vite/deps/@inertiajs_react.js?v=fa28684d:19578:13)
+    at exports.useState (http://[::1]:5173/node_modules/.vite/deps/react-CZunmVaX.js?v=fa28684d:779:31)
+    at useUncontrolledState (http://[::1]:5173/node_modules/.vite/deps/dist-DuG9Vrh9.js?v=fa28684d:44:41)
+    at useControllableState (http://[::1]:5173/node_modules/.vite/deps/dist-DuG9Vrh9.js?v=fa28684d:17:63)
+    at SelectProvider (http://[::1]:5173/node_modules/.vite/deps/@radix-ui_react-select.js?v=fa28684d:53:28)
+    at Object.react_stack_bottom_frame (http://[::1]:5173/node_modules/.vite/deps/@inertiajs_react.js?v=fa28684d:19395:12)
+    at renderWithHooks (http://[::1]:5173/node_modules/.vite/deps/@inertiajs_react.js?v=fa28684d:10740:19)
+[    7183ms] [WARNING] %s
+
+%s
+ An error occurred in the <SelectProvider> component. Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://react.dev/link/error-boundaries to learn more about error boundaries. @ http://[::1]:5173/node_modules/.vite/deps/@inertiajs_react.js?v=fa28684d:11784

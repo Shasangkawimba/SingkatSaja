@@ -27,7 +27,9 @@ class LinkController extends Controller
 
         return Inertia::render('links/index', [
             'links' => $links,
-            'filters' => $request->only(['sort']),
+            'filters' => [
+                'sort' => $request->query('sort', 'newest'),
+            ],
         ]);
     }
 

@@ -1,0 +1,43 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - link "SingkatSaja" [ref=e6] [cursor=pointer]:
+        - /url: /dashboard
+        - generic [ref=e7]:
+          - img [ref=e9]
+          - generic [ref=e12]: SingkatSaja
+      - navigation "Main" [ref=e14]:
+        - list [ref=e16]:
+          - listitem [ref=e17]:
+            - link "Dashboard" [ref=e18] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e19]
+              - text: Dashboard
+          - listitem [ref=e24]:
+            - link "My Links" [ref=e25] [cursor=pointer]:
+              - /url: /links
+              - img [ref=e26]
+              - text: My Links
+      - generic [ref=e30]:
+        - button [ref=e32] [cursor=pointer]:
+          - img
+        - button "TU" [ref=e33]:
+          - generic [ref=e35]: TU
+    - main [ref=e36]:
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - generic [ref=e40]:
+            - heading "My Links" [level=2] [ref=e41]
+            - paragraph [ref=e42]: Manage, monitor, and configure shortened links.
+          - link "Create Link" [ref=e44] [cursor=pointer]:
+            - /url: /links/create
+            - img
+            - text: Create Link
+        - generic [ref=e46]:
+          - img [ref=e48]
+          - generic [ref=e51]:
+            - heading "No links created yet" [level=3] [ref=e52]
+            - paragraph [ref=e53]: Generate your first shortened Base62 link to start tracking clicks.
+          - link "Create your first link" [ref=e55] [cursor=pointer]:
+            - /url: /links/create
+  - region "Notifications alt+T"

@@ -9,9 +9,11 @@
 
 @theme {
     --font-sans:
-        'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        'Segoe UI', Roboto, sans-serif;
     --font-satoshi:
-        'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        'Segoe UI', Roboto, sans-serif;
 
     /* Custom Design Colors */
     --color-vivid-indigo: #494bcb;
@@ -49,17 +51,24 @@
     --color-input: var(--input);
     --color-ring: var(--ring);
 
-    /* Custom Spacing Scale */
-    --spacing-4: 4px;
-    --spacing-8: 8px;
-    --spacing-16: 16px;
-    --spacing-20: 20px;
-    --spacing-32: 32px;
-    --spacing-40: 40px;
-    --spacing-48: 48px;
-    --spacing-76: 76px;
-    --spacing-84: 84px;
-
+    --spacing: 1px;
+    --spacing-0\.5: 2px;
+    --spacing-1: 4px;
+    --spacing-1\.5: 6px;
+    --spacing-2: 8px;
+    --spacing-2\.5: 10px;
+    --spacing-3: 12px;
+    --spacing-3\.5: 14px;
+    --spacing-4: 16px;
+    --spacing-5: 20px;
+    --spacing-6: 24px;
+    --spacing-7: 28px;
+    --spacing-8: 32px;
+    --spacing-9: 36px;
+    --spacing-10: 40px;
+    --spacing-11: 44px;
+    --spacing-12: 48px;
+    --spacing-14: 56px;
     /* Custom Border Radii */
     --radius-cards: 7.6px;
     --radius-pills: 35.8px;
@@ -98,28 +107,28 @@
 :root {
     --background: #ffffff;
     --foreground: #222222;
-    
+
     --card: #ffffff;
     --card-foreground: #222222;
-    
+
     --popover: #ffffff;
     --popover-foreground: #222222;
-    
+
     --primary: #494bcb;
     --primary-foreground: #ffffff;
-    
+
     --secondary: #eaeaf7;
     --secondary-foreground: #222222;
-    
+
     --muted: #f6f6fa;
     --muted-foreground: #686878;
-    
+
     --accent: #eaeaf7;
     --accent-foreground: #494bcb;
-    
+
     --destructive: oklch(0.577 0.245 27.325);
     --destructive-foreground: #ffffff;
-    
+
     --border: #686878;
     --input: #aaaab0;
     --ring: #494bcb;
@@ -129,25 +138,25 @@
 .dark {
     --background: #08093f;
     --foreground: #ffffff;
-    
+
     --card: #08093f;
     --card-foreground: #ffffff;
-    
+
     --popover: #08093f;
     --popover-foreground: #ffffff;
-    
+
     --primary: #ffffff;
     --primary-foreground: #08093f;
-    
+
     --secondary: #eaeaf7;
     --secondary-foreground: #08093f;
-    
+
     --muted: #eaeaf7;
     --muted-foreground: #8a8ac6;
-    
+
     --accent: #eaeaf7;
     --accent-foreground: #ffffff;
-    
+
     --border: #8a8ac6;
     --input: #8a8ac6;
     --ring: #ffffff;
@@ -159,7 +168,6 @@
     }
 
     body {
-        @apply bg-background text-foreground font-sans tracking-[-0.02em];
+        @apply bg-background font-sans tracking-[-0.02em] text-foreground;
     }
 }
-

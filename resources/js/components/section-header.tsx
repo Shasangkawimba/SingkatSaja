@@ -1,74 +1,78 @@
-import * as React from "react"
-import { cn } from "@/lib/utils"
-import { Badge } from "@/components/ui/badge"
+import * as React from 'react';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 interface SectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  eyebrow?: string | React.ReactNode
-  title: string | React.ReactNode
-  description?: string | React.ReactNode
-  actions?: React.ReactNode
-  align?: "left" | "center"
-  isHero?: boolean
+    eyebrow?: string | React.ReactNode;
+    title: string | React.ReactNode;
+    description?: string | React.ReactNode;
+    actions?: React.ReactNode;
+    align?: 'left' | 'center';
+    isHero?: boolean;
 }
 
 export function SectionHeader({
-  className,
-  eyebrow,
-  title,
-  description,
-  actions,
-  align = "left",
-  isHero = false,
-  ...props
+    className,
+    eyebrow,
+    title,
+    description,
+    actions,
+    align = 'left',
+    isHero = false,
+    ...props
 }: SectionHeaderProps) {
-  const isCentered = align === "center"
+    const isCentered = align === 'center';
 
-  return (
-    <div
-      className={cn(
-        "flex flex-col gap-16",
-        isCentered ? "items-center text-center mx-auto max-w-2xl" : "items-start",
-        className
-      )}
-      {...props}
-    >
-      {eyebrow && (
-        <div data-slot="section-header-eyebrow">
-          {typeof eyebrow === "string" ? (
-            <Badge variant="eyebrow">{eyebrow}</Badge>
-          ) : (
-            eyebrow
-          )}
-        </div>
-      )}
-
-      <div className="flex flex-col gap-8">
-        <h2
-          className={cn(
-            "font-bold text-graphite dark:text-pure-white tracking-[-0.02em]",
-            isHero ? "text-heading-lg md:text-display leading-none" : "text-heading-sm md:text-heading leading-tight"
-          )}
-        >
-          {title}
-        </h2>
-
-        {description && (
-          <p className="text-body text-slate dark:text-soft-violet max-w-xl leading-relaxed">
-            {description}
-          </p>
-        )}
-      </div>
-
-      {actions && (
+    return (
         <div
-          className={cn(
-            "flex flex-wrap gap-8 items-center",
-            isCentered ? "justify-center" : "justify-start"
-          )}
+            className={cn(
+                'flex flex-col gap-16',
+                isCentered
+                    ? 'mx-auto max-w-2xl items-center text-center'
+                    : 'items-start',
+                className,
+            )}
+            {...props}
         >
-          {actions}
+            {eyebrow && (
+                <div data-slot="section-header-eyebrow">
+                    {typeof eyebrow === 'string' ? (
+                        <Badge variant="eyebrow">{eyebrow}</Badge>
+                    ) : (
+                        eyebrow
+                    )}
+                </div>
+            )}
+
+            <div className="flex flex-col gap-8">
+                <h2
+                    className={cn(
+                        'font-bold tracking-[-0.02em] text-graphite dark:text-pure-white',
+                        isHero
+                            ? 'text-heading-lg leading-none md:text-display'
+                            : 'text-heading-sm leading-tight md:text-heading',
+                    )}
+                >
+                    {title}
+                </h2>
+
+                {description && (
+                    <p className="max-w-xl text-body leading-relaxed text-slate dark:text-soft-violet">
+                        {description}
+                    </p>
+                )}
+            </div>
+
+            {actions && (
+                <div
+                    className={cn(
+                        'flex flex-wrap items-center gap-8',
+                        isCentered ? 'justify-center' : 'justify-start',
+                    )}
+                >
+                    {actions}
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  )
+    );
 }

@@ -8,4 +8,3 @@ export type DashboardStats = {
 export type DashboardProps = {
     readonly stats: DashboardStats;
 };
-

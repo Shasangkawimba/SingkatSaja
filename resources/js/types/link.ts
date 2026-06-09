@@ -44,4 +44,3 @@ export type LinksIndexProps = {
     readonly links: PaginatedResponse<Link>;
     readonly filters: LinkFilters;
 };
-
