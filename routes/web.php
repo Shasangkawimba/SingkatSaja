@@ -18,5 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 require __DIR__.'/settings.php';
 
+Route::get('api/health/queue', [\App\Http\Controllers\QueueHealthController::class, 'show'])->name('queue.health');
+
 Route::get('/{short_code}', [\App\Http\Controllers\RedirectController::class, 'redirect'])->name('redirect');
 

@@ -15,11 +15,38 @@ class LogClickJob implements ShouldQueue
     use Queueable;
 
     /**
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
+    public $tries = 5;
+
+    /**
+     * The number of seconds the job can run before timing out.
+     *
+     * @var int
+     */
+    public $timeout = 30;
+
+    /**
+     * Calculate the number of seconds to wait before retrying the job.
+     *
+     * @return array<int, int>
+     */
+    public function backoff(): array
+    {
+        return [5, 10, 30, 60];
+    }
+
+    /**
      * Create a new job instance.
      */
     public function __construct(
         public array $payload
-    ) {}
+    ) {
+        $this->connection = 'redis';
+        $this->queue = 'analytics';
+    }
 
     /**
      * Execute the job.
