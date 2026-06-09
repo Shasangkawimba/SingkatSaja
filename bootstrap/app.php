@@ -27,4 +27,24 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*'),
         );
+
+        $exceptions->respond(function (\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception, Request $request) {
+            if ($request->is('api/*') || $request->expectsJson()) {
+                return $response;
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if (in_array($statusCode, [401, 403, 404, 419, 429, 500, 503])) {
+                if (app()->environment('local') && in_array($statusCode, [500, 503]) && config('app.debug')) {
+                    return $response;
+                }
+
+                return \Inertia\Inertia::render('error', [
+                    'status' => $statusCode,
+                ])->toResponse($request)->setStatusCode($statusCode);
+            }
+
+            return $response;
+        });
     })->create();
