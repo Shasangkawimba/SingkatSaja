@@ -1,5 +1,5 @@
 import { Head, Link, useForm } from '@inertiajs/react';
-import { ArrowLeft, Save } from 'lucide-react';
+import { ArrowLeft, Save, Lock } from 'lucide-react';
 import React from 'react';
 import { toast } from 'sonner';
 import { DashboardContainer } from '@/components/dashboard-container';
@@ -50,10 +50,10 @@ export default function Edit({ link }: EditProps) {
                 <Button
                     asChild
                     variant="ghost"
-                    className="h-9 rounded-lg border border-neutral-200 font-medium text-graphite hover:bg-frost-gray"
+                    className="h-9 rounded-lg border border-neutral-200/80 text-[13px] font-medium text-graphite hover:bg-frost-gray"
                 >
                     <Link href="/links">
-                        <ArrowLeft className="mr-8 size-16" />
+                        <ArrowLeft className="size-3.5" />
                         Back to Links
                     </Link>
                 </Button>
@@ -61,11 +61,11 @@ export default function Edit({ link }: EditProps) {
         >
             <Head title="Edit Link" />
 
-            <div className="mx-auto mt-20 max-w-xl">
-                <Card className="rounded-largecards border border-neutral-200/80 bg-white p-24 shadow-[0_8px_30px_rgb(0,0,0,0.01)] md:p-32">
-                    <CardContent className="p-0">
+            <div className="mx-auto max-w-lg">
+                <Card className="rounded-xl border border-neutral-200/60 bg-white shadow-none">
+                    <CardContent className="p-6">
                         {processing ? (
-                            <div className="py-48">
+                            <div className="py-10">
                                 <LoadingState
                                     variant="spinner"
                                     message="Saving changes..."
@@ -75,13 +75,33 @@ export default function Edit({ link }: EditProps) {
                             <form
                                 id="edit-link-form"
                                 onSubmit={submit}
-                                className="flex flex-col gap-24"
+                                className="flex flex-col gap-5"
                             >
-                                <div className="flex flex-col gap-6">
+                                {/* Form Header */}
+                                <div className="flex items-center gap-2.5 border-b border-neutral-100 pb-4">
+                                    <div className="flex size-8 items-center justify-center rounded-lg bg-neutral-100 text-slate">
+                                        <Save className="size-4" />
+                                    </div>
+                                    <div>
+                                        <p className="text-[13px] font-bold text-graphite">
+                                            Editing:{' '}
+                                            <span className="font-bold text-vivid-indigo">
+                                                {link.short_code}
+                                            </span>
+                                        </p>
+                                        <p className="text-[11px] text-slate">
+                                            The alias cannot be changed after creation.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Short Code (read-only) */}
+                                <div className="flex flex-col gap-1.5">
                                     <Label
                                         htmlFor="short_code"
-                                        className="text-[12px] font-bold tracking-wider text-slate uppercase"
+                                        className="flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-slate/70 uppercase"
                                     >
+                                        <Lock className="size-3" />
                                         Short Code / Alias
                                     </Label>
                                     <Input
@@ -89,18 +109,17 @@ export default function Edit({ link }: EditProps) {
                                         type="text"
                                         value={link.short_code}
                                         disabled
-                                        className="h-10 cursor-not-allowed rounded-lg border-neutral-200/80 bg-frost-gray/50 text-body font-bold text-slate opacity-80 select-none"
+                                        className="h-9 cursor-not-allowed rounded-lg border-neutral-200/50 bg-neutral-50/80 text-[14px] font-medium text-slate/60 select-none"
                                     />
-                                    <span className="text-[11px] font-medium text-slate">
-                                        The shortened alias URL path cannot be
-                                        modified after creation.
+                                    <span className="text-[11px] text-slate/60">
+                                        The shortened alias URL path cannot be modified after creation.
                                     </span>
                                 </div>
 
-                                <div className="flex flex-col gap-6">
+                                <div className="flex flex-col gap-1.5">
                                     <Label
                                         htmlFor="destination_url"
-                                        className="text-[12px] font-bold tracking-wider text-graphite uppercase"
+                                        className="text-[11px] font-bold tracking-widest text-graphite uppercase"
                                     >
                                         Destination URL
                                     </Label>
@@ -115,22 +134,25 @@ export default function Edit({ link }: EditProps) {
                                             )
                                         }
                                         required
-                                        className="h-10 rounded-lg border-neutral-200/80 bg-white text-body focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
+                                        className="h-9 rounded-lg border-neutral-200/80 bg-white text-[14px] focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
                                     />
                                     <InputError
                                         message={errors.destination_url}
                                     />
-                                    <span className="text-[11px] font-medium text-slate">
+                                    <span className="text-[11px] text-slate/70">
                                         Must start with http:// or https://
                                     </span>
                                 </div>
 
-                                <div className="flex flex-col gap-6">
+                                <div className="flex flex-col gap-1.5">
                                     <Label
                                         htmlFor="expires_at"
-                                        className="text-[12px] font-bold tracking-wider text-graphite uppercase"
+                                        className="text-[11px] font-bold tracking-widest text-graphite uppercase"
                                     >
                                         Expiration Date
+                                        <span className="ml-1 font-normal text-slate/60 normal-case tracking-normal">
+                                            (optional)
+                                        </span>
                                     </Label>
                                     <Input
                                         id="expires_at"
@@ -142,29 +164,28 @@ export default function Edit({ link }: EditProps) {
                                                 e.target.value,
                                             )
                                         }
-                                        className="h-10 rounded-lg border-neutral-200/80 bg-white text-body focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
+                                        className="h-9 rounded-lg border-neutral-200/80 bg-white text-[14px] focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
                                     />
                                     <InputError message={errors.expires_at} />
-                                    <span className="text-[11px] font-medium text-slate">
-                                        After this timestamp, redirects
-                                        automatically fail with 404.
+                                    <span className="text-[11px] text-slate/70">
+                                        After this timestamp, redirects automatically return 404.
                                     </span>
                                 </div>
 
-                                <div className="mt-8 flex justify-end gap-12 border-t border-neutral-100 pt-20">
+                                <div className="flex justify-end gap-2.5 border-t border-neutral-100 pt-4">
                                     <Button
                                         asChild
                                         variant="ghost"
-                                        className="h-10 rounded-lg border border-neutral-200 px-16 font-medium text-graphite hover:bg-neutral-50"
+                                        className="h-9 rounded-lg border border-neutral-200/80 px-4 text-[13px] font-medium text-graphite hover:bg-neutral-50"
                                     >
                                         <Link href="/links">Cancel</Link>
                                     </Button>
                                     <Button
                                         type="submit"
                                         disabled={processing}
-                                        className="h-10 rounded-lg bg-vivid-indigo px-20 font-medium text-pure-white shadow-xs hover:bg-vivid-indigo/90"
+                                        className="h-9 rounded-lg bg-vivid-indigo px-5 text-[13px] font-medium text-pure-white shadow-none transition-all hover:bg-vivid-indigo/90 hover:shadow-sm active:scale-[0.98]"
                                     >
-                                        <Save className="mr-8 size-16" />
+                                        <Save className="size-3.5" />
                                         Save Changes
                                     </Button>
                                 </div>

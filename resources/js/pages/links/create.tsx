@@ -1,5 +1,5 @@
 import { Head, Link, useForm } from '@inertiajs/react';
-import { ArrowLeft, Plus } from 'lucide-react';
+import { ArrowLeft, Zap } from 'lucide-react';
 import React from 'react';
 import { toast } from 'sonner';
 import { DashboardContainer } from '@/components/dashboard-container';
@@ -34,10 +34,10 @@ export default function Create() {
                 <Button
                     asChild
                     variant="ghost"
-                    className="h-9 rounded-lg border border-neutral-200 font-medium text-graphite hover:bg-frost-gray"
+                    className="h-9 rounded-lg border border-neutral-200/80 text-[13px] font-medium text-graphite hover:bg-frost-gray"
                 >
                     <Link href="/links">
-                        <ArrowLeft className="mr-8 size-16" />
+                        <ArrowLeft className="size-3.5" />
                         Back to Links
                     </Link>
                 </Button>
@@ -45,11 +45,11 @@ export default function Create() {
         >
             <Head title="Create Link" />
 
-            <div className="mx-auto mt-20 max-w-xl">
-                <Card className="rounded-largecards border border-neutral-200/80 bg-white p-24 shadow-[0_8px_30px_rgb(0,0,0,0.01)] md:p-32">
-                    <CardContent className="p-0">
+            <div className="mx-auto max-w-lg">
+                <Card className="rounded-xl border border-neutral-200/60 bg-white shadow-none">
+                    <CardContent className="p-6">
                         {processing ? (
-                            <div className="py-48">
+                            <div className="py-10">
                                 <LoadingState
                                     variant="spinner"
                                     message="Generating short link..."
@@ -59,12 +59,27 @@ export default function Create() {
                             <form
                                 id="create-link-form"
                                 onSubmit={submit}
-                                className="flex flex-col gap-24"
+                                className="flex flex-col gap-5"
                             >
-                                <div className="flex flex-col gap-6">
+                                {/* Form Header */}
+                                <div className="flex items-center gap-2.5 border-b border-neutral-100 pb-4">
+                                    <div className="flex size-8 items-center justify-center rounded-lg bg-vivid-indigo/10 text-vivid-indigo">
+                                        <Zap className="size-4" />
+                                    </div>
+                                    <div>
+                                        <p className="text-[13px] font-bold text-graphite">
+                                            New Short Link
+                                        </p>
+                                        <p className="text-[11px] text-slate">
+                                            Configure your destination and alias options below.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col gap-1.5">
                                     <Label
                                         htmlFor="destination_url"
-                                        className="text-[12px] font-bold tracking-wider text-graphite uppercase"
+                                        className="text-[11px] font-bold tracking-widest text-graphite uppercase"
                                     >
                                         Destination URL
                                     </Label>
@@ -80,26 +95,28 @@ export default function Create() {
                                             )
                                         }
                                         required
-                                        className="h-10 rounded-lg border-neutral-200/80 bg-white text-body focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
+                                        className="h-9 rounded-lg border-neutral-200/80 bg-white text-[14px] focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
                                     />
                                     <InputError
                                         message={errors.destination_url}
                                     />
-                                    <span className="text-[11px] font-medium text-slate">
-                                        The target URL to redirect visitors to.
-                                        Must start with http:// or https://
+                                    <span className="text-[11px] text-slate/70">
+                                        The target URL. Must start with http:// or https://
                                     </span>
                                 </div>
 
-                                <div className="flex flex-col gap-6">
+                                <div className="flex flex-col gap-1.5">
                                     <Label
                                         htmlFor="short_code"
-                                        className="text-[12px] font-bold tracking-wider text-graphite uppercase"
+                                        className="text-[11px] font-bold tracking-widest text-graphite uppercase"
                                     >
-                                        Custom Alias (Optional)
+                                        Custom Alias
+                                        <span className="ml-1 font-normal text-slate/60 normal-case tracking-normal">
+                                            (optional)
+                                        </span>
                                     </Label>
                                     <div className="flex items-center">
-                                        <span className="inline-flex h-10 items-center rounded-l-lg border border-r-0 border-neutral-200/80 bg-frost-gray/50 px-12 text-[13px] text-caption font-medium text-slate select-none">
+                                        <span className="inline-flex h-9 items-center rounded-l-lg border border-r-0 border-neutral-200/80 bg-frost-gray/60 px-3 text-[12px] font-medium text-slate select-none">
                                             singkat.saja/
                                         </span>
                                         <Input
@@ -113,23 +130,24 @@ export default function Create() {
                                                     e.target.value,
                                                 )
                                             }
-                                            className="h-10 rounded-l-none rounded-r-lg border-neutral-200/80 bg-white text-body focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
+                                            className="h-9 rounded-l-none rounded-r-lg border-neutral-200/80 bg-white text-[14px] focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
                                         />
                                     </div>
                                     <InputError message={errors.short_code} />
-                                    <span className="text-[11px] font-medium text-slate">
-                                        Custom names must be alphanumeric and
-                                        cannot match system paths (like admin,
-                                        dashboard).
+                                    <span className="text-[11px] text-slate/70">
+                                        Alphanumeric only. Cannot match reserved paths (admin, dashboard, etc).
                                     </span>
                                 </div>
 
-                                <div className="flex flex-col gap-6">
+                                <div className="flex flex-col gap-1.5">
                                     <Label
                                         htmlFor="expires_at"
-                                        className="text-[12px] font-bold tracking-wider text-graphite uppercase"
+                                        className="text-[11px] font-bold tracking-widest text-graphite uppercase"
                                     >
-                                        Expiration Date (Optional)
+                                        Expiration Date
+                                        <span className="ml-1 font-normal text-slate/60 normal-case tracking-normal">
+                                            (optional)
+                                        </span>
                                     </Label>
                                     <Input
                                         id="expires_at"
@@ -141,29 +159,28 @@ export default function Create() {
                                                 e.target.value,
                                             )
                                         }
-                                        className="h-10 rounded-lg border-neutral-200/80 bg-white text-body focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
+                                        className="h-9 rounded-lg border-neutral-200/80 bg-white text-[14px] focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
                                     />
                                     <InputError message={errors.expires_at} />
-                                    <span className="text-[11px] font-medium text-slate">
-                                        After this timestamp, the shortcode
-                                        resolves to a 404 response.
+                                    <span className="text-[11px] text-slate/70">
+                                        After this timestamp, redirects return 404.
                                     </span>
                                 </div>
 
-                                <div className="mt-8 flex justify-end gap-12 border-t border-neutral-100 pt-20">
+                                <div className="flex justify-end gap-2.5 border-t border-neutral-100 pt-4">
                                     <Button
                                         asChild
                                         variant="ghost"
-                                        className="h-10 rounded-lg border border-neutral-200 px-16 font-medium text-graphite hover:bg-neutral-50"
+                                        className="h-9 rounded-lg border border-neutral-200/80 px-4 text-[13px] font-medium text-graphite hover:bg-neutral-50"
                                     >
                                         <Link href="/links">Cancel</Link>
                                     </Button>
                                     <Button
                                         type="submit"
                                         disabled={processing}
-                                        className="h-10 rounded-lg bg-vivid-indigo px-20 font-medium text-pure-white shadow-xs hover:bg-vivid-indigo/90"
+                                        className="h-9 rounded-lg bg-vivid-indigo px-5 text-[13px] font-medium text-pure-white shadow-none transition-all hover:bg-vivid-indigo/90 hover:shadow-sm active:scale-[0.98]"
                                     >
-                                        <Plus className="mr-8 size-16" />
+                                        <Zap className="size-3.5" />
                                         Generate Link
                                     </Button>
                                 </div>

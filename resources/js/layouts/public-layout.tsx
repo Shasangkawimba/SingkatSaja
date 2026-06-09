@@ -12,24 +12,24 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
         <div className="flex min-h-screen flex-col bg-pure-white font-sans text-graphite">
             {/* Top Header */}
             <header className="sticky top-0 z-50 w-full border-b border-neutral-100/80 bg-pure-white/80 backdrop-blur-md">
-                <div className="mx-auto flex h-56 max-w-[1200px] items-center justify-between px-16 md:px-32">
+                <div className="mx-auto flex h-14 max-w-[1200px] items-center justify-between px-4 md:px-8">
                     <Link href="/">
                         <AppLogo />
                     </Link>
 
-                    <nav className="flex items-center gap-16">
+                    <nav className="flex items-center gap-4">
                         {auth?.user ? (
                             <>
                                 <Link
                                     href={dashboard()}
-                                    className="text-body font-medium text-ash transition-colors hover:text-vivid-indigo"
+                                    className="text-[13px] font-medium text-slate transition-colors hover:text-vivid-indigo"
                                 >
                                     Dashboard
                                 </Link>
                                 <Button
                                     asChild
                                     variant="default"
-                                    className="rounded-buttons bg-vivid-indigo px-16 py-8 text-caption font-medium text-pure-white hover:bg-vivid-indigo/90"
+                                    className="h-8 rounded-lg bg-vivid-indigo px-4 text-[13px] font-medium text-pure-white hover:bg-vivid-indigo/90"
                                 >
                                     <Link href={dashboard()}>Go to app</Link>
                                 </Button>
@@ -38,14 +38,14 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                             <>
                                 <Link
                                     href={login()}
-                                    className="text-body font-medium text-ash transition-colors hover:text-vivid-indigo"
+                                    className="text-[13px] font-medium text-slate transition-colors hover:text-vivid-indigo"
                                 >
                                     Log In
                                 </Link>
                                 <Button
                                     asChild
                                     variant="default"
-                                    className="rounded-buttons bg-vivid-indigo px-16 py-8 text-caption font-medium text-pure-white hover:bg-vivid-indigo/90"
+                                    className="h-8 rounded-lg bg-vivid-indigo px-4 text-[13px] font-medium text-pure-white hover:bg-vivid-indigo/90"
                                 >
                                     <Link href={register()}>
                                         Get started — it's free

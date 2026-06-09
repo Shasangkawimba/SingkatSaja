@@ -1,0 +1,95 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - link "SingkatSaja" [ref=e6] [cursor=pointer]:
+        - /url: /dashboard
+        - generic [ref=e7]:
+          - img [ref=e9]
+          - generic [ref=e12]: SingkatSaja
+      - navigation "Main" [ref=e14]:
+        - list [ref=e16]:
+          - listitem [ref=e17]:
+            - link "Dashboard" [ref=e18] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e19]
+              - text: Dashboard
+          - listitem [ref=e25]:
+            - link "My Links" [ref=e26] [cursor=pointer]:
+              - /url: /links
+              - img [ref=e27]
+              - text: My Links
+      - generic [ref=e30]:
+        - button [ref=e32] [cursor=pointer]:
+          - img
+        - button "TU" [ref=e33]:
+          - generic [ref=e35]: TU
+    - main [ref=e36]:
+      - generic [ref=e37]:
+        - generic [ref=e40]:
+          - heading "Dashboard" [level=2] [ref=e41]
+          - paragraph [ref=e42]: Overview of your redirect counts and active links.
+        - generic [ref=e43]:
+          - generic [ref=e44]:
+            - generic [ref=e46]:
+              - generic [ref=e47]:
+                - generic [ref=e48]: Total Links
+                - img [ref=e50]
+              - generic [ref=e53]:
+                - generic [ref=e54]: "1"
+                - generic [ref=e55]: links created
+            - generic [ref=e57]:
+              - generic [ref=e58]:
+                - generic [ref=e59]: Active Links
+                - img [ref=e61]
+              - generic [ref=e63]:
+                - generic [ref=e64]: "1"
+                - generic [ref=e65]: Active
+            - generic [ref=e67]:
+              - generic [ref=e68]:
+                - generic [ref=e69]: Total Clicks
+                - img [ref=e71]
+              - generic [ref=e74]:
+                - generic [ref=e75]: "0"
+                - generic [ref=e76]: all-time redirects
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - generic [ref=e80]: Clicks Today
+                - img [ref=e82]
+              - generic [ref=e85]:
+                - generic [ref=e86]: "0"
+                - generic [ref=e87]: Quiet
+          - generic [ref=e88]:
+            - generic [ref=e90]:
+              - generic [ref=e91]:
+                - generic [ref=e92]:
+                  - generic [ref=e93]: Shorten a URL
+                  - generic [ref=e94]: Generate clean, fast Base62 redirects instantly.
+                - generic [ref=e96]:
+                  - generic [ref=e97]:
+                    - generic [ref=e98]: Destination URL
+                    - textbox "Destination URL" [ref=e99]:
+                      - /placeholder: https://example.com/very-long-campaign-url
+                  - generic [ref=e100]:
+                    - generic [ref=e101]:
+                      - generic [ref=e102]: Custom Alias (Optional)
+                      - generic [ref=e103]:
+                        - generic [ref=e104]: singkat.saja/
+                        - textbox "Custom Alias (Optional)" [ref=e105]:
+                          - /placeholder: alias
+                    - generic [ref=e106]:
+                      - generic [ref=e107]: Expiration (Optional)
+                      - textbox "Expiration (Optional)" [ref=e108]
+              - button "Shorten Link" [ref=e110]:
+                - img
+                - text: Shorten Link
+            - generic [ref=e112]:
+              - generic [ref=e113]:
+                - generic [ref=e114]: My Short Links
+                - generic [ref=e115]: Browse, filter, and track performance.
+              - generic [ref=e116]:
+                - paragraph [ref=e117]: Detailed click counts, time-series curves for the last 7 and 30 days, and breakdowns by browser, device type, and operating system are housed in the link manager.
+                - link "Manage Links" [ref=e119] [cursor=pointer]:
+                  - /url: /links
+                  - text: Manage Links
+                  - img
+  - region "Notifications alt+T"

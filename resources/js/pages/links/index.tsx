@@ -9,6 +9,7 @@ import {
     Plus,
     AlertTriangle,
     ExternalLink,
+    ChevronRight,
 } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { toast } from 'sonner';
@@ -102,10 +103,10 @@ export default function Index({ links, filters }: LinksIndexProps) {
             actions={
                 <Button
                     asChild
-                    className="h-10 rounded-lg bg-vivid-indigo px-16 font-medium text-pure-white shadow-xs hover:bg-vivid-indigo/90"
+                    className="h-9 rounded-lg bg-vivid-indigo px-4 text-[13px] font-medium text-pure-white shadow-none transition-all hover:bg-vivid-indigo/90 hover:shadow-sm active:scale-[0.98]"
                 >
                     <Link href="/links/create">
-                        <Plus className="mr-8 size-16" />
+                        <Plus className="size-3.5" />
                         Create Link
                     </Link>
                 </Button>
@@ -120,7 +121,7 @@ export default function Index({ links, filters }: LinksIndexProps) {
                     action={
                         <Button
                             asChild
-                            className="h-10 rounded-lg bg-vivid-indigo px-20 font-medium text-pure-white hover:bg-vivid-indigo/90"
+                            className="h-9 rounded-lg bg-vivid-indigo px-5 text-[13px] font-medium text-pure-white hover:bg-vivid-indigo/90"
                         >
                             <Link href="/links/create">
                                 Create your first link
@@ -129,29 +130,29 @@ export default function Index({ links, filters }: LinksIndexProps) {
                     }
                 />
             ) : (
-                <div className="flex flex-col gap-24">
+                <div className="flex flex-col gap-4">
                     {/* Filter controls / Toolbar */}
-                    <div className="flex w-full flex-col items-center justify-between gap-16 sm:flex-row">
+                    <div className="flex w-full flex-col items-center justify-between gap-3 sm:flex-row">
                         <div className="relative flex w-full items-center sm:max-w-xs">
-                            <Search className="pointer-events-none absolute left-12 size-16 text-slate/80" />
+                            <Search className="pointer-events-none absolute left-3 size-3.5 text-slate/60" />
                             <Input
                                 type="text"
                                 placeholder="Search links or destinations..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="h-10 rounded-lg border-neutral-200/80 bg-white pl-36 text-body focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
+                                className="h-9 rounded-lg border-neutral-200/80 bg-white pl-9 text-[13px] focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
                             />
                         </div>
 
-                        <div className="flex w-full items-center justify-end gap-12 sm:w-auto">
-                            <span className="hidden text-[12px] font-bold tracking-wider text-graphite uppercase md:inline">
+                        <div className="flex w-full items-center justify-end gap-2 sm:w-auto">
+                            <span className="hidden text-[11px] font-bold tracking-widest text-slate/70 uppercase md:inline">
                                 Sort by:
                             </span>
                             <Select
                                 defaultValue={(typeof filters === 'object' && !Array.isArray(filters) ? filters.sort : '') || 'newest'}
                                 onValueChange={handleSortChange}
                             >
-                                <SelectTrigger className="h-10 w-[180px] rounded-lg border-neutral-200/80 bg-white text-body focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20">
+                                <SelectTrigger className="h-9 w-[160px] rounded-lg border-neutral-200/80 bg-white text-[13px] focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20">
                                     <SelectValue placeholder="Sort option" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -170,9 +171,9 @@ export default function Index({ links, filters }: LinksIndexProps) {
                     </div>
 
                     {/* Table View */}
-                    <Card className="overflow-hidden rounded-largecards border border-neutral-200/80 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.01)]">
+                    <Card className="overflow-hidden rounded-xl border border-neutral-200/60 bg-white shadow-none">
                         {isLoading ? (
-                            <div className="p-32">
+                            <div className="p-6">
                                 <LoadingState
                                     variant="table"
                                     count={5}
@@ -181,86 +182,85 @@ export default function Index({ links, filters }: LinksIndexProps) {
                             </div>
                         ) : (
                             <div className="overflow-x-auto">
-                                <table className="w-full min-w-[800px] border-collapse text-left">
+                                <table className="w-full min-w-[700px] border-collapse text-left">
                                     <thead>
-                                        <tr className="border-b border-neutral-100 bg-frost-gray/30 text-[11px] font-bold tracking-wider text-slate uppercase">
-                                            <th className="p-16 px-24">
+                                        <tr className="border-b border-neutral-100 bg-neutral-50/70 text-[10px] font-bold tracking-widest text-slate/70 uppercase">
+                                            <th className="px-5 py-3">
                                                 Short Code
                                             </th>
-                                            <th className="p-16 px-24">
+                                            <th className="px-5 py-3">
                                                 Destination URL
                                             </th>
-                                            <th className="p-16 px-24 text-center">
+                                            <th className="px-5 py-3 text-center">
                                                 Clicks
                                             </th>
-                                            <th className="p-16 px-24">
+                                            <th className="px-5 py-3">
                                                 Expiration
                                             </th>
-                                            <th className="p-16 px-24">
+                                            <th className="px-5 py-3">
                                                 Status
                                             </th>
-                                            <th className="p-16 px-24 text-right">
+                                            <th className="px-5 py-3 text-right">
                                                 Actions
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-neutral-100 text-body text-graphite">
+                                    <tbody className="divide-y divide-neutral-100 text-[13px] text-graphite">
                                         {filteredLinks.map((link) => {
                                             const expired = isLinkExpired(link);
 
                                             return (
                                                 <tr
                                                     key={link.id}
-                                                    className="transition-colors hover:bg-frost-gray/20"
+                                                    className="group transition-colors hover:bg-neutral-50/60"
                                                 >
-                                                    <td className="p-16 px-24 font-satoshi">
-                                                        <div className="flex items-center gap-12">
-                                                            <span className="text-[15px] font-bold tracking-tight text-vivid-indigo">
+                                                    <td className="px-5 py-3 font-satoshi">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="font-semibold tracking-tight text-vivid-indigo">
                                                                 {
                                                                     link.short_code
                                                                 }
                                                             </span>
-                                                            <Button
-                                                                variant="ghost"
-                                                                size="icon"
+                                                            <button
                                                                 onClick={() =>
                                                                     handleCopy(
                                                                         link.short_code,
                                                                         link.id,
                                                                     )
                                                                 }
-                                                                className="size-28 rounded-lg border border-neutral-200/30 bg-white text-slate shadow-2xs hover:bg-neutral-50 hover:text-vivid-indigo"
+                                                                className="flex size-6 items-center justify-center rounded border border-neutral-200/50 bg-white text-slate opacity-0 shadow-none transition-all hover:border-neutral-300 hover:text-vivid-indigo group-hover:opacity-100"
+                                                                title="Copy URL"
                                                             >
                                                                 {copiedId ===
                                                                 link.id ? (
-                                                                    <Check className="size-12 text-emerald-600" />
+                                                                    <Check className="size-3 text-emerald-600" />
                                                                 ) : (
-                                                                    <Copy className="size-12" />
+                                                                    <Copy className="size-3" />
                                                                 )}
-                                                            </Button>
+                                                            </button>
                                                         </div>
                                                     </td>
-                                                    <td className="max-w-xs p-16 px-24 md:max-w-sm">
-                                                        <div className="truncate text-[14px] text-slate transition-colors hover:text-graphite">
-                                                            <a
-                                                                href={
-                                                                    link.destination_url
-                                                                }
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
-                                                                className="inline-flex items-center gap-6 hover:underline"
-                                                            >
+                                                    <td className="max-w-[220px] px-5 py-3">
+                                                        <a
+                                                            href={
+                                                                link.destination_url
+                                                            }
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="inline-flex items-center gap-1 truncate text-slate transition-colors hover:text-graphite hover:underline"
+                                                        >
+                                                            <span className="truncate">
                                                                 {
                                                                     link.destination_url
                                                                 }
-                                                                <ExternalLink className="size-12 shrink-0 text-slate/50" />
-                                                            </a>
-                                                        </div>
+                                                            </span>
+                                                            <ExternalLink className="size-3 shrink-0 text-slate/40" />
+                                                        </a>
                                                     </td>
-                                                    <td className="p-16 px-24 text-center font-satoshi text-[15px] font-bold text-graphite">
+                                                    <td className="px-5 py-3 text-center font-satoshi font-bold text-graphite">
                                                         {link.clicks_count ?? 0}
                                                     </td>
-                                                    <td className="p-16 px-24 text-[14px] text-slate">
+                                                    <td className="px-5 py-3 text-[12px] text-slate">
                                                         {link.expires_at
                                                             ? new Date(
                                                                   link.expires_at,
@@ -272,9 +272,9 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                                                       day: 'numeric',
                                                                   },
                                                               )
-                                                            : 'Never'}
+                                                            : '—'}
                                                     </td>
-                                                    <td className="p-16 px-24">
+                                                    <td className="px-5 py-3">
                                                         {expired ? (
                                                             <Badge
                                                                 variant="danger"
@@ -291,32 +291,32 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                                             </Badge>
                                                         )}
                                                     </td>
-                                                    <td className="p-16 px-24 text-right">
-                                                        <div className="flex items-center justify-end gap-12">
+                                                    <td className="px-5 py-3 text-right">
+                                                        <div className="flex items-center justify-end gap-1">
                                                             <Button
                                                                 asChild
                                                                 variant="ghost"
                                                                 size="icon"
-                                                                className="size-32 rounded-lg border border-neutral-200/60 bg-white text-slate shadow-2xs hover:bg-neutral-50 hover:text-vivid-indigo"
+                                                                className="size-7 rounded-md text-slate transition-all hover:bg-indigo-50 hover:text-vivid-indigo"
                                                             >
                                                                 <Link
                                                                     href={`/links/${link.id}`}
                                                                     title="View Analytics"
                                                                 >
-                                                                    <Eye className="size-14" />
+                                                                    <Eye className="size-3.5" />
                                                                 </Link>
                                                             </Button>
                                                             <Button
                                                                 asChild
                                                                 variant="ghost"
                                                                 size="icon"
-                                                                className="size-32 rounded-lg border border-neutral-200/60 bg-white text-slate shadow-2xs hover:bg-neutral-50 hover:text-vivid-indigo"
+                                                                className="size-7 rounded-md text-slate transition-all hover:bg-neutral-100 hover:text-graphite"
                                                             >
                                                                 <Link
                                                                     href={`/links/${link.id}/edit`}
                                                                     title="Edit Link"
                                                                 >
-                                                                    <Edit2 className="size-14" />
+                                                                    <Edit2 className="size-3.5" />
                                                                 </Link>
                                                             </Button>
                                                             <Button
@@ -327,10 +327,10 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                                                         link,
                                                                     )
                                                                 }
-                                                                className="size-32 rounded-lg border border-neutral-200/60 bg-white text-slate shadow-2xs hover:bg-rose-50 hover:text-rose-600"
+                                                                className="size-7 rounded-md text-slate transition-all hover:bg-rose-50 hover:text-rose-600"
                                                                 title="Delete Link"
                                                             >
-                                                                <Trash2 className="size-14" />
+                                                                <Trash2 className="size-3.5" />
                                                             </Button>
                                                         </div>
                                                     </td>
@@ -345,11 +345,11 @@ export default function Index({ links, filters }: LinksIndexProps) {
 
                     {/* Pagination Links */}
                     {links.links.length > 3 && (
-                        <div className="mt-8 flex items-center justify-center gap-8">
+                        <div className="flex items-center justify-center gap-1.5">
                             {links.links.map((pageLink, index) => {
                                 const label = pageLink.label
-                                    .replace('&laquo; Previous', 'Previous')
-                                    .replace('Next &raquo;', 'Next');
+                                    .replace('&laquo; Previous', '← Prev')
+                                    .replace('Next &raquo;', 'Next →');
 
                                 return (
                                     <Button
@@ -363,10 +363,10 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                                 ? 'default'
                                                 : 'ghost'
                                         }
-                                        className={`border-neutral-250/50 h-10 rounded-lg border px-16 text-[13px] font-medium shadow-2xs ${
+                                        className={`h-8 min-w-8 rounded-lg px-3 text-[12px] font-medium ${
                                             pageLink.active
-                                                ? 'border-transparent bg-vivid-indigo font-bold text-pure-white hover:bg-vivid-indigo/90'
-                                                : 'bg-white text-slate hover:bg-frost-gray/50 hover:text-graphite'
+                                                ? 'bg-vivid-indigo font-bold text-pure-white hover:bg-vivid-indigo/90'
+                                                : 'border border-neutral-200/70 bg-white text-slate hover:bg-neutral-50 hover:text-graphite'
                                         }`}
                                     >
                                         {pageLink.url ? (
@@ -392,37 +392,36 @@ export default function Index({ links, filters }: LinksIndexProps) {
                 open={!!selectedLinkToDelete}
                 onOpenChange={(open) => !open && setSelectedLinkToDelete(null)}
             >
-                <DialogContent className="rounded-largecards border border-neutral-200/80 bg-pure-white shadow-lg sm:max-w-md">
-                    <DialogHeader className="flex flex-col gap-12 text-center">
-                        <div className="mx-auto mb-8 flex size-48 items-center justify-center rounded-full border border-rose-100 bg-rose-50 text-rose-600">
-                            <AlertTriangle className="size-24" />
+                <DialogContent className="rounded-xl border border-neutral-200/80 bg-white shadow-xl sm:max-w-sm">
+                    <DialogHeader className="flex flex-col gap-3 text-center">
+                        <div className="mx-auto flex size-11 items-center justify-center rounded-full border border-rose-100 bg-rose-50 text-rose-600">
+                            <AlertTriangle className="size-5" />
                         </div>
-                        <DialogTitle className="text-center font-satoshi text-heading-sm font-bold text-graphite">
+                        <DialogTitle className="text-center font-satoshi text-[17px] font-bold text-graphite">
                             Delete Link
                         </DialogTitle>
-                        <DialogDescription className="px-12 text-center text-[14px] leading-relaxed text-slate">
-                            Are you sure you want to delete this link? The
-                            shortcode{' '}
-                            <span className="font-bold text-graphite">
+                        <DialogDescription className="px-2 text-center text-[13px] leading-relaxed text-slate">
+                            Are you sure you want to delete{' '}
+                            <span className="font-semibold text-graphite">
                                 singkat.saja/{selectedLinkToDelete?.short_code}
-                            </span>{' '}
-                            will be soft-deleted and evicted from the Redis
-                            redirect cache.
+                            </span>
+                            ? It will be soft-deleted and evicted from the Redis
+                            cache.
                         </DialogDescription>
                     </DialogHeader>
-                    <DialogFooter className="mt-20 flex gap-12 border-t border-neutral-100 pt-16 sm:justify-center">
+                    <DialogFooter className="mt-2 flex gap-2 border-t border-neutral-100 pt-4 sm:justify-center">
                         <Button
                             variant="ghost"
                             onClick={() => setSelectedLinkToDelete(null)}
-                            className="h-10 rounded-lg border border-neutral-200 px-16 font-medium text-graphite hover:bg-frost-gray"
+                            className="h-9 flex-1 rounded-lg border border-neutral-200 text-[13px] font-medium text-graphite hover:bg-frost-gray"
                         >
                             Cancel
                         </Button>
                         <Button
                             onClick={handleDelete}
-                            className="h-10 rounded-lg bg-rose-600 px-16 font-medium text-pure-white hover:bg-rose-700"
+                            className="h-9 flex-1 rounded-lg bg-rose-600 text-[13px] font-medium text-pure-white hover:bg-rose-700 active:scale-[0.98]"
                         >
-                            Confirm Delete
+                            Delete Link
                         </Button>
                     </DialogFooter>
                 </DialogContent>

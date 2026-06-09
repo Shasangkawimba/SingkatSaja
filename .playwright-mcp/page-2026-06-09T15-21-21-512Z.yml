@@ -1,0 +1,143 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - link "SingkatSaja" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e7]:
+            - img [ref=e9]
+            - generic [ref=e12]: SingkatSaja
+        - navigation [ref=e13]:
+          - link "Dashboard" [ref=e14] [cursor=pointer]:
+            - /url: /dashboard
+          - link "Go to app" [ref=e15] [cursor=pointer]:
+            - /url: /dashboard
+    - main [ref=e16]:
+      - generic [ref=e17]:
+        - generic [ref=e19]:
+          - generic [ref=e20]:
+            - generic [ref=e21]: SingkatSaja v1.0 · Redis-Powered Redirects
+            - heading "The URL engine built for precision & speed" [level=1] [ref=e22]
+            - paragraph [ref=e23]: Create short, high-performance link aliases in milliseconds. Backed by Redis-first lookups and non-blocking asynchronous analytics.
+          - link "Go to Dashboard" [ref=e25] [cursor=pointer]:
+            - /url: /dashboard
+            - text: Go to Dashboard
+            - img
+          - generic [ref=e26]:
+            - generic [ref=e27]:
+              - generic [ref=e33]:
+                - generic [ref=e34]: ●
+                - generic [ref=e35]: shortcut.singkatsaja.com
+              - generic [ref=e36]: Active REDIS Engine
+            - generic [ref=e37]:
+              - generic [ref=e38]:
+                - generic [ref=e39]:
+                  - generic [ref=e40]:
+                    - generic [ref=e41]: singkat.saja/promo-2026
+                    - generic [ref=e42]: Custom Alias
+                  - generic [ref=e43]: https://ecommerce.com/campaign/summer-promo-discount-page
+                - generic [ref=e44]:
+                  - generic [ref=e45]:
+                    - generic [ref=e46]: 1,482 Clicks
+                    - generic [ref=e47]: Recorded Today
+                  - generic [ref=e48]:
+                    - generic [ref=e49]: Active
+                    - button [ref=e50]:
+                      - img [ref=e51]
+              - generic [ref=e54]:
+                - generic [ref=e55]:
+                  - generic [ref=e56]:
+                    - generic [ref=e57]: singkat.saja/x7Y9k2L
+                    - generic [ref=e58]: Random Base62
+                  - generic [ref=e59]: https://github.com/Shasangkawimba/SingkatSaja
+                - generic [ref=e60]:
+                  - generic [ref=e61]:
+                    - generic [ref=e62]: 382 Clicks
+                    - generic [ref=e63]: Recorded Today
+                  - generic [ref=e64]:
+                    - generic [ref=e65]: Expires Soon
+                    - button [ref=e66]:
+                      - img [ref=e67]
+        - generic [ref=e71]:
+          - paragraph [ref=e72]: Trusted by builders at modern organizations
+          - generic [ref=e73]:
+            - generic [ref=e74]: ACME LABS
+            - generic [ref=e75]: INITECH
+            - generic [ref=e76]: HOOLI
+            - generic [ref=e77]: VEHEMENT
+            - generic [ref=e78]: UMBRELLA
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - generic [ref=e82]: Core Capabilities
+            - heading "Focusing strictly on performance & precision" [level=2] [ref=e83]
+            - paragraph [ref=e84]: No subscription walls or bloated packages. Just raw redirect speed combined with the essential features you expect.
+          - generic [ref=e85]:
+            - generic [ref=e86]:
+              - generic [ref=e87]:
+                - img [ref=e89]
+                - generic [ref=e92]: Custom Aliases
+              - paragraph [ref=e94]: Define clean, memorable brand shortcodes. We enforce strict reserved routing rules to prevent users from overriding dashboard URLs.
+            - generic [ref=e95]:
+              - generic [ref=e96]:
+                - img [ref=e98]
+                - generic [ref=e101]: Scheduled Expirations
+              - paragraph [ref=e103]: Configure precise campaign durations. Expired links are automatically evicted from Redis and return immediate 404s.
+            - generic [ref=e104]:
+              - generic [ref=e105]:
+                - img [ref=e107]
+                - generic [ref=e109]: Async Analytics
+              - paragraph [ref=e111]: Track click patterns dynamically. Telemetry is parsed in isolated queue workers to keep redirection latency low.
+        - generic [ref=e113]:
+          - generic [ref=e114]:
+            - generic [ref=e115]: The Redirection Flow
+            - heading "Three simple steps to high-performance links" [level=2] [ref=e116]
+            - paragraph [ref=e117]: Simple to operate, reliable under heavy traffic.
+          - generic [ref=e118]:
+            - generic [ref=e119]:
+              - generic [ref=e120]: "01"
+              - heading "Generate" [level=3] [ref=e121]
+              - paragraph [ref=e122]: Input your long target URL, choose a custom alias path, and configure an optional expiry window.
+            - generic [ref=e123]:
+              - generic [ref=e124]: "02"
+              - heading "Share" [level=3] [ref=e125]
+              - paragraph [ref=e126]: Distribute your singkat.saja Base62 path. Clicks are resolved from the Redis cache in single-digit milliseconds.
+            - generic [ref=e127]:
+              - generic [ref=e128]: "03"
+              - heading "Monitor" [level=3] [ref=e129]
+              - paragraph [ref=e130]: Track trends, devices, browsers, and location dimensions inside a polished analytics dashboard.
+        - generic [ref=e132]:
+          - generic [ref=e133]: Get Started Immediately
+          - heading "Clean short links, ready in seconds." [level=2] [ref=e134]
+          - paragraph [ref=e135]: Create your account today. No credit cards, no subscriptions, no bloat.
+          - link "Go to Dashboard" [ref=e137] [cursor=pointer]:
+            - /url: /dashboard
+    - contentinfo [ref=e138]:
+      - generic [ref=e139]:
+        - generic [ref=e140]:
+          - link "SingkatSaja" [ref=e141] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e142]:
+              - img [ref=e144]
+              - generic [ref=e147]: SingkatSaja
+          - paragraph [ref=e148]: Quiet, high-key canvas URL shortening interrupted by a single confident violet stroke.
+        - generic [ref=e149]:
+          - generic [ref=e150]:
+            - generic [ref=e151]: Product
+            - link "Features" [ref=e152] [cursor=pointer]:
+              - /url: /
+            - link "Dashboard" [ref=e153] [cursor=pointer]:
+              - /url: /dashboard
+          - generic [ref=e154]:
+            - generic [ref=e155]: Resources
+            - link "Laravel" [ref=e156] [cursor=pointer]:
+              - /url: https://laravel.com
+            - link "Inertia.js" [ref=e157] [cursor=pointer]:
+              - /url: https://inertiajs.com
+          - generic [ref=e158]:
+            - generic [ref=e159]: Legal
+            - link "Privacy Policy" [ref=e160] [cursor=pointer]:
+              - /url: ""
+            - link "Terms of Service" [ref=e161] [cursor=pointer]:
+              - /url: ""
+      - generic [ref=e162]: © 2026 SingkatSaja. Built with precision and restraint.
+  - region "Notifications alt+T"

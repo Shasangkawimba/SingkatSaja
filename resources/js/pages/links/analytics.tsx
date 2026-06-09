@@ -9,6 +9,7 @@ import {
     Globe,
     Laptop,
     Smartphone,
+    TrendingUp,
 } from 'lucide-react';
 import React, { useState } from 'react';
 import {
@@ -47,8 +48,8 @@ const CustomTooltip = ({
         const dateStr = typeof label === 'string' ? label : '';
 
         return (
-            <div className="rounded-lg border border-neutral-200/80 bg-pure-white p-12 text-left font-sans text-caption shadow-md">
-                <p className="mb-4 font-bold text-graphite">
+            <div className="rounded-lg border border-neutral-200/80 bg-white p-3 text-left shadow-lg">
+                <p className="mb-1 text-[11px] font-bold text-slate">
                     {dateStr
                         ? new Date(dateStr).toLocaleDateString(undefined, {
                               year: 'numeric',
@@ -57,11 +58,9 @@ const CustomTooltip = ({
                           })
                         : ''}
                 </p>
-                <p className="text-[14px] font-bold text-vivid-indigo">
-                    Clicks:{' '}
-                    <span className="font-extrabold text-graphite">
-                        {payload[0].value}
-                    </span>
+                <p className="text-[13px] font-bold text-graphite">
+                    {payload[0].value}{' '}
+                    <span className="font-medium text-slate">clicks</span>
                 </p>
             </div>
         );
@@ -129,10 +128,10 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                 <Button
                     asChild
                     variant="ghost"
-                    className="h-9 rounded-lg border border-neutral-200 font-medium text-graphite hover:bg-frost-gray"
+                    className="h-9 rounded-lg border border-neutral-200/80 text-[13px] font-medium text-graphite hover:bg-frost-gray"
                 >
                     <Link href="/links">
-                        <ArrowLeft className="mr-8 size-16" />
+                        <ArrowLeft className="size-3.5" />
                         Back to Links
                     </Link>
                 </Button>
@@ -140,85 +139,82 @@ export default function Analytics({ analytics }: AnalyticsProps) {
         >
             <Head title={`Analytics — ${link.short_code}`} />
 
-            <div className="flex flex-col gap-24">
+            <div className="flex flex-col gap-5">
                 {/* 1. Overview Cards */}
-                <div className="grid grid-cols-1 gap-20 sm:grid-cols-2 lg:grid-cols-4">
-                    <Card className="border border-neutral-200/80 bg-white transition-all duration-300 hover:border-neutral-300">
-                        <CardContent className="flex flex-col gap-12 p-20">
-                            <span className="text-[11px] font-bold tracking-wider text-slate uppercase">
+                <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+                    <Card className="border border-neutral-200/60 bg-white shadow-none transition-all duration-200 hover:border-neutral-300">
+                        <CardContent className="flex flex-col gap-2.5 p-4">
+                            <span className="text-[10px] font-bold tracking-widest text-slate/70 uppercase">
                                 Total Clicks
                             </span>
-                            <div className="mt-4 flex items-baseline justify-between">
-                                <span className="font-satoshi text-4xl font-bold tracking-tight text-vivid-indigo">
+                            <div className="flex items-baseline justify-between">
+                                <span className="font-satoshi text-3xl font-bold tracking-tight text-vivid-indigo">
                                     {link.clicks_count ?? 0}
                                 </span>
-                                <span className="text-[12px] font-medium text-slate">
-                                    all-time clicks
+                                <span className="text-[11px] text-slate/60">
+                                    all-time
                                 </span>
                             </div>
                         </CardContent>
                     </Card>
 
-                    <Card className="border border-neutral-200/80 bg-white transition-all duration-300 hover:border-neutral-300">
-                        <CardContent className="flex flex-col gap-12 p-20">
-                            <span className="text-[11px] font-bold tracking-wider text-slate uppercase">
+                    <Card className="border border-neutral-200/60 bg-white shadow-none transition-all duration-200 hover:border-neutral-300">
+                        <CardContent className="flex flex-col gap-2.5 p-4">
+                            <span className="text-[10px] font-bold tracking-widest text-slate/70 uppercase">
                                 Short URL
                             </span>
-                            <div className="mt-4 flex items-center justify-between gap-8">
-                                <span className="truncate font-satoshi text-heading-sm font-bold text-graphite select-all">
+                            <div className="flex items-center justify-between gap-2">
+                                <span className="truncate font-satoshi text-[15px] font-bold text-graphite select-all">
                                     {link.short_code}
                                 </span>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
+                                <button
                                     onClick={handleCopy}
-                                    className="size-32 shrink-0 rounded-lg border border-neutral-200/60 bg-white shadow-2xs hover:bg-neutral-50 hover:text-vivid-indigo"
                                     title="Copy Link"
+                                    className="flex size-7 shrink-0 items-center justify-center rounded border border-neutral-200/60 bg-white text-slate shadow-none transition-all hover:border-neutral-300 hover:text-vivid-indigo"
                                 >
                                     {copied ? (
-                                        <Check className="size-14 text-emerald-600" />
+                                        <Check className="size-3 text-emerald-600" />
                                     ) : (
-                                        <Copy className="size-14" />
+                                        <Copy className="size-3" />
                                     )}
-                                </Button>
+                                </button>
                             </div>
                         </CardContent>
                     </Card>
 
-                    <Card className="border border-neutral-200/80 bg-white transition-all duration-300 hover:border-neutral-300">
-                        <CardContent className="flex flex-col gap-12 p-20">
-                            <span className="text-[11px] font-bold tracking-wider text-slate uppercase">
+                    <Card className="border border-neutral-200/60 bg-white shadow-none transition-all duration-200 hover:border-neutral-300">
+                        <CardContent className="flex flex-col gap-2.5 p-4">
+                            <span className="text-[10px] font-bold tracking-widest text-slate/70 uppercase">
                                 Destination
                             </span>
-                            <div className="mt-4 flex items-center justify-between gap-8">
-                                <span className="max-w-[160px] truncate text-[14px] font-medium text-slate transition-colors hover:text-graphite">
-                                    <a
-                                        href={link.destination_url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        {link.destination_url}
-                                    </a>
-                                </span>
+                            <div className="flex items-center justify-between gap-2">
                                 <a
                                     href={link.destination_url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex size-32 shrink-0 items-center justify-center rounded-lg border border-neutral-200/60 bg-white text-slate shadow-2xs hover:bg-neutral-50 hover:text-vivid-indigo"
-                                    title="Open Destination"
+                                    className="truncate text-[12px] font-medium text-slate transition-colors hover:text-graphite hover:underline"
                                 >
-                                    <ExternalLink className="size-14" />
+                                    {link.destination_url}
+                                </a>
+                                <a
+                                    href={link.destination_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    title="Open Destination"
+                                    className="flex size-7 shrink-0 items-center justify-center rounded border border-neutral-200/60 bg-white text-slate shadow-none transition-all hover:border-neutral-300 hover:text-vivid-indigo"
+                                >
+                                    <ExternalLink className="size-3" />
                                 </a>
                             </div>
                         </CardContent>
                     </Card>
 
-                    <Card className="border border-neutral-200/80 bg-white transition-all duration-300 hover:border-neutral-300">
-                        <CardContent className="flex flex-col gap-12 p-20">
-                            <span className="text-[11px] font-bold tracking-wider text-slate uppercase">
-                                Status & Expiration
+                    <Card className="border border-neutral-200/60 bg-white shadow-none transition-all duration-200 hover:border-neutral-300">
+                        <CardContent className="flex flex-col gap-2.5 p-4">
+                            <span className="text-[10px] font-bold tracking-widest text-slate/70 uppercase">
+                                Status
                             </span>
-                            <div className="mt-4 flex flex-wrap items-center justify-between gap-8">
+                            <div className="flex flex-wrap items-center justify-between gap-2">
                                 {expired ? (
                                     <Badge
                                         variant="danger"
@@ -234,10 +230,10 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                         Active
                                     </Badge>
                                 )}
-                                <span className="text-[12px] font-medium text-slate">
+                                <span className="text-[11px] text-slate/70">
                                     {link.expires_at ? (
-                                        <span className="flex items-center gap-4 text-slate">
-                                            <Calendar className="size-12" />
+                                        <span className="flex items-center gap-1">
+                                            <Calendar className="size-3" />
                                             {new Date(
                                                 link.expires_at,
                                             ).toLocaleDateString(undefined, {
@@ -254,33 +250,32 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                     </Card>
                 </div>
 
-                {/* 2 & 3. Trend Charts (7 Day & 30 Day) */}
-                <div className="grid grid-cols-1 gap-24 lg:grid-cols-2">
-                    <Card className="flex flex-col gap-20 rounded-largecards border border-neutral-200/80 bg-white p-24">
+                {/* 2 & 3. Trend Charts */}
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                    <Card className="flex flex-col gap-4 rounded-xl border border-neutral-200/60 bg-white p-5 shadow-none">
                         <CardHeader className="p-0">
-                            <div className="flex items-center gap-12">
-                                <div className="flex size-32 items-center justify-center rounded-lg bg-pale-lilac/50 text-vivid-indigo">
-                                    <BarChart3 className="size-16" />
+                            <div className="flex items-center gap-2.5">
+                                <div className="flex size-8 items-center justify-center rounded-lg bg-pale-lilac/60 text-vivid-indigo">
+                                    <TrendingUp className="size-4" />
                                 </div>
                                 <div>
-                                    <CardTitle className="font-satoshi text-heading-sm font-bold text-graphite">
+                                    <CardTitle className="font-satoshi text-[14px] font-bold text-graphite">
                                         7 Day Trend
                                     </CardTitle>
-                                    <CardDescription className="mt-1 text-[12px] text-slate">
-                                        Click rate performance over the past
-                                        week
+                                    <CardDescription className="mt-0.5 text-[11px] text-slate">
+                                        Click performance over the past week
                                     </CardDescription>
                                 </div>
                             </div>
                         </CardHeader>
-                        <CardContent className="mt-8 h-[280px] p-0">
+                        <CardContent className="h-[240px] p-0">
                             <ResponsiveContainer width="100%" height="100%">
                                 <AreaChart
                                     data={stats_7_days}
                                     margin={{
-                                        top: 10,
-                                        right: 10,
-                                        left: -20,
+                                        top: 8,
+                                        right: 8,
+                                        left: -24,
                                         bottom: 0,
                                     }}
                                 >
@@ -295,7 +290,7 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                             <stop
                                                 offset="5%"
                                                 stopColor="#494bcb"
-                                                stopOpacity={0.15}
+                                                stopOpacity={0.12}
                                             />
                                             <stop
                                                 offset="95%"
@@ -307,28 +302,28 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                     <CartesianGrid
                                         strokeDasharray="3 3"
                                         vertical={false}
-                                        stroke="#f0f0f5"
+                                        stroke="#f4f4f8"
                                     />
                                     <XAxis
                                         dataKey="date"
                                         tickFormatter={formattedDate}
                                         tick={{
-                                            fill: '#686878',
-                                            fontSize: 11,
+                                            fill: '#8a8a99',
+                                            fontSize: 10,
                                             fontWeight: 500,
                                         }}
-                                        stroke="#neutral-300"
-                                        strokeOpacity={0.15}
-                                        dy={8}
+                                        axisLine={false}
+                                        tickLine={false}
+                                        dy={6}
                                     />
                                     <YAxis
                                         tick={{
-                                            fill: '#686878',
-                                            fontSize: 11,
+                                            fill: '#8a8a99',
+                                            fontSize: 10,
                                             fontWeight: 500,
                                         }}
-                                        stroke="#neutral-300"
-                                        strokeOpacity={0.15}
+                                        axisLine={false}
+                                        tickLine={false}
                                         allowDecimals={false}
                                     />
                                     <Tooltip content={<CustomTooltip />} />
@@ -336,7 +331,7 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                         type="monotone"
                                         dataKey="clicks_count"
                                         stroke="#494bcb"
-                                        strokeWidth={2}
+                                        strokeWidth={1.5}
                                         fillOpacity={1}
                                         fill="url(#colorClicks7)"
                                     />
@@ -345,31 +340,30 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                         </CardContent>
                     </Card>
 
-                    <Card className="flex flex-col gap-20 rounded-largecards border border-neutral-200/80 bg-white p-24">
+                    <Card className="flex flex-col gap-4 rounded-xl border border-neutral-200/60 bg-white p-5 shadow-none">
                         <CardHeader className="p-0">
-                            <div className="flex items-center gap-12">
-                                <div className="flex size-32 items-center justify-center rounded-lg bg-pale-lilac/50 text-vivid-indigo">
-                                    <BarChart3 className="size-16" />
+                            <div className="flex items-center gap-2.5">
+                                <div className="flex size-8 items-center justify-center rounded-lg bg-pale-lilac/60 text-vivid-indigo">
+                                    <BarChart3 className="size-4" />
                                 </div>
                                 <div>
-                                    <CardTitle className="font-satoshi text-heading-sm font-bold text-graphite">
+                                    <CardTitle className="font-satoshi text-[14px] font-bold text-graphite">
                                         30 Day Trend
                                     </CardTitle>
-                                    <CardDescription className="mt-1 text-[12px] text-slate">
-                                        Click rate performance over the past
-                                        month
+                                    <CardDescription className="mt-0.5 text-[11px] text-slate">
+                                        Click performance over the past month
                                     </CardDescription>
                                 </div>
                             </div>
                         </CardHeader>
-                        <CardContent className="mt-8 h-[280px] p-0">
+                        <CardContent className="h-[240px] p-0">
                             <ResponsiveContainer width="100%" height="100%">
                                 <AreaChart
                                     data={stats_30_days}
                                     margin={{
-                                        top: 10,
-                                        right: 10,
-                                        left: -20,
+                                        top: 8,
+                                        right: 8,
+                                        left: -24,
                                         bottom: 0,
                                     }}
                                 >
@@ -384,7 +378,7 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                             <stop
                                                 offset="5%"
                                                 stopColor="#494bcb"
-                                                stopOpacity={0.15}
+                                                stopOpacity={0.12}
                                             />
                                             <stop
                                                 offset="95%"
@@ -396,28 +390,28 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                     <CartesianGrid
                                         strokeDasharray="3 3"
                                         vertical={false}
-                                        stroke="#f0f0f5"
+                                        stroke="#f4f4f8"
                                     />
                                     <XAxis
                                         dataKey="date"
                                         tickFormatter={formattedDate}
                                         tick={{
-                                            fill: '#686878',
-                                            fontSize: 11,
+                                            fill: '#8a8a99',
+                                            fontSize: 10,
                                             fontWeight: 500,
                                         }}
-                                        stroke="#neutral-300"
-                                        strokeOpacity={0.15}
-                                        dy={8}
+                                        axisLine={false}
+                                        tickLine={false}
+                                        dy={6}
                                     />
                                     <YAxis
                                         tick={{
-                                            fill: '#686878',
-                                            fontSize: 11,
+                                            fill: '#8a8a99',
+                                            fontSize: 10,
                                             fontWeight: 500,
                                         }}
-                                        stroke="#neutral-300"
-                                        strokeOpacity={0.15}
+                                        axisLine={false}
+                                        tickLine={false}
                                         allowDecimals={false}
                                     />
                                     <Tooltip content={<CustomTooltip />} />
@@ -425,7 +419,7 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                         type="monotone"
                                         dataKey="clicks_count"
                                         stroke="#494bcb"
-                                        strokeWidth={2}
+                                        strokeWidth={1.5}
                                         fillOpacity={1}
                                         fill="url(#colorClicks30)"
                                     />
@@ -435,32 +429,32 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                     </Card>
                 </div>
 
-                {/* 4, 5 & 6. Client Dimensions (Browsers, Devices, Platforms) */}
-                <div className="grid grid-cols-1 gap-24 md:grid-cols-3">
+                {/* 4, 5 & 6. Client Dimensions */}
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                     {/* Top Browsers */}
-                    <Card className="flex flex-col gap-20 rounded-largecards border border-neutral-200/80 bg-white p-24">
+                    <Card className="flex flex-col gap-4 rounded-xl border border-neutral-200/60 bg-white p-5 shadow-none">
                         <CardHeader className="p-0">
-                            <div className="flex items-center gap-12">
-                                <div className="flex size-32 items-center justify-center rounded-lg bg-pale-lilac/50 text-vivid-indigo">
-                                    <Globe className="size-16" />
+                            <div className="flex items-center gap-2.5">
+                                <div className="flex size-8 items-center justify-center rounded-lg bg-pale-lilac/60 text-vivid-indigo">
+                                    <Globe className="size-4" />
                                 </div>
                                 <div>
-                                    <CardTitle className="font-satoshi text-heading-sm font-bold text-graphite">
+                                    <CardTitle className="font-satoshi text-[14px] font-bold text-graphite">
                                         Top Browsers
                                     </CardTitle>
-                                    <CardDescription className="mt-1 text-[12px] text-slate">
-                                        Visits classified by browser type
+                                    <CardDescription className="mt-0.5 text-[11px] text-slate">
+                                        Visits by browser type
                                     </CardDescription>
                                 </div>
                             </div>
                         </CardHeader>
-                        <CardContent className="flex flex-col gap-16 p-0">
+                        <CardContent className="flex flex-col gap-3 p-0">
                             {top_browsers.length === 0 ? (
-                                <div className="py-24 text-center text-[13px] font-medium text-slate">
+                                <div className="py-6 text-center text-[12px] text-slate/60">
                                     No browser data logged yet.
                                 </div>
                             ) : (
-                                <div className="flex flex-col gap-16">
+                                <div className="flex flex-col gap-3">
                                     {top_browsers.map((item, index) => {
                                         const percentage =
                                             totalBrowserClicks > 0
@@ -472,22 +466,20 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                         return (
                                             <div
                                                 key={index}
-                                                className="flex flex-col gap-6"
+                                                className="flex flex-col gap-1"
                                             >
-                                                <div className="flex items-center justify-between text-[13px] font-medium">
-                                                    <span className="text-graphite">
-                                                        {item.browser ||
-                                                            'Other'}
+                                                <div className="flex items-center justify-between text-[12px]">
+                                                    <span className="font-medium text-graphite">
+                                                        {item.browser || 'Other'}
                                                     </span>
-                                                    <span className="font-bold text-slate">
+                                                    <span className="font-bold text-slate/70">
                                                         {item.clicks_count} (
-                                                        {percentage.toFixed(1)}
-                                                        %)
+                                                        {percentage.toFixed(0)}%)
                                                     </span>
                                                 </div>
-                                                <div className="h-6 w-full overflow-hidden rounded-pills border border-neutral-100 bg-frost-gray">
+                                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-neutral-100">
                                                     <div
-                                                        className="h-full rounded-pills bg-vivid-indigo"
+                                                        className="h-full rounded-full bg-vivid-indigo transition-all duration-500"
                                                         style={{
                                                             width: `${percentage}%`,
                                                         }}
@@ -502,29 +494,29 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                     </Card>
 
                     {/* Top Devices */}
-                    <Card className="flex flex-col gap-20 rounded-largecards border border-neutral-200/80 bg-white p-24">
+                    <Card className="flex flex-col gap-4 rounded-xl border border-neutral-200/60 bg-white p-5 shadow-none">
                         <CardHeader className="p-0">
-                            <div className="flex items-center gap-12">
-                                <div className="flex size-32 items-center justify-center rounded-lg bg-pale-lilac/50 text-vivid-indigo">
-                                    <Smartphone className="size-16" />
+                            <div className="flex items-center gap-2.5">
+                                <div className="flex size-8 items-center justify-center rounded-lg bg-pale-lilac/60 text-vivid-indigo">
+                                    <Smartphone className="size-4" />
                                 </div>
                                 <div>
-                                    <CardTitle className="font-satoshi text-heading-sm font-bold text-graphite">
+                                    <CardTitle className="font-satoshi text-[14px] font-bold text-graphite">
                                         Top Devices
                                     </CardTitle>
-                                    <CardDescription className="mt-1 text-[12px] text-slate">
-                                        Distribution of device types utilized
+                                    <CardDescription className="mt-0.5 text-[11px] text-slate">
+                                        Distribution of device types
                                     </CardDescription>
                                 </div>
                             </div>
                         </CardHeader>
-                        <CardContent className="flex flex-col gap-16 p-0">
+                        <CardContent className="flex flex-col gap-3 p-0">
                             {top_devices.length === 0 ? (
-                                <div className="py-24 text-center text-[13px] font-medium text-slate">
+                                <div className="py-6 text-center text-[12px] text-slate/60">
                                     No device data logged yet.
                                 </div>
                             ) : (
-                                <div className="flex flex-col gap-16">
+                                <div className="flex flex-col gap-3">
                                     {top_devices.map((item, index) => {
                                         const percentage =
                                             totalDeviceClicks > 0
@@ -542,21 +534,20 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                         return (
                                             <div
                                                 key={index}
-                                                className="flex flex-col gap-6"
+                                                className="flex flex-col gap-1"
                                             >
-                                                <div className="flex items-center justify-between text-[13px] font-medium">
-                                                    <span className="text-graphite">
+                                                <div className="flex items-center justify-between text-[12px]">
+                                                    <span className="font-medium text-graphite">
                                                         {label}
                                                     </span>
-                                                    <span className="font-bold text-slate">
+                                                    <span className="font-bold text-slate/70">
                                                         {item.clicks_count} (
-                                                        {percentage.toFixed(1)}
-                                                        %)
+                                                        {percentage.toFixed(0)}%)
                                                     </span>
                                                 </div>
-                                                <div className="h-6 w-full overflow-hidden rounded-pills border border-neutral-100 bg-frost-gray">
+                                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-neutral-100">
                                                     <div
-                                                        className="h-full rounded-pills bg-vivid-indigo"
+                                                        className="h-full rounded-full bg-vivid-indigo transition-all duration-500"
                                                         style={{
                                                             width: `${percentage}%`,
                                                         }}
@@ -571,29 +562,29 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                     </Card>
 
                     {/* Top Platforms */}
-                    <Card className="flex flex-col gap-20 rounded-largecards border border-neutral-200/80 bg-white p-24">
+                    <Card className="flex flex-col gap-4 rounded-xl border border-neutral-200/60 bg-white p-5 shadow-none">
                         <CardHeader className="p-0">
-                            <div className="flex items-center gap-12">
-                                <div className="flex size-32 items-center justify-center rounded-lg bg-pale-lilac/50 text-vivid-indigo">
-                                    <Laptop className="size-16" />
+                            <div className="flex items-center gap-2.5">
+                                <div className="flex size-8 items-center justify-center rounded-lg bg-pale-lilac/60 text-vivid-indigo">
+                                    <Laptop className="size-4" />
                                 </div>
                                 <div>
-                                    <CardTitle className="font-satoshi text-heading-sm font-bold text-graphite">
+                                    <CardTitle className="font-satoshi text-[14px] font-bold text-graphite">
                                         Top Platforms
                                     </CardTitle>
-                                    <CardDescription className="mt-1 text-[12px] text-slate">
-                                        Operating systems platform groupings
+                                    <CardDescription className="mt-0.5 text-[11px] text-slate">
+                                        Operating system platform groups
                                     </CardDescription>
                                 </div>
                             </div>
                         </CardHeader>
-                        <CardContent className="flex flex-col gap-16 p-0">
+                        <CardContent className="flex flex-col gap-3 p-0">
                             {top_platforms.length === 0 ? (
-                                <div className="py-24 text-center text-[13px] font-medium text-slate">
+                                <div className="py-6 text-center text-[12px] text-slate/60">
                                     No platform data logged yet.
                                 </div>
                             ) : (
-                                <div className="flex flex-col gap-16">
+                                <div className="flex flex-col gap-3">
                                     {top_platforms.map((item, index) => {
                                         const percentage =
                                             totalPlatformClicks > 0
@@ -605,22 +596,20 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                         return (
                                             <div
                                                 key={index}
-                                                className="flex flex-col gap-6"
+                                                className="flex flex-col gap-1"
                                             >
-                                                <div className="flex items-center justify-between text-[13px] font-medium">
-                                                    <span className="text-graphite">
-                                                        {item.platform ||
-                                                            'Other'}
+                                                <div className="flex items-center justify-between text-[12px]">
+                                                    <span className="font-medium text-graphite">
+                                                        {item.platform || 'Other'}
                                                     </span>
-                                                    <span className="font-bold text-slate">
+                                                    <span className="font-bold text-slate/70">
                                                         {item.clicks_count} (
-                                                        {percentage.toFixed(1)}
-                                                        %)
+                                                        {percentage.toFixed(0)}%)
                                                     </span>
                                                 </div>
-                                                <div className="h-6 w-full overflow-hidden rounded-pills border border-neutral-100 bg-frost-gray">
+                                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-neutral-100">
                                                     <div
-                                                        className="h-full rounded-pills bg-vivid-indigo"
+                                                        className="h-full rounded-full bg-vivid-indigo transition-all duration-500"
                                                         style={{
                                                             width: `${percentage}%`,
                                                         }}

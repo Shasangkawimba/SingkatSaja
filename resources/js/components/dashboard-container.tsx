@@ -20,17 +20,17 @@ export function DashboardContainer({
 }: DashboardContainerProps) {
     return (
         <PageContainer
-            className={cn('flex flex-col gap-32', className)}
+            className={cn('flex flex-col gap-6 py-5 md:py-8', className)}
             {...props}
         >
-            <div className="flex flex-col justify-between gap-16 border-b border-slate/10 pb-20 md:flex-row md:items-center">
+            <div className="flex flex-col justify-between gap-4 border-b border-neutral-100 pb-5 md:flex-row md:items-end">
                 <SectionHeader
                     title={title}
                     description={description}
                     align="left"
                 />
                 {actions && (
-                    <div className="flex shrink-0 items-center gap-16 md:mt-24">
+                    <div className="flex shrink-0 items-center gap-3">
                         {actions}
                     </div>
                 )}

@@ -26,7 +26,7 @@ export function SectionHeader({
     return (
         <div
             className={cn(
-                'flex flex-col gap-16',
+                'flex flex-col gap-2',
                 isCentered
                     ? 'mx-auto max-w-2xl items-center text-center'
                     : 'items-start',
@@ -44,7 +44,7 @@ export function SectionHeader({
                 </div>
             )}
 
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-1">
                 <h2
                     className={cn(
                         'font-bold tracking-[-0.02em] text-graphite dark:text-pure-white',
@@ -57,7 +57,7 @@ export function SectionHeader({
                 </h2>
 
                 {description && (
-                    <p className="max-w-xl text-body leading-relaxed text-slate dark:text-soft-violet">
+                    <p className="max-w-xl text-[13px] leading-relaxed text-slate dark:text-soft-violet">
                         {description}
                     </p>
                 )}

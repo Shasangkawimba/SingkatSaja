@@ -1,0 +1,64 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - link "SingkatSaja" [ref=e6] [cursor=pointer]:
+        - /url: /dashboard
+        - generic [ref=e7]:
+          - img [ref=e9]
+          - generic [ref=e12]: SingkatSaja
+      - navigation "Main" [ref=e14]:
+        - list [ref=e16]:
+          - listitem [ref=e17]:
+            - link "Dashboard" [ref=e18] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e19]
+              - text: Dashboard
+          - listitem [ref=e24]:
+            - link "My Links" [ref=e25] [cursor=pointer]:
+              - /url: /links
+              - img [ref=e26]
+              - text: My Links
+      - generic [ref=e29]:
+        - button [ref=e31] [cursor=pointer]:
+          - img
+        - button "TU" [ref=e32]:
+          - generic [ref=e34]: TU
+    - main [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e39]:
+            - heading "Create Short Link" [level=2] [ref=e40]
+            - paragraph [ref=e41]: Shorten target URLs and configure custom options.
+          - link "Back to Links" [ref=e43] [cursor=pointer]:
+            - /url: /links
+            - img
+            - text: Back to Links
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - img [ref=e51]
+            - generic [ref=e53]:
+              - paragraph [ref=e54]: New Short Link
+              - paragraph [ref=e55]: Configure your destination and alias options below.
+          - generic [ref=e56]:
+            - generic [ref=e57]: Destination URL
+            - textbox "Destination URL" [ref=e58]:
+              - /placeholder: https://example.com/long-target-url
+            - generic [ref=e59]: The target URL. Must start with http:// or https://
+          - generic [ref=e60]:
+            - generic [ref=e61]: Custom Alias(optional)
+            - generic [ref=e62]:
+              - generic [ref=e63]: singkat.saja/
+              - textbox "Custom Alias(optional)" [ref=e64]:
+                - /placeholder: custom-name
+            - generic [ref=e65]: Alphanumeric only. Cannot match reserved paths (admin, dashboard, etc).
+          - generic [ref=e66]:
+            - generic [ref=e67]: Expiration Date(optional)
+            - textbox "Expiration Date(optional)" [ref=e68]
+            - generic [ref=e69]: After this timestamp, redirects return 404.
+          - generic [ref=e70]:
+            - link "Cancel" [ref=e71] [cursor=pointer]:
+              - /url: /links
+            - button "Generate Link" [ref=e72]:
+              - img
+              - text: Generate Link
+  - region "Notifications alt+T"
