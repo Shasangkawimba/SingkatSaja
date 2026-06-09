@@ -20,5 +20,8 @@ require __DIR__.'/settings.php';
 
 Route::get('api/health/queue', [\App\Http\Controllers\QueueHealthController::class, 'show'])->name('queue.health');
 
+Route::get('robots.txt', [\App\Http\Controllers\SeoController::class, 'robots'])->name('seo.robots');
+Route::get('sitemap.xml', [\App\Http\Controllers\SeoController::class, 'sitemap'])->name('seo.sitemap');
+
 Route::get('/{short_code}', [\App\Http\Controllers\RedirectController::class, 'redirect'])->name('redirect');
 

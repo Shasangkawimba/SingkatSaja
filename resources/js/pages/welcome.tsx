@@ -1,4 +1,4 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { LayoutGrid, LinkIcon, Clock, BarChart3, ArrowRight, Share2, Activity } from 'lucide-react';
 import { PublicLayout } from '@/layouts/public-layout';
 import { PageContainer } from '@/components/page-container';
@@ -7,13 +7,14 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { dashboard, register, login } from '@/routes';
+import { SEO } from '@/components/seo';
 
 export default function Welcome() {
     const { auth } = usePage().props as any;
 
     return (
         <PublicLayout>
-            <Head title="SingkatSaja — Confident & Fast URL Shortener" />
+            <SEO />
 
             {/* 1. Hero Section */}
             <section className="relative overflow-hidden pt-40 pb-48 md:pt-48 md:pb-76 bg-pure-white">
