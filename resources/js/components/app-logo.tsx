@@ -2,12 +2,10 @@ import AppLogoIcon from '@/components/app-logo-icon';
 
 export default function AppLogo() {
     return (
-        <div className="flex items-center gap-8">
-            <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-vivid-indigo text-white">
-                <AppLogoIcon className="size-5 fill-current text-white" />
-            </div>
+        <div className="flex items-center gap-3">
+            <AppLogoIcon className="h-8 w-auto brightness-0 dark:invert transition-all" />
             <div className="flex flex-col text-left">
-                <span className="font-satoshi text-[16px] leading-none font-bold tracking-tight text-graphite dark:text-pure-white">
+                <span className="font-satoshi text-xl leading-none font-bold tracking-tight text-foreground">
                     SingkatSaja
                 </span>
             </div>

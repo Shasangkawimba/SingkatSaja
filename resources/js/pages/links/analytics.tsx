@@ -28,15 +28,7 @@ import type {
 } from 'recharts/types/component/DefaultTooltipContent';
 import { toast } from 'sonner';
 import { DashboardContainer } from '@/components/dashboard-container';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-    CardDescription,
-} from '@/components/ui/card';
 import type { AnalyticsProps } from '@/types/analytics';
 
 const CustomTooltip = ({
@@ -47,21 +39,21 @@ const CustomTooltip = ({
     if (active && payload && payload.length && label) {
         const dateStr = typeof label === 'string' ? label : '';
         return (
-            <div className="rounded-lg border border-border/60 bg-popover px-3 py-2 text-popover-foreground shadow-sm">
-                <p className="mb-1 text-[11px] font-medium text-muted-foreground uppercase tracking-wider">
+            <div className="glass-panel px-4 py-3 rounded-xl border border-white/20 shadow-xl backdrop-blur-xl">
+                <p className="mb-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">
                     {dateStr ? new Date(dateStr).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : ''}
                 </p>
-                <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 rounded-full bg-primary" />
-                    <p className="text-sm font-bold">
-                        {payload[0].value} <span className="font-normal text-muted-foreground">clicks</span>
+                <div className="flex items-center gap-3">
+                    <div className="h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.8)]" />
+                    <p className="text-sm font-extrabold text-foreground">
+                        {payload[0].value} <span className="text-muted-foreground font-semibold">clicks</span>
                     </p>
                 </div>
             </div>
         );
     }
     return null;
-};
+}
 
 export default function Analytics({ analytics }: AnalyticsProps) {
     const {
@@ -101,221 +93,231 @@ export default function Analytics({ analytics }: AnalyticsProps) {
         <DashboardContainer
             title=""
             description=""
-            className="pb-12"
+            className="pb-12 relative z-10 pt-8"
         >
             <Head title={`Analytics — ${link.short_code}`} />
 
             {/* Back Navigation */}
-            <div className="mb-4 flex">
-                <Button asChild variant="ghost" size="sm" className="h-8 pl-2 pr-4 text-xs text-muted-foreground hover:text-foreground">
+            <div className="mb-8 flex">
+                <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground hover:bg-background/50 rounded-full px-6 font-bold h-10">
                     <Link href="/links">
-                        <ArrowLeft className="mr-1.5 h-3 w-3" />
+                        <ArrowLeft className="mr-2 h-4 w-4" />
                         Back to Links
                     </Link>
                 </Button>
             </div>
 
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-8">
                 {/* 1. Hero Card */}
-                <Card className="overflow-hidden border-border/40 bg-card shadow-sm">
-                    <div className="flex flex-col border-b border-border/40 md:flex-row">
+                <div className="glass-panel rounded-3xl border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] overflow-hidden">
+                    <div className="flex flex-col md:flex-row">
                         {/* Primary Info */}
-                        <div className="flex flex-1 flex-col justify-center gap-4 p-6 md:p-8">
-                            <div className="flex items-center gap-3">
-                                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                        <div className="flex flex-1 flex-col justify-center gap-6 p-8 md:p-10">
+                            <div className="flex items-center gap-4">
+                                <h1 className="text-4xl font-extrabold tracking-tight text-foreground bg-background/50 px-4 py-2 rounded-xl border border-white/10 font-mono shadow-inner">
                                     {link.short_code}
                                 </h1>
-                                <button
+                                <Button
+                                    variant="outline"
+                                    size="icon"
                                     onClick={handleCopy}
-                                    className="group rounded-md border border-border/40 bg-muted/30 p-2 transition-all hover:bg-muted"
+                                    className="h-12 w-12 shrink-0 rounded-full bg-background/50 border-white/10 shadow-sm hover:shadow-md transition-all hover:bg-background/80"
                                     title="Copy short link"
                                 >
-                                    {copied ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4 text-muted-foreground group-hover:text-foreground" />}
-                                </button>
+                                    {copied ? <Check className="h-6 w-6 text-emerald-500" /> : <Copy className="h-5 w-5 text-muted-foreground" />}
+                                </Button>
                             </div>
                             
-                            <div className="flex items-center gap-2 text-sm">
+                            <div className="flex items-center gap-3 text-base font-bold">
                                 <span className="text-muted-foreground">Destination:</span>
                                 <a 
                                     href={link.destination_url} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    className="flex max-w-sm items-center gap-1.5 truncate font-medium text-foreground hover:underline sm:max-w-md lg:max-w-lg"
+                                    className="flex max-w-sm items-center gap-2 truncate text-foreground hover:text-primary transition-colors sm:max-w-md lg:max-w-lg"
                                 >
-                                    {link.destination_url}
-                                    <ExternalLink className="h-3 w-3 text-muted-foreground" />
+                                    <span className="truncate">{link.destination_url}</span>
+                                    <ExternalLink className="h-4 w-4 shrink-0 opacity-50" />
                                 </a>
                             </div>
 
-                            <div className="mt-2 flex flex-wrap items-center gap-4">
+                            <div className="flex flex-wrap items-center gap-3 mt-2">
                                 {expired ? (
-                                    <Badge variant="destructive" className="bg-destructive/10 text-destructive hover:bg-destructive/10">
+                                    <span className="inline-flex items-center gap-2 rounded-full bg-destructive/10 border border-destructive/20 px-3 py-1 text-xs font-bold text-destructive shadow-sm">
+                                        <div className="h-2 w-2 rounded-full bg-destructive" />
                                         Expired
-                                    </Badge>
+                                    </span>
                                 ) : (
-                                    <Badge variant="default" className="bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/10 dark:text-emerald-400">
+                                    <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 shadow-sm">
+                                        <div className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                                         Active
-                                    </Badge>
+                                    </span>
                                 )}
-                                <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                                    <CalendarDays className="h-4 w-4" />
+                                <span className="flex items-center gap-2 text-xs font-bold text-muted-foreground bg-background/50 rounded-full px-4 py-1.5 border border-white/10 shadow-sm">
+                                    <CalendarDays className="h-4 w-4 text-primary/70" />
                                     {link.expires_at ? `Expires ${new Date(link.expires_at).toLocaleDateString()}` : 'Never expires'}
                                 </span>
                             </div>
                         </div>
 
                         {/* Stat Block */}
-                        <div className="flex w-full flex-col justify-center border-t border-border/40 bg-muted/10 p-6 md:w-64 md:border-l md:border-t-0 md:p-8 lg:w-80">
-                            <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                                <MousePointerClick className="h-4 w-4" />
+                        <div className="flex w-full flex-col justify-center border-t border-white/10 bg-background/20 p-8 md:w-80 md:border-l md:border-t-0 md:p-10 backdrop-blur-sm">
+                            <div className="flex items-center gap-2 text-sm font-bold text-muted-foreground uppercase tracking-wider">
+                                <MousePointerClick className="h-4 w-4 text-primary" />
                                 Total Clicks
                             </div>
-                            <div className="mt-2 text-5xl font-bold tracking-tighter text-foreground">
+                            <div className="mt-4 text-6xl font-extrabold tracking-tight text-foreground drop-shadow-sm">
                                 {link.clicks_count ?? 0}
                             </div>
                         </div>
                     </div>
-                </Card>
+                </div>
 
                 {/* 2. Full Width 30 Day Chart */}
-                <Card className="border-border/40 bg-card shadow-sm">
-                    <CardHeader className="border-b border-border/40 px-6 py-5">
-                        <CardTitle className="flex items-center gap-2 text-base">
-                            <BarChart3 className="h-4 w-4 text-muted-foreground" />
+                <div className="glass-panel rounded-3xl border border-white/20 overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]">
+                    <div className="border-b border-white/10 bg-background/30 px-8 py-5">
+                        <h3 className="flex items-center gap-3 text-lg font-bold text-foreground">
+                            <BarChart3 className="h-5 w-5 text-primary" />
                             30 Day Performance
-                        </CardTitle>
-                    </CardHeader>
-                    <CardContent className="h-[350px] p-0 sm:p-6">
+                        </h3>
+                    </div>
+                    <div className="h-[400px] p-8 pt-10">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={stats_30_days} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                                 <defs>
                                     <linearGradient id="colorClicks" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="hsl(var(--foreground))" stopOpacity={0.1} />
-                                        <stop offset="95%" stopColor="hsl(var(--foreground))" stopOpacity={0} />
+                                        <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.6} />
+                                        <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0.05} />
                                     </linearGradient>
                                 </defs>
-                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" strokeOpacity={0.4} />
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--muted-foreground))" strokeOpacity={0.15} />
                                 <XAxis 
                                     dataKey="date" 
                                     tickFormatter={formattedDate} 
-                                    tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }} 
+                                    tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12, fontWeight: 600 }} 
                                     axisLine={false} 
                                     tickLine={false} 
-                                    dy={10} 
-                                    minTickGap={20}
+                                    dy={15} 
+                                    minTickGap={30}
                                 />
                                 <YAxis 
-                                    tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }} 
+                                    tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12, fontWeight: 600 }} 
                                     axisLine={false} 
                                     tickLine={false} 
                                     allowDecimals={false} 
-                                    dx={-10}
+                                    dx={-15}
                                 />
-                                <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'hsl(var(--border))', strokeWidth: 1, strokeDasharray: '4 4' }} />
-                                <Area type="monotone" dataKey="clicks_count" stroke="hsl(var(--foreground))" strokeWidth={2} fillOpacity={1} fill="url(#colorClicks)" />
+                                <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'hsl(var(--primary))', strokeWidth: 1.5, strokeDasharray: '4 4', opacity: 0.5 }} />
+                                <Area type="monotone" dataKey="clicks_count" stroke="hsl(var(--primary))" strokeWidth={3} fillOpacity={1} fill="url(#colorClicks)" />
                             </AreaChart>
                         </ResponsiveContainer>
-                    </CardContent>
-                </Card>
+                    </div>
+                </div>
 
                 {/* 3. Dimension Cards */}
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                     {/* Browsers */}
-                    <Card className="border-border/40 bg-card shadow-sm">
-                        <CardHeader className="border-b border-border/40 px-5 py-4">
-                            <CardTitle className="flex items-center gap-2 text-sm">
-                                <Globe className="h-4 w-4 text-muted-foreground" />
+                    <div className="glass-panel rounded-3xl border border-white/20 overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]">
+                        <div className="border-b border-white/10 bg-background/30 px-6 py-5">
+                            <h3 className="flex items-center gap-3 text-base font-bold text-foreground">
+                                <Globe className="h-5 w-5 text-primary" />
                                 Top Browsers
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="p-5">
+                            </h3>
+                        </div>
+                        <div className="p-6 h-full min-h-[280px]">
                             {top_browsers.length === 0 ? (
-                                <div className="py-8 text-center text-sm text-muted-foreground">No data available yet.</div>
+                                <div className="flex h-full items-center justify-center text-sm font-medium text-muted-foreground">No data available</div>
                             ) : (
-                                <div className="flex flex-col gap-4">
+                                <div className="flex flex-col gap-6">
                                     {top_browsers.map((item, index) => {
                                         const percentage = totalBrowserClicks > 0 ? (item.clicks_count / totalBrowserClicks) * 100 : 0;
                                         return (
-                                            <div key={index} className="flex flex-col gap-1.5">
+                                            <div key={index} className="flex flex-col gap-3">
                                                 <div className="flex items-center justify-between text-sm">
-                                                    <span className="font-medium text-foreground">{item.browser || 'Other'}</span>
-                                                    <span className="text-muted-foreground">{percentage.toFixed(1)}% <span className="ml-1 text-xs opacity-50">({item.clicks_count})</span></span>
+                                                    <span className="font-bold text-foreground">{item.browser || 'Other'}</span>
+                                                    <span className="text-muted-foreground font-bold">{percentage.toFixed(1)}% <span className="ml-2 font-mono text-xs bg-background/60 border border-white/10 shadow-sm px-2 py-1 rounded-md text-foreground">{item.clicks_count}</span></span>
                                                 </div>
-                                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
-                                                    <div className="h-full rounded-full bg-foreground transition-all duration-1000" style={{ width: `${percentage}%` }} />
+                                                <div className="h-2.5 w-full rounded-full bg-background/50 border border-white/5 overflow-hidden shadow-inner">
+                                                    <div className="h-full bg-primary transition-all duration-1000 relative" style={{ width: `${percentage}%` }}>
+                                                        <div className="absolute inset-0 bg-white/20"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         );
                                     })}
                                 </div>
                             )}
-                        </CardContent>
-                    </Card>
+                        </div>
+                    </div>
 
                     {/* Devices */}
-                    <Card className="border-border/40 bg-card shadow-sm">
-                        <CardHeader className="border-b border-border/40 px-5 py-4">
-                            <CardTitle className="flex items-center gap-2 text-sm">
-                                <Smartphone className="h-4 w-4 text-muted-foreground" />
+                    <div className="glass-panel rounded-3xl border border-white/20 overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]">
+                        <div className="border-b border-white/10 bg-background/30 px-6 py-5">
+                            <h3 className="flex items-center gap-3 text-base font-bold text-foreground">
+                                <Smartphone className="h-5 w-5 text-primary" />
                                 Top Devices
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="p-5">
+                            </h3>
+                        </div>
+                        <div className="p-6 h-full min-h-[280px]">
                             {top_devices.length === 0 ? (
-                                <div className="py-8 text-center text-sm text-muted-foreground">No data available yet.</div>
+                                <div className="flex h-full items-center justify-center text-sm font-medium text-muted-foreground">No data available</div>
                             ) : (
-                                <div className="flex flex-col gap-4">
+                                <div className="flex flex-col gap-6">
                                     {top_devices.map((item, index) => {
                                         const percentage = totalDeviceClicks > 0 ? (item.clicks_count / totalDeviceClicks) * 100 : 0;
                                         const label = item.device_type ? item.device_type.charAt(0).toUpperCase() + item.device_type.slice(1) : 'Other';
                                         return (
-                                            <div key={index} className="flex flex-col gap-1.5">
+                                            <div key={index} className="flex flex-col gap-3">
                                                 <div className="flex items-center justify-between text-sm">
-                                                    <span className="font-medium text-foreground">{label}</span>
-                                                    <span className="text-muted-foreground">{percentage.toFixed(1)}% <span className="ml-1 text-xs opacity-50">({item.clicks_count})</span></span>
+                                                    <span className="font-bold text-foreground">{label}</span>
+                                                    <span className="text-muted-foreground font-bold">{percentage.toFixed(1)}% <span className="ml-2 font-mono text-xs bg-background/60 border border-white/10 shadow-sm px-2 py-1 rounded-md text-foreground">{item.clicks_count}</span></span>
                                                 </div>
-                                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
-                                                    <div className="h-full rounded-full bg-foreground transition-all duration-1000" style={{ width: `${percentage}%` }} />
+                                                <div className="h-2.5 w-full rounded-full bg-background/50 border border-white/5 overflow-hidden shadow-inner">
+                                                    <div className="h-full bg-primary transition-all duration-1000 relative" style={{ width: `${percentage}%` }}>
+                                                        <div className="absolute inset-0 bg-white/20"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         );
                                     })}
                                 </div>
                             )}
-                        </CardContent>
-                    </Card>
+                        </div>
+                    </div>
 
                     {/* Platforms */}
-                    <Card className="border-border/40 bg-card shadow-sm">
-                        <CardHeader className="border-b border-border/40 px-5 py-4">
-                            <CardTitle className="flex items-center gap-2 text-sm">
-                                <Laptop className="h-4 w-4 text-muted-foreground" />
+                    <div className="glass-panel rounded-3xl border border-white/20 overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]">
+                        <div className="border-b border-white/10 bg-background/30 px-6 py-5">
+                            <h3 className="flex items-center gap-3 text-base font-bold text-foreground">
+                                <Laptop className="h-5 w-5 text-primary" />
                                 Top Platforms
-                            </CardTitle>
-                        </CardHeader>
-                        <CardContent className="p-5">
+                            </h3>
+                        </div>
+                        <div className="p-6 h-full min-h-[280px]">
                             {top_platforms.length === 0 ? (
-                                <div className="py-8 text-center text-sm text-muted-foreground">No data available yet.</div>
+                                <div className="flex h-full items-center justify-center text-sm font-medium text-muted-foreground">No data available</div>
                             ) : (
-                                <div className="flex flex-col gap-4">
+                                <div className="flex flex-col gap-6">
                                     {top_platforms.map((item, index) => {
                                         const percentage = totalPlatformClicks > 0 ? (item.clicks_count / totalPlatformClicks) * 100 : 0;
                                         return (
-                                            <div key={index} className="flex flex-col gap-1.5">
+                                            <div key={index} className="flex flex-col gap-3">
                                                 <div className="flex items-center justify-between text-sm">
-                                                    <span className="font-medium text-foreground">{item.platform || 'Other'}</span>
-                                                    <span className="text-muted-foreground">{percentage.toFixed(1)}% <span className="ml-1 text-xs opacity-50">({item.clicks_count})</span></span>
+                                                    <span className="font-bold text-foreground">{item.platform || 'Other'}</span>
+                                                    <span className="text-muted-foreground font-bold">{percentage.toFixed(1)}% <span className="ml-2 font-mono text-xs bg-background/60 border border-white/10 shadow-sm px-2 py-1 rounded-md text-foreground">{item.clicks_count}</span></span>
                                                 </div>
-                                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
-                                                    <div className="h-full rounded-full bg-foreground transition-all duration-1000" style={{ width: `${percentage}%` }} />
+                                                <div className="h-2.5 w-full rounded-full bg-background/50 border border-white/5 overflow-hidden shadow-inner">
+                                                    <div className="h-full bg-primary transition-all duration-1000 relative" style={{ width: `${percentage}%` }}>
+                                                        <div className="absolute inset-0 bg-white/20"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         );
                                     })}
                                 </div>
                             )}
-                        </CardContent>
-                    </Card>
+                        </div>
+                    </div>
                 </div>
             </div>
         </DashboardContainer>

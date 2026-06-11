@@ -32,14 +32,14 @@ export default function Login({ status }: { status?: string }) {
             <Head title="Log In" />
 
             {status && (
-                <div className="mb-4 text-sm font-medium text-emerald-600">
+                <div className="mb-8 rounded-xl bg-emerald-500/10 p-4 text-sm font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-sm backdrop-blur-md">
                     {status}
                 </div>
             )}
 
-            <form onSubmit={submit} className="flex flex-col gap-5">
-                <div className="grid gap-2">
-                    <Label htmlFor="email">Email address</Label>
+            <form onSubmit={submit} className="flex flex-col gap-6">
+                <div className="grid gap-3">
+                    <Label htmlFor="email" className="font-bold text-foreground">Email address</Label>
                     <Input
                         id="email"
                         type="email"
@@ -49,18 +49,19 @@ export default function Login({ status }: { status?: string }) {
                         autoFocus
                         onChange={(e) => setData('email', e.target.value)}
                         required
+                        className="h-14 rounded-xl bg-white/30 dark:bg-black/20 backdrop-blur-sm border-white/50 dark:border-white/10 focus-visible:ring-primary/50 text-base shadow-inner"
                     />
                     <InputError message={errors.email} />
                 </div>
 
-                <div className="grid gap-2">
+                <div className="grid gap-3">
                     <div className="flex items-center justify-between">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password" className="font-bold text-foreground">Password</Label>
                         <Link
                             href="/forgot-password"
-                            className="text-xs font-medium text-muted-foreground hover:text-foreground"
+                            className="text-sm font-bold text-primary hover:text-primary/80 transition-colors"
                         >
-                            Forgot your password?
+                            Forgot password?
                         </Link>
                     </div>
                     <Input
@@ -71,32 +72,34 @@ export default function Login({ status }: { status?: string }) {
                         autoComplete="current-password"
                         onChange={(e) => setData('password', e.target.value)}
                         required
+                        className="h-14 rounded-xl bg-white/30 dark:bg-black/20 backdrop-blur-sm border-white/50 dark:border-white/10 focus-visible:ring-primary/50 text-base shadow-inner"
                     />
                     <InputError message={errors.password} />
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3 mt-2">
                     <Checkbox
                         id="remember"
                         name="remember"
                         checked={data.remember}
                         onCheckedChange={(checked) => setData('remember', checked as boolean)}
+                        className="h-5 w-5 rounded-md border-white/40 dark:border-white/20 bg-white/30 dark:bg-black/30 backdrop-blur-sm data-[state=checked]:bg-primary"
                     />
-                    <Label htmlFor="remember" className="font-normal text-muted-foreground cursor-pointer">
+                    <Label htmlFor="remember" className="font-medium text-muted-foreground cursor-pointer text-sm">
                         Remember me for 30 days
                     </Label>
                 </div>
 
-                <Button type="submit" disabled={processing} className="w-full">
-                    {processing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    Sign in to your account
+                <Button type="submit" disabled={processing} className="w-full mt-4 h-14 font-bold text-base rounded-xl shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transition-all">
+                    {processing && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
+                    Sign in
                 </Button>
 
-                <div className="mt-4 text-center text-sm">
-                    <span className="text-muted-foreground">Don't have an account? </span>
+                <div className="mt-6 text-center text-sm font-medium text-muted-foreground">
+                    Don't have an account?{' '}
                     <Link
                         href={register()}
-                        className="font-medium text-foreground hover:underline"
+                        className="font-bold text-primary hover:underline transition-colors"
                     >
                         Sign up
                     </Link>

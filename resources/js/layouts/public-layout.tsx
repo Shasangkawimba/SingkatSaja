@@ -9,11 +9,15 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
     const { auth } = usePage().props as any;
 
     return (
-        <div className="flex min-h-screen flex-col bg-background font-sans text-foreground">
+        <div className="flex min-h-screen flex-col font-sans text-foreground relative z-0">
+            {/* Base Aurora Background */}
+            <div className="aurora-bg"></div>
+            <div className="aurora-bg-3"></div>
+
             {/* Top Header */}
-            <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
-                <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
-                    <Link href="/" className="transition-opacity hover:opacity-80">
+            <header className="sticky top-4 z-50 mx-auto w-[calc(100%-2rem)] max-w-5xl md:mt-4">
+                <div className="glass-panel flex h-16 items-center justify-between px-6 rounded-full border border-white/20 dark:border-white/10">
+                    <Link href="/" className="transition-transform hover:scale-105">
                         <AppLogo />
                     </Link>
 
@@ -22,7 +26,7 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                             <>
                                 <Link
                                     href={dashboard()}
-                                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                                    className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
                                 >
                                     Dashboard
                                 </Link>
@@ -30,7 +34,7 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                                     asChild
                                     variant="default"
                                     size="sm"
-                                    className="h-8 rounded-md px-4 text-xs font-medium"
+                                    className="h-10 rounded-full px-5 text-sm font-semibold"
                                 >
                                     <Link href={dashboard()}>Go to app</Link>
                                 </Button>
@@ -39,7 +43,7 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                             <>
                                 <Link
                                     href={login()}
-                                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                                    className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
                                 >
                                     Log In
                                 </Link>
@@ -47,7 +51,7 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                                     asChild
                                     variant="default"
                                     size="sm"
-                                    className="h-8 rounded-md px-4 text-xs font-medium"
+                                    className="h-10 rounded-full px-5 text-sm font-semibold shadow-md hover:shadow-lg transition-all"
                                 >
                                     <Link href={register()}>Sign Up</Link>
                                 </Button>
@@ -58,7 +62,7 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
             </header>
 
             {/* Main content */}
-            <main className="relative flex w-full flex-1 flex-col items-center justify-center">
+            <main className="relative flex w-full flex-1 flex-col items-center justify-center mt-8">
                 {children}
             </main>
 

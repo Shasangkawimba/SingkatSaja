@@ -10,6 +10,7 @@ import {
     AlertTriangle,
     ExternalLink,
     Clock,
+    BarChart3
 } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { toast } from 'sonner';
@@ -18,7 +19,6 @@ import { EmptyState } from '@/components/empty-state';
 import { LoadingState } from '@/components/loading-state';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import {
     Dialog,
     DialogContent,
@@ -89,10 +89,11 @@ export default function Index({ links, filters }: LinksIndexProps) {
         <DashboardContainer
             title="My Links"
             description="Manage, monitor, and configure shortened links."
+            className="relative z-10"
             actions={
-                <Button asChild className="h-9 gap-2">
+                <Button asChild className="font-bold rounded-xl shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]">
                     <Link href="/links/create">
-                        <Plus className="h-4 w-4" />
+                        <Plus className="mr-2 h-4 w-4" />
                         Create Link
                     </Link>
                 </Button>
@@ -101,27 +102,29 @@ export default function Index({ links, filters }: LinksIndexProps) {
             <Head title="My Links" />
 
             {links.data.length === 0 ? (
-                <EmptyState
-                    title="No links created yet"
-                    description="Generate your first shortened Base62 link to start tracking clicks."
-                    action={
-                        <Button asChild className="mt-4">
-                            <Link href="/links/create">Create your first link</Link>
-                        </Button>
-                    }
-                />
+                <div className="glass-panel mt-8 border border-white/40 dark:border-white/20">
+                    <EmptyState
+                        title="No links created yet"
+                        description="Generate your first shortened Base62 link to start tracking clicks."
+                        action={
+                            <Button asChild className="mt-4 font-bold rounded-xl shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]">
+                                <Link href="/links/create">Create your first link</Link>
+                            </Button>
+                        }
+                    />
+                </div>
             ) : (
-                <div className="flex flex-col gap-6 pt-4">
+                <div className="flex flex-col gap-6 pt-6">
                     {/* Toolbar */}
-                    <div className="flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
+                    <div className="flex w-full flex-col items-center justify-between gap-4 sm:flex-row glass-panel p-4 rounded-2xl border border-white/40 dark:border-white/20 shadow-sm">
                         <div className="relative flex w-full items-center sm:max-w-md">
-                            <Search className="absolute left-3 h-4 w-4 text-muted-foreground" />
+                            <Search className="absolute left-4 h-5 w-5 text-muted-foreground" />
                             <Input
                                 type="text"
                                 placeholder="Search links or destinations..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="h-9 w-full bg-card pl-9 text-sm focus-visible:ring-offset-1"
+                                className="h-12 w-full pl-12 rounded-xl bg-white/30 dark:bg-black/20 border-white/40 dark:border-white/10 focus-visible:ring-primary/50 text-base backdrop-blur-md"
                             />
                         </div>
 
@@ -130,41 +133,41 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                 defaultValue={(typeof filters === 'object' && !Array.isArray(filters) ? filters.sort : '') || 'newest'}
                                 onValueChange={handleSortChange}
                             >
-                                <SelectTrigger className="h-9 w-[160px] bg-card text-sm">
+                                <SelectTrigger className="h-12 w-[180px] rounded-xl bg-white/30 dark:bg-black/20 border-white/40 dark:border-white/10 font-medium backdrop-blur-md">
                                     <SelectValue placeholder="Sort option" />
                                 </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="newest">Newest First</SelectItem>
-                                    <SelectItem value="oldest">Oldest First</SelectItem>
-                                    <SelectItem value="most_clicked">Most Clicked</SelectItem>
+                                <SelectContent className="rounded-xl border-white/40 dark:border-white/10 bg-white/60 dark:bg-black/40 backdrop-blur-xl">
+                                    <SelectItem value="newest" className="font-medium rounded-lg">Newest First</SelectItem>
+                                    <SelectItem value="oldest" className="font-medium rounded-lg">Oldest First</SelectItem>
+                                    <SelectItem value="most_clicked" className="font-medium rounded-lg">Most Clicked</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
                     </div>
 
                     {/* Data Table */}
-                    <Card className="overflow-hidden border-border/40 bg-card shadow-sm">
+                    <div className="glass-panel rounded-3xl border border-white/50 dark:border-white/20 shadow-sm overflow-hidden">
                         {isLoading ? (
-                            <div className="p-6">
+                            <div className="p-8">
                                 <LoadingState variant="table" count={5} message="Updating links..." />
                             </div>
                         ) : (
                             <div className="overflow-x-auto">
-                                <table className="w-full min-w-[800px] border-collapse text-left text-sm">
+                                <table className="w-full min-w-[800px] border-collapse text-left whitespace-nowrap">
                                     <thead>
-                                        <tr className="border-b border-border/40 bg-muted/30 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                                            <th className="px-6 py-4">Short Code</th>
-                                            <th className="px-6 py-4">Destination</th>
-                                            <th className="px-6 py-4 text-right">Clicks</th>
-                                            <th className="px-6 py-4">Status</th>
-                                            <th className="px-6 py-4">Expiration</th>
-                                            <th className="px-6 py-4 text-right">Actions</th>
+                                        <tr className="border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-md text-xs uppercase tracking-wider font-bold text-muted-foreground">
+                                            <th className="px-8 py-5">Short Code</th>
+                                            <th className="px-8 py-5">Destination</th>
+                                            <th className="px-8 py-5 text-center">Clicks</th>
+                                            <th className="px-8 py-5 text-center">Status</th>
+                                            <th className="px-8 py-5">Expiration</th>
+                                            <th className="px-8 py-5 text-right">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-border/40">
+                                    <tbody className="divide-y divide-white/20 dark:divide-white/5 bg-transparent text-sm">
                                         {filteredLinks.length === 0 ? (
                                             <tr>
-                                                <td colSpan={6} className="px-6 py-12 text-center text-muted-foreground">
+                                                <td colSpan={6} className="px-8 py-16 text-center text-base font-medium text-muted-foreground">
                                                     No links match your search.
                                                 </td>
                                             </tr>
@@ -172,85 +175,88 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                             filteredLinks.map((link) => {
                                                 const expired = isLinkExpired(link);
                                                 return (
-                                                    <tr key={link.id} className="group transition-colors hover:bg-muted/20">
-                                                        <td className="px-6 py-4">
-                                                            <div className="flex items-center gap-2">
-                                                                <span className="font-semibold text-foreground">
+                                                    <tr key={link.id} className="group transition-colors duration-300 hover:bg-white/30 dark:hover:bg-white/5">
+                                                        <td className="px-8 py-5">
+                                                            <div className="flex items-center gap-3">
+                                                                <span className="font-mono text-sm font-bold text-foreground bg-white/50 dark:bg-black/30 px-3 py-1.5 rounded-lg border border-white/40 dark:border-white/10 shadow-sm backdrop-blur-sm">
                                                                     {link.short_code}
                                                                 </span>
                                                                 <button
                                                                     onClick={() => handleCopy(link.short_code, link.id)}
-                                                                    className="invisible text-muted-foreground transition-colors hover:text-foreground group-hover:visible"
+                                                                    className="flex h-8 w-8 items-center justify-center rounded-full bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/60 dark:hover:bg-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-sm"
                                                                     title="Copy URL"
                                                                 >
                                                                     {copiedId === link.id ? (
-                                                                        <Check className="h-3.5 w-3.5 text-emerald-500" />
+                                                                        <Check className="h-4 w-4 text-emerald-500" />
                                                                     ) : (
-                                                                        <Copy className="h-3.5 w-3.5" />
+                                                                        <Copy className="h-4 w-4" />
                                                                     )}
                                                                 </button>
                                                             </div>
                                                         </td>
-                                                        <td className="px-6 py-4">
+                                                        <td className="px-8 py-5">
                                                             <a
                                                                 href={link.destination_url}
                                                                 target="_blank"
                                                                 rel="noopener noreferrer"
-                                                                className="flex max-w-[250px] items-center gap-1.5 truncate text-muted-foreground transition-colors hover:text-foreground hover:underline"
+                                                                className="flex max-w-[250px] md:max-w-[350px] items-center gap-2 truncate text-muted-foreground transition-colors hover:text-primary font-medium"
                                                                 title={link.destination_url}
                                                             >
                                                                 <span className="truncate">{link.destination_url}</span>
-                                                                <ExternalLink className="h-3 w-3 shrink-0" />
+                                                                <ExternalLink className="h-4 w-4 shrink-0 opacity-50" />
                                                             </a>
                                                         </td>
-                                                        <td className="px-6 py-4 text-right">
-                                                            <Badge variant="secondary" className="bg-secondary/50 font-mono text-xs text-foreground">
+                                                        <td className="px-8 py-5 text-center">
+                                                            <span className="inline-flex items-center justify-center rounded-full bg-primary/10 border border-primary/10 px-3 py-1 text-xs font-bold text-primary shadow-sm backdrop-blur-sm">
                                                                 {link.clicks_count ?? 0}
-                                                            </Badge>
+                                                            </span>
                                                         </td>
-                                                        <td className="px-6 py-4">
+                                                        <td className="px-8 py-5 text-center">
                                                             {expired ? (
-                                                                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-destructive">
-                                                                    <div className="h-1.5 w-1.5 rounded-full bg-destructive" />
+                                                                <span className="inline-flex items-center gap-2 rounded-full bg-destructive/10 border border-destructive/20 px-3 py-1 text-xs font-bold text-destructive shadow-sm backdrop-blur-sm">
+                                                                    <div className="h-2 w-2 rounded-full bg-destructive" />
                                                                     Expired
                                                                 </span>
                                                             ) : (
-                                                                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400">
-                                                                    <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                                                                <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 shadow-sm backdrop-blur-sm">
+                                                                    <div className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                                                                     Active
                                                                 </span>
                                                             )}
                                                         </td>
-                                                        <td className="px-6 py-4 text-muted-foreground">
+                                                        <td className="px-8 py-5 text-muted-foreground font-medium">
                                                             {link.expires_at ? (
-                                                                <div className="flex items-center gap-1.5 text-xs">
-                                                                    <Clock className="h-3.5 w-3.5" />
+                                                                <div className="flex items-center gap-2">
+                                                                    <Clock className="h-4 w-4" />
                                                                     {new Date(link.expires_at).toLocaleDateString()}
                                                                 </div>
                                                             ) : (
-                                                                <span className="text-xs">—</span>
+                                                                <span className="text-muted-foreground/50">--</span>
                                                             )}
                                                         </td>
-                                                        <td className="px-6 py-4 text-right">
-                                                            <div className="flex items-center justify-end gap-1">
-                                                                <Button asChild variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-foreground">
+                                                        <td className="px-8 py-5 text-right">
+                                                            <div className="flex items-center justify-end gap-2">
+                                                                <Button asChild variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md transition-all hover:bg-white/60 dark:hover:bg-white/20">
                                                                     <Link href={`/links/${link.id}`} title="View Analytics">
-                                                                        <Eye className="h-4 w-4" />
+                                                                        <BarChart3 className="h-4 w-4" />
+                                                                        <span className="sr-only">Analytics</span>
                                                                     </Link>
                                                                 </Button>
-                                                                <Button asChild variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-foreground">
+                                                                <Button asChild variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md transition-all hover:bg-white/60 dark:hover:bg-white/20">
                                                                     <Link href={`/links/${link.id}/edit`} title="Edit Link">
                                                                         <Edit2 className="h-4 w-4" />
+                                                                        <span className="sr-only">Edit</span>
                                                                     </Link>
                                                                 </Button>
                                                                 <Button
                                                                     variant="ghost"
                                                                     size="icon"
                                                                     onClick={() => setSelectedLinkToDelete(link)}
-                                                                    className="h-7 w-7 text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+                                                                    className="h-10 w-10 rounded-full bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md hover:bg-destructive/10 hover:text-destructive hover:border-destructive/20 transition-all"
                                                                     title="Delete Link"
                                                                 >
                                                                     <Trash2 className="h-4 w-4" />
+                                                                    <span className="sr-only">Delete</span>
                                                                 </Button>
                                                             </div>
                                                         </td>
@@ -262,11 +268,11 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                 </table>
                             </div>
                         )}
-                    </Card>
+                    </div>
 
                     {/* Pagination */}
                     {links.links.length > 3 && (
-                        <div className="flex items-center justify-center gap-2 pt-4">
+                        <div className="flex items-center justify-center gap-2 pt-6">
                             {links.links.map((pageLink, index) => {
                                 const label = pageLink.label.replace('&laquo; Previous', 'Prev').replace('Next &raquo;', 'Next');
                                 return (
@@ -276,7 +282,7 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                         disabled={!pageLink.url || pageLink.active}
                                         variant={pageLink.active ? 'default' : 'outline'}
                                         size="sm"
-                                        className={`h-8 min-w-8 text-xs ${pageLink.active ? '' : 'text-muted-foreground'}`}
+                                        className={`h-10 min-w-[2.5rem] rounded-xl font-bold ${pageLink.active ? 'shadow-[0_0_15px_rgba(59,130,246,0.3)]' : 'bg-white/40 dark:bg-white/10 border-white/50 dark:border-white/10 hover:bg-white/60 dark:hover:bg-white/20'}`}
                                     >
                                         {pageLink.url ? (
                                             <Link href={pageLink.url} preserveState>
@@ -295,25 +301,26 @@ export default function Index({ links, filters }: LinksIndexProps) {
 
             {/* Delete Dialog */}
             <Dialog open={!!selectedLinkToDelete} onOpenChange={(open) => !open && setSelectedLinkToDelete(null)}>
-                <DialogContent className="sm:max-w-md">
-                    <DialogHeader className="flex flex-col items-center gap-4 text-center sm:items-start sm:text-left sm:flex-row">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-destructive/10">
-                            <AlertTriangle className="h-5 w-5 text-destructive" />
-                        </div>
-                        <div className="flex flex-col gap-1.5 mt-1 sm:mt-0">
-                            <DialogTitle>Delete Link</DialogTitle>
-                            <DialogDescription>
-                                Are you sure you want to delete <span className="font-semibold text-foreground">singkat.saja/{selectedLinkToDelete?.short_code}</span>? 
-                                This will permanently remove the link from the redirect engine. Analytics data will be preserved.
-                            </DialogDescription>
-                        </div>
+                <DialogContent className="sm:max-w-md glass-panel rounded-3xl border border-white/40 dark:border-white/20">
+                    <DialogHeader>
+                        <DialogTitle className="flex items-center gap-3 text-xl">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-destructive/10 border border-destructive/20 text-destructive">
+                                <AlertTriangle className="h-5 w-5" />
+                            </div>
+                            Delete Link
+                        </DialogTitle>
+                        <DialogDescription className="pt-4 text-base font-medium">
+                            Are you sure you want to delete <span className="font-mono bg-white/50 dark:bg-black/30 px-2 py-1 rounded-md border border-white/40 dark:border-white/10 mx-1 text-foreground shadow-sm backdrop-blur-sm">singkat.saja/{selectedLinkToDelete?.short_code}</span>? 
+                            <br/><br/>
+                            This will permanently remove the link from the redirect engine. Analytics data will be preserved.
+                        </DialogDescription>
                     </DialogHeader>
-                    <DialogFooter className="mt-4 sm:justify-end">
-                        <Button variant="outline" onClick={() => setSelectedLinkToDelete(null)}>
+                    <DialogFooter className="gap-3 sm:gap-0 mt-6">
+                        <Button variant="outline" onClick={() => setSelectedLinkToDelete(null)} className="rounded-xl h-11 px-6 font-bold bg-white/40 dark:bg-white/10 border-white/50 dark:border-white/10 hover:bg-white/60 dark:hover:bg-white/20">
                             Cancel
                         </Button>
-                        <Button variant="destructive" onClick={handleDelete}>
-                            Delete Link
+                        <Button variant="destructive" onClick={handleDelete} className="rounded-xl h-11 px-6 font-bold shadow-[0_0_15px_rgba(239,68,68,0.3)]">
+                            Delete
                         </Button>
                     </DialogFooter>
                 </DialogContent>
