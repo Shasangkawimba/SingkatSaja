@@ -15,21 +15,6 @@
         'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
         'Segoe UI', Roboto, sans-serif;
 
-    /* Custom Design Colors */
-    --color-vivid-indigo: #494bcb;
-    --color-midnight-ink: #08093f;
-    --color-soft-violet: #8a8ac6;
-    --color-pale-lavender: #9f7ad0;
-    --color-sunlit-yellow: #ffde87;
-    --color-pale-lilac: #eaeaf7;
-    --color-pure-white: #ffffff;
-    --color-frost-gray: #f6f6fa;
-    --color-slate: #686878;
-    --color-graphite: #222222;
-    --color-ash: #333333;
-    --color-stone: #6d737d;
-    --color-fog: #aaaab0;
-
     /* Tailwind / shadcn Variable Mappings */
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -51,123 +36,79 @@
     --color-input: var(--input);
     --color-ring: var(--ring);
 
-    --spacing: 1px;
-    --spacing-0\.5: 2px;
-    --spacing-1: 4px;
-    --spacing-1\.5: 6px;
-    --spacing-2: 8px;
-    --spacing-2\.5: 10px;
-    --spacing-3: 12px;
-    --spacing-3\.5: 14px;
-    --spacing-4: 16px;
-    --spacing-5: 20px;
-    --spacing-6: 24px;
-    --spacing-7: 28px;
-    --spacing-8: 32px;
-    --spacing-9: 36px;
-    --spacing-10: 40px;
-    --spacing-11: 44px;
-    --spacing-12: 48px;
-    --spacing-14: 56px;
-    /* Custom Border Radii */
-    --radius-cards: 7.6px;
-    --radius-pills: 35.8px;
-    --radius-badges: 7.6px;
-    --radius-images: 7.6px;
-    --radius-buttons: 7.6px;
-    --radius-largecards: 15.2px;
-
-    /* Radia Scale Mapping for shadcn/ui and utility compatibility */
-    --radius-sm: 4px;
-    --radius-md: 7.6px;
-    --radius-lg: 15.2px;
-    --radius-xl: 35.8px;
-
-    /* Typography Scale */
-    --text-caption: 13px;
-    --leading-caption: 1.5;
-    --tracking-caption: -0.26px;
-    --text-body: 15px;
-    --leading-body: 1.5;
-    --tracking-body: -0.3px;
-    --text-heading-sm: 19px;
-    --leading-heading-sm: 1.27;
-    --tracking-heading-sm: -0.38px;
-    --text-heading: 21px;
-    --leading-heading: 1.27;
-    --tracking-heading: -0.42px;
-    --text-heading-lg: 46px;
-    --leading-heading-lg: 1.1;
-    --tracking-heading-lg: -0.92px;
-    --text-display: 61px;
-    --leading-display: 1.1;
-    --tracking-display: -1.22px;
+    --radius-sm: calc(var(--radius) - 2px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
 }
 
 :root {
-    --background: #ffffff;
-    --foreground: #222222;
+    --background: #fafafa;
+    --foreground: #171717;
 
     --card: #ffffff;
-    --card-foreground: #222222;
+    --card-foreground: #171717;
 
     --popover: #ffffff;
-    --popover-foreground: #222222;
+    --popover-foreground: #171717;
 
-    --primary: #494bcb;
+    --primary: #171717;
     --primary-foreground: #ffffff;
 
-    --secondary: #eaeaf7;
-    --secondary-foreground: #222222;
+    --secondary: #f5f5f5;
+    --secondary-foreground: #171717;
 
-    --muted: #f6f6fa;
-    --muted-foreground: #686878;
+    --muted: #f5f5f5;
+    --muted-foreground: #737373;
 
-    --accent: #eaeaf7;
-    --accent-foreground: #494bcb;
+    --accent: #f5f5f5;
+    --accent-foreground: #171717;
 
-    --destructive: oklch(0.577 0.245 27.325);
+    --destructive: #ef4444;
     --destructive-foreground: #ffffff;
 
-    --border: #686878;
-    --input: #aaaab0;
-    --ring: #494bcb;
-    --radius: 7.6px;
+    --border: #e5e5e5;
+    --input: #e5e5e5;
+    --ring: #171717;
+    --radius: 0.5rem;
 }
 
 .dark {
-    --background: #08093f;
-    --foreground: #ffffff;
+    --background: #0a0a0a;
+    --foreground: #ededed;
 
-    --card: #08093f;
-    --card-foreground: #ffffff;
+    --card: #0a0a0a;
+    --card-foreground: #ededed;
 
-    --popover: #08093f;
-    --popover-foreground: #ffffff;
+    --popover: #0a0a0a;
+    --popover-foreground: #ededed;
 
-    --primary: #ffffff;
-    --primary-foreground: #08093f;
+    --primary: #ededed;
+    --primary-foreground: #0a0a0a;
 
-    --secondary: #eaeaf7;
-    --secondary-foreground: #08093f;
+    --secondary: #262626;
+    --secondary-foreground: #ededed;
 
-    --muted: #eaeaf7;
-    --muted-foreground: #8a8ac6;
+    --muted: #262626;
+    --muted-foreground: #a3a3a3;
 
-    --accent: #eaeaf7;
-    --accent-foreground: #ffffff;
+    --accent: #262626;
+    --accent-foreground: #ededed;
 
-    --border: #8a8ac6;
-    --input: #8a8ac6;
-    --ring: #ffffff;
+    --destructive: #7f1d1d;
+    --destructive-foreground: #f87171;
+
+    --border: #262626;
+    --input: #262626;
+    --ring: #d4d4d4;
 }
 
 @layer base {
     * {
-        @apply border-border tracking-[-0.02em];
+        @apply border-border;
     }
 
     body {
-        @apply bg-background font-sans tracking-[-0.02em] text-foreground;
+        @apply bg-background font-sans text-foreground antialiased selection:bg-primary/10;
     }
 }

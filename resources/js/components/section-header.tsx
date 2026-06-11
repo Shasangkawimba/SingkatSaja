@@ -57,7 +57,7 @@ export function SectionHeader({
                 </h2>
 
                 {description && (
-                    <p className="max-w-xl text-[13px] leading-relaxed text-slate dark:text-soft-violet">
+                    <p className="max-w-xl text-sm leading-relaxed text-slate dark:text-soft-violet">
                         {description}
                     </p>
                 )}

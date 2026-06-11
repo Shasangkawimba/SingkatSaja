@@ -4,12 +4,12 @@ import {
     Copy,
     Check,
     ExternalLink,
-    Calendar,
     BarChart3,
     Globe,
     Laptop,
     Smartphone,
-    TrendingUp,
+    MousePointerClick,
+    CalendarDays
 } from 'lucide-react';
 import React, { useState } from 'react';
 import {
@@ -46,33 +46,26 @@ const CustomTooltip = ({
 }: TooltipProps<ValueType, NameType>) => {
     if (active && payload && payload.length && label) {
         const dateStr = typeof label === 'string' ? label : '';
-
         return (
-            <div className="rounded-lg border border-neutral-200/80 bg-white p-3 text-left shadow-lg">
-                <p className="mb-1 text-[11px] font-bold text-slate">
-                    {dateStr
-                        ? new Date(dateStr).toLocaleDateString(undefined, {
-                              year: 'numeric',
-                              month: 'short',
-                              day: 'numeric',
-                          })
-                        : ''}
+            <div className="rounded-lg border border-border/60 bg-popover px-3 py-2 text-popover-foreground shadow-sm">
+                <p className="mb-1 text-[11px] font-medium text-muted-foreground uppercase tracking-wider">
+                    {dateStr ? new Date(dateStr).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) : ''}
                 </p>
-                <p className="text-[13px] font-bold text-graphite">
-                    {payload[0].value}{' '}
-                    <span className="font-medium text-slate">clicks</span>
-                </p>
+                <div className="flex items-center gap-2">
+                    <div className="h-2 w-2 rounded-full bg-primary" />
+                    <p className="text-sm font-bold">
+                        {payload[0].value} <span className="font-normal text-muted-foreground">clicks</span>
+                    </p>
+                </div>
             </div>
         );
     }
-
     return null;
 };
 
 export default function Analytics({ analytics }: AnalyticsProps) {
     const {
         link,
-        stats_7_days,
         stats_30_days,
         top_browsers,
         top_platforms,
@@ -89,401 +82,167 @@ export default function Analytics({ analytics }: AnalyticsProps) {
     };
 
     const isLinkExpired = () => {
-        if (!link.expires_at) {
-            return false;
-        }
-
+        if (!link.expires_at) return false;
         return new Date(link.expires_at) < new Date();
     };
 
-    const totalBrowserClicks = top_browsers.reduce(
-        (acc, curr) => acc + curr.clicks_count,
-        0,
-    );
-    const totalDeviceClicks = top_devices.reduce(
-        (acc, curr) => acc + curr.clicks_count,
-        0,
-    );
-    const totalPlatformClicks = top_platforms.reduce(
-        (acc, curr) => acc + curr.clicks_count,
-        0,
-    );
+    const totalBrowserClicks = top_browsers.reduce((acc, curr) => acc + curr.clicks_count, 0);
+    const totalDeviceClicks = top_devices.reduce((acc, curr) => acc + curr.clicks_count, 0);
+    const totalPlatformClicks = top_platforms.reduce((acc, curr) => acc + curr.clicks_count, 0);
 
     const formattedDate = (dateString: string) => {
         const d = new Date(dateString);
-
-        return d.toLocaleDateString(undefined, {
-            month: 'short',
-            day: 'numeric',
-        });
+        return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
     };
 
     const expired = isLinkExpired();
 
     return (
         <DashboardContainer
-            title={`Analytics: ${link.short_code}`}
-            description="Detailed click events, trends, and client dimensions."
-            actions={
-                <Button
-                    asChild
-                    variant="ghost"
-                    className="h-9 rounded-lg border border-neutral-200/80 text-[13px] font-medium text-graphite hover:bg-frost-gray"
-                >
-                    <Link href="/links">
-                        <ArrowLeft className="size-3.5" />
-                        Back to Links
-                    </Link>
-                </Button>
-            }
+            title=""
+            description=""
+            className="pb-12"
         >
             <Head title={`Analytics — ${link.short_code}`} />
 
-            <div className="flex flex-col gap-5">
-                {/* 1. Overview Cards */}
-                <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-                    <Card className="border border-neutral-200/60 bg-white shadow-none transition-all duration-200 hover:border-neutral-300">
-                        <CardContent className="flex flex-col gap-2.5 p-4">
-                            <span className="text-[10px] font-bold tracking-widest text-slate/70 uppercase">
-                                Total Clicks
-                            </span>
-                            <div className="flex items-baseline justify-between">
-                                <span className="font-satoshi text-3xl font-bold tracking-tight text-vivid-indigo">
-                                    {link.clicks_count ?? 0}
-                                </span>
-                                <span className="text-[11px] text-slate/60">
-                                    all-time
-                                </span>
-                            </div>
-                        </CardContent>
-                    </Card>
+            {/* Back Navigation */}
+            <div className="mb-4 flex">
+                <Button asChild variant="ghost" size="sm" className="h-8 pl-2 pr-4 text-xs text-muted-foreground hover:text-foreground">
+                    <Link href="/links">
+                        <ArrowLeft className="mr-1.5 h-3 w-3" />
+                        Back to Links
+                    </Link>
+                </Button>
+            </div>
 
-                    <Card className="border border-neutral-200/60 bg-white shadow-none transition-all duration-200 hover:border-neutral-300">
-                        <CardContent className="flex flex-col gap-2.5 p-4">
-                            <span className="text-[10px] font-bold tracking-widest text-slate/70 uppercase">
-                                Short URL
-                            </span>
-                            <div className="flex items-center justify-between gap-2">
-                                <span className="truncate font-satoshi text-[15px] font-bold text-graphite select-all">
+            <div className="flex flex-col gap-6">
+                {/* 1. Hero Card */}
+                <Card className="overflow-hidden border-border/40 bg-card shadow-sm">
+                    <div className="flex flex-col border-b border-border/40 md:flex-row">
+                        {/* Primary Info */}
+                        <div className="flex flex-1 flex-col justify-center gap-4 p-6 md:p-8">
+                            <div className="flex items-center gap-3">
+                                <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                                     {link.short_code}
-                                </span>
+                                </h1>
                                 <button
                                     onClick={handleCopy}
-                                    title="Copy Link"
-                                    className="flex size-7 shrink-0 items-center justify-center rounded border border-neutral-200/60 bg-white text-slate shadow-none transition-all hover:border-neutral-300 hover:text-vivid-indigo"
+                                    className="group rounded-md border border-border/40 bg-muted/30 p-2 transition-all hover:bg-muted"
+                                    title="Copy short link"
                                 >
-                                    {copied ? (
-                                        <Check className="size-3 text-emerald-600" />
-                                    ) : (
-                                        <Copy className="size-3" />
-                                    )}
+                                    {copied ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4 text-muted-foreground group-hover:text-foreground" />}
                                 </button>
                             </div>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="border border-neutral-200/60 bg-white shadow-none transition-all duration-200 hover:border-neutral-300">
-                        <CardContent className="flex flex-col gap-2.5 p-4">
-                            <span className="text-[10px] font-bold tracking-widest text-slate/70 uppercase">
-                                Destination
-                            </span>
-                            <div className="flex items-center justify-between gap-2">
-                                <a
-                                    href={link.destination_url}
-                                    target="_blank"
+                            
+                            <div className="flex items-center gap-2 text-sm">
+                                <span className="text-muted-foreground">Destination:</span>
+                                <a 
+                                    href={link.destination_url} 
+                                    target="_blank" 
                                     rel="noopener noreferrer"
-                                    className="truncate text-[12px] font-medium text-slate transition-colors hover:text-graphite hover:underline"
+                                    className="flex max-w-sm items-center gap-1.5 truncate font-medium text-foreground hover:underline sm:max-w-md lg:max-w-lg"
                                 >
                                     {link.destination_url}
-                                </a>
-                                <a
-                                    href={link.destination_url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    title="Open Destination"
-                                    className="flex size-7 shrink-0 items-center justify-center rounded border border-neutral-200/60 bg-white text-slate shadow-none transition-all hover:border-neutral-300 hover:text-vivid-indigo"
-                                >
-                                    <ExternalLink className="size-3" />
+                                    <ExternalLink className="h-3 w-3 text-muted-foreground" />
                                 </a>
                             </div>
-                        </CardContent>
-                    </Card>
 
-                    <Card className="border border-neutral-200/60 bg-white shadow-none transition-all duration-200 hover:border-neutral-300">
-                        <CardContent className="flex flex-col gap-2.5 p-4">
-                            <span className="text-[10px] font-bold tracking-widest text-slate/70 uppercase">
-                                Status
-                            </span>
-                            <div className="flex flex-wrap items-center justify-between gap-2">
+                            <div className="mt-2 flex flex-wrap items-center gap-4">
                                 {expired ? (
-                                    <Badge
-                                        variant="danger"
-                                        className="bg-rose-50 text-rose-700"
-                                    >
+                                    <Badge variant="destructive" className="bg-destructive/10 text-destructive hover:bg-destructive/10">
                                         Expired
                                     </Badge>
                                 ) : (
-                                    <Badge
-                                        variant="success"
-                                        className="bg-emerald-50 text-emerald-700"
-                                    >
+                                    <Badge variant="default" className="bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/10 dark:text-emerald-400">
                                         Active
                                     </Badge>
                                 )}
-                                <span className="text-[11px] text-slate/70">
-                                    {link.expires_at ? (
-                                        <span className="flex items-center gap-1">
-                                            <Calendar className="size-3" />
-                                            {new Date(
-                                                link.expires_at,
-                                            ).toLocaleDateString(undefined, {
-                                                month: 'short',
-                                                day: 'numeric',
-                                            })}
-                                        </span>
-                                    ) : (
-                                        'Never expires'
-                                    )}
+                                <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                                    <CalendarDays className="h-4 w-4" />
+                                    {link.expires_at ? `Expires ${new Date(link.expires_at).toLocaleDateString()}` : 'Never expires'}
                                 </span>
                             </div>
-                        </CardContent>
-                    </Card>
-                </div>
+                        </div>
 
-                {/* 2 & 3. Trend Charts */}
-                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-                    <Card className="flex flex-col gap-4 rounded-xl border border-neutral-200/60 bg-white p-5 shadow-none">
-                        <CardHeader className="p-0">
-                            <div className="flex items-center gap-2.5">
-                                <div className="flex size-8 items-center justify-center rounded-lg bg-pale-lilac/60 text-vivid-indigo">
-                                    <TrendingUp className="size-4" />
-                                </div>
-                                <div>
-                                    <CardTitle className="font-satoshi text-[14px] font-bold text-graphite">
-                                        7 Day Trend
-                                    </CardTitle>
-                                    <CardDescription className="mt-0.5 text-[11px] text-slate">
-                                        Click performance over the past week
-                                    </CardDescription>
-                                </div>
+                        {/* Stat Block */}
+                        <div className="flex w-full flex-col justify-center border-t border-border/40 bg-muted/10 p-6 md:w-64 md:border-l md:border-t-0 md:p-8 lg:w-80">
+                            <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                                <MousePointerClick className="h-4 w-4" />
+                                Total Clicks
                             </div>
-                        </CardHeader>
-                        <CardContent className="h-[240px] p-0">
-                            <ResponsiveContainer width="100%" height="100%">
-                                <AreaChart
-                                    data={stats_7_days}
-                                    margin={{
-                                        top: 8,
-                                        right: 8,
-                                        left: -24,
-                                        bottom: 0,
-                                    }}
-                                >
-                                    <defs>
-                                        <linearGradient
-                                            id="colorClicks7"
-                                            x1="0"
-                                            y1="0"
-                                            x2="0"
-                                            y2="1"
-                                        >
-                                            <stop
-                                                offset="5%"
-                                                stopColor="#494bcb"
-                                                stopOpacity={0.12}
-                                            />
-                                            <stop
-                                                offset="95%"
-                                                stopColor="#494bcb"
-                                                stopOpacity={0}
-                                            />
-                                        </linearGradient>
-                                    </defs>
-                                    <CartesianGrid
-                                        strokeDasharray="3 3"
-                                        vertical={false}
-                                        stroke="#f4f4f8"
-                                    />
-                                    <XAxis
-                                        dataKey="date"
-                                        tickFormatter={formattedDate}
-                                        tick={{
-                                            fill: '#8a8a99',
-                                            fontSize: 10,
-                                            fontWeight: 500,
-                                        }}
-                                        axisLine={false}
-                                        tickLine={false}
-                                        dy={6}
-                                    />
-                                    <YAxis
-                                        tick={{
-                                            fill: '#8a8a99',
-                                            fontSize: 10,
-                                            fontWeight: 500,
-                                        }}
-                                        axisLine={false}
-                                        tickLine={false}
-                                        allowDecimals={false}
-                                    />
-                                    <Tooltip content={<CustomTooltip />} />
-                                    <Area
-                                        type="monotone"
-                                        dataKey="clicks_count"
-                                        stroke="#494bcb"
-                                        strokeWidth={1.5}
-                                        fillOpacity={1}
-                                        fill="url(#colorClicks7)"
-                                    />
-                                </AreaChart>
-                            </ResponsiveContainer>
-                        </CardContent>
-                    </Card>
+                            <div className="mt-2 text-5xl font-bold tracking-tighter text-foreground">
+                                {link.clicks_count ?? 0}
+                            </div>
+                        </div>
+                    </div>
+                </Card>
 
-                    <Card className="flex flex-col gap-4 rounded-xl border border-neutral-200/60 bg-white p-5 shadow-none">
-                        <CardHeader className="p-0">
-                            <div className="flex items-center gap-2.5">
-                                <div className="flex size-8 items-center justify-center rounded-lg bg-pale-lilac/60 text-vivid-indigo">
-                                    <BarChart3 className="size-4" />
-                                </div>
-                                <div>
-                                    <CardTitle className="font-satoshi text-[14px] font-bold text-graphite">
-                                        30 Day Trend
-                                    </CardTitle>
-                                    <CardDescription className="mt-0.5 text-[11px] text-slate">
-                                        Click performance over the past month
-                                    </CardDescription>
-                                </div>
-                            </div>
-                        </CardHeader>
-                        <CardContent className="h-[240px] p-0">
-                            <ResponsiveContainer width="100%" height="100%">
-                                <AreaChart
-                                    data={stats_30_days}
-                                    margin={{
-                                        top: 8,
-                                        right: 8,
-                                        left: -24,
-                                        bottom: 0,
-                                    }}
-                                >
-                                    <defs>
-                                        <linearGradient
-                                            id="colorClicks30"
-                                            x1="0"
-                                            y1="0"
-                                            x2="0"
-                                            y2="1"
-                                        >
-                                            <stop
-                                                offset="5%"
-                                                stopColor="#494bcb"
-                                                stopOpacity={0.12}
-                                            />
-                                            <stop
-                                                offset="95%"
-                                                stopColor="#494bcb"
-                                                stopOpacity={0}
-                                            />
-                                        </linearGradient>
-                                    </defs>
-                                    <CartesianGrid
-                                        strokeDasharray="3 3"
-                                        vertical={false}
-                                        stroke="#f4f4f8"
-                                    />
-                                    <XAxis
-                                        dataKey="date"
-                                        tickFormatter={formattedDate}
-                                        tick={{
-                                            fill: '#8a8a99',
-                                            fontSize: 10,
-                                            fontWeight: 500,
-                                        }}
-                                        axisLine={false}
-                                        tickLine={false}
-                                        dy={6}
-                                    />
-                                    <YAxis
-                                        tick={{
-                                            fill: '#8a8a99',
-                                            fontSize: 10,
-                                            fontWeight: 500,
-                                        }}
-                                        axisLine={false}
-                                        tickLine={false}
-                                        allowDecimals={false}
-                                    />
-                                    <Tooltip content={<CustomTooltip />} />
-                                    <Area
-                                        type="monotone"
-                                        dataKey="clicks_count"
-                                        stroke="#494bcb"
-                                        strokeWidth={1.5}
-                                        fillOpacity={1}
-                                        fill="url(#colorClicks30)"
-                                    />
-                                </AreaChart>
-                            </ResponsiveContainer>
-                        </CardContent>
-                    </Card>
-                </div>
+                {/* 2. Full Width 30 Day Chart */}
+                <Card className="border-border/40 bg-card shadow-sm">
+                    <CardHeader className="border-b border-border/40 px-6 py-5">
+                        <CardTitle className="flex items-center gap-2 text-base">
+                            <BarChart3 className="h-4 w-4 text-muted-foreground" />
+                            30 Day Performance
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent className="h-[350px] p-0 sm:p-6">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <AreaChart data={stats_30_days} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                                <defs>
+                                    <linearGradient id="colorClicks" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="5%" stopColor="hsl(var(--foreground))" stopOpacity={0.1} />
+                                        <stop offset="95%" stopColor="hsl(var(--foreground))" stopOpacity={0} />
+                                    </linearGradient>
+                                </defs>
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border))" strokeOpacity={0.4} />
+                                <XAxis 
+                                    dataKey="date" 
+                                    tickFormatter={formattedDate} 
+                                    tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }} 
+                                    axisLine={false} 
+                                    tickLine={false} 
+                                    dy={10} 
+                                    minTickGap={20}
+                                />
+                                <YAxis 
+                                    tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 11 }} 
+                                    axisLine={false} 
+                                    tickLine={false} 
+                                    allowDecimals={false} 
+                                    dx={-10}
+                                />
+                                <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'hsl(var(--border))', strokeWidth: 1, strokeDasharray: '4 4' }} />
+                                <Area type="monotone" dataKey="clicks_count" stroke="hsl(var(--foreground))" strokeWidth={2} fillOpacity={1} fill="url(#colorClicks)" />
+                            </AreaChart>
+                        </ResponsiveContainer>
+                    </CardContent>
+                </Card>
 
-                {/* 4, 5 & 6. Client Dimensions */}
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                    {/* Top Browsers */}
-                    <Card className="flex flex-col gap-4 rounded-xl border border-neutral-200/60 bg-white p-5 shadow-none">
-                        <CardHeader className="p-0">
-                            <div className="flex items-center gap-2.5">
-                                <div className="flex size-8 items-center justify-center rounded-lg bg-pale-lilac/60 text-vivid-indigo">
-                                    <Globe className="size-4" />
-                                </div>
-                                <div>
-                                    <CardTitle className="font-satoshi text-[14px] font-bold text-graphite">
-                                        Top Browsers
-                                    </CardTitle>
-                                    <CardDescription className="mt-0.5 text-[11px] text-slate">
-                                        Visits by browser type
-                                    </CardDescription>
-                                </div>
-                            </div>
+                {/* 3. Dimension Cards */}
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                    {/* Browsers */}
+                    <Card className="border-border/40 bg-card shadow-sm">
+                        <CardHeader className="border-b border-border/40 px-5 py-4">
+                            <CardTitle className="flex items-center gap-2 text-sm">
+                                <Globe className="h-4 w-4 text-muted-foreground" />
+                                Top Browsers
+                            </CardTitle>
                         </CardHeader>
-                        <CardContent className="flex flex-col gap-3 p-0">
+                        <CardContent className="p-5">
                             {top_browsers.length === 0 ? (
-                                <div className="py-6 text-center text-[12px] text-slate/60">
-                                    No browser data logged yet.
-                                </div>
+                                <div className="py-8 text-center text-sm text-muted-foreground">No data available yet.</div>
                             ) : (
-                                <div className="flex flex-col gap-3">
+                                <div className="flex flex-col gap-4">
                                     {top_browsers.map((item, index) => {
-                                        const percentage =
-                                            totalBrowserClicks > 0
-                                                ? (item.clicks_count /
-                                                      totalBrowserClicks) *
-                                                  100
-                                                : 0;
-
+                                        const percentage = totalBrowserClicks > 0 ? (item.clicks_count / totalBrowserClicks) * 100 : 0;
                                         return (
-                                            <div
-                                                key={index}
-                                                className="flex flex-col gap-1"
-                                            >
-                                                <div className="flex items-center justify-between text-[12px]">
-                                                    <span className="font-medium text-graphite">
-                                                        {item.browser || 'Other'}
-                                                    </span>
-                                                    <span className="font-bold text-slate/70">
-                                                        {item.clicks_count} (
-                                                        {percentage.toFixed(0)}%)
-                                                    </span>
+                                            <div key={index} className="flex flex-col gap-1.5">
+                                                <div className="flex items-center justify-between text-sm">
+                                                    <span className="font-medium text-foreground">{item.browser || 'Other'}</span>
+                                                    <span className="text-muted-foreground">{percentage.toFixed(1)}% <span className="ml-1 text-xs opacity-50">({item.clicks_count})</span></span>
                                                 </div>
-                                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-neutral-100">
-                                                    <div
-                                                        className="h-full rounded-full bg-vivid-indigo transition-all duration-500"
-                                                        style={{
-                                                            width: `${percentage}%`,
-                                                        }}
-                                                    />
+                                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+                                                    <div className="h-full rounded-full bg-foreground transition-all duration-1000" style={{ width: `${percentage}%` }} />
                                                 </div>
                                             </div>
                                         );
@@ -493,65 +252,30 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                         </CardContent>
                     </Card>
 
-                    {/* Top Devices */}
-                    <Card className="flex flex-col gap-4 rounded-xl border border-neutral-200/60 bg-white p-5 shadow-none">
-                        <CardHeader className="p-0">
-                            <div className="flex items-center gap-2.5">
-                                <div className="flex size-8 items-center justify-center rounded-lg bg-pale-lilac/60 text-vivid-indigo">
-                                    <Smartphone className="size-4" />
-                                </div>
-                                <div>
-                                    <CardTitle className="font-satoshi text-[14px] font-bold text-graphite">
-                                        Top Devices
-                                    </CardTitle>
-                                    <CardDescription className="mt-0.5 text-[11px] text-slate">
-                                        Distribution of device types
-                                    </CardDescription>
-                                </div>
-                            </div>
+                    {/* Devices */}
+                    <Card className="border-border/40 bg-card shadow-sm">
+                        <CardHeader className="border-b border-border/40 px-5 py-4">
+                            <CardTitle className="flex items-center gap-2 text-sm">
+                                <Smartphone className="h-4 w-4 text-muted-foreground" />
+                                Top Devices
+                            </CardTitle>
                         </CardHeader>
-                        <CardContent className="flex flex-col gap-3 p-0">
+                        <CardContent className="p-5">
                             {top_devices.length === 0 ? (
-                                <div className="py-6 text-center text-[12px] text-slate/60">
-                                    No device data logged yet.
-                                </div>
+                                <div className="py-8 text-center text-sm text-muted-foreground">No data available yet.</div>
                             ) : (
-                                <div className="flex flex-col gap-3">
+                                <div className="flex flex-col gap-4">
                                     {top_devices.map((item, index) => {
-                                        const percentage =
-                                            totalDeviceClicks > 0
-                                                ? (item.clicks_count /
-                                                      totalDeviceClicks) *
-                                                  100
-                                                : 0;
-                                        const label = item.device_type
-                                            ? item.device_type
-                                                  .charAt(0)
-                                                  .toUpperCase() +
-                                              item.device_type.slice(1)
-                                            : 'Other';
-
+                                        const percentage = totalDeviceClicks > 0 ? (item.clicks_count / totalDeviceClicks) * 100 : 0;
+                                        const label = item.device_type ? item.device_type.charAt(0).toUpperCase() + item.device_type.slice(1) : 'Other';
                                         return (
-                                            <div
-                                                key={index}
-                                                className="flex flex-col gap-1"
-                                            >
-                                                <div className="flex items-center justify-between text-[12px]">
-                                                    <span className="font-medium text-graphite">
-                                                        {label}
-                                                    </span>
-                                                    <span className="font-bold text-slate/70">
-                                                        {item.clicks_count} (
-                                                        {percentage.toFixed(0)}%)
-                                                    </span>
+                                            <div key={index} className="flex flex-col gap-1.5">
+                                                <div className="flex items-center justify-between text-sm">
+                                                    <span className="font-medium text-foreground">{label}</span>
+                                                    <span className="text-muted-foreground">{percentage.toFixed(1)}% <span className="ml-1 text-xs opacity-50">({item.clicks_count})</span></span>
                                                 </div>
-                                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-neutral-100">
-                                                    <div
-                                                        className="h-full rounded-full bg-vivid-indigo transition-all duration-500"
-                                                        style={{
-                                                            width: `${percentage}%`,
-                                                        }}
-                                                    />
+                                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+                                                    <div className="h-full rounded-full bg-foreground transition-all duration-1000" style={{ width: `${percentage}%` }} />
                                                 </div>
                                             </div>
                                         );
@@ -561,59 +285,29 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                         </CardContent>
                     </Card>
 
-                    {/* Top Platforms */}
-                    <Card className="flex flex-col gap-4 rounded-xl border border-neutral-200/60 bg-white p-5 shadow-none">
-                        <CardHeader className="p-0">
-                            <div className="flex items-center gap-2.5">
-                                <div className="flex size-8 items-center justify-center rounded-lg bg-pale-lilac/60 text-vivid-indigo">
-                                    <Laptop className="size-4" />
-                                </div>
-                                <div>
-                                    <CardTitle className="font-satoshi text-[14px] font-bold text-graphite">
-                                        Top Platforms
-                                    </CardTitle>
-                                    <CardDescription className="mt-0.5 text-[11px] text-slate">
-                                        Operating system platform groups
-                                    </CardDescription>
-                                </div>
-                            </div>
+                    {/* Platforms */}
+                    <Card className="border-border/40 bg-card shadow-sm">
+                        <CardHeader className="border-b border-border/40 px-5 py-4">
+                            <CardTitle className="flex items-center gap-2 text-sm">
+                                <Laptop className="h-4 w-4 text-muted-foreground" />
+                                Top Platforms
+                            </CardTitle>
                         </CardHeader>
-                        <CardContent className="flex flex-col gap-3 p-0">
+                        <CardContent className="p-5">
                             {top_platforms.length === 0 ? (
-                                <div className="py-6 text-center text-[12px] text-slate/60">
-                                    No platform data logged yet.
-                                </div>
+                                <div className="py-8 text-center text-sm text-muted-foreground">No data available yet.</div>
                             ) : (
-                                <div className="flex flex-col gap-3">
+                                <div className="flex flex-col gap-4">
                                     {top_platforms.map((item, index) => {
-                                        const percentage =
-                                            totalPlatformClicks > 0
-                                                ? (item.clicks_count /
-                                                      totalPlatformClicks) *
-                                                  100
-                                                : 0;
-
+                                        const percentage = totalPlatformClicks > 0 ? (item.clicks_count / totalPlatformClicks) * 100 : 0;
                                         return (
-                                            <div
-                                                key={index}
-                                                className="flex flex-col gap-1"
-                                            >
-                                                <div className="flex items-center justify-between text-[12px]">
-                                                    <span className="font-medium text-graphite">
-                                                        {item.platform || 'Other'}
-                                                    </span>
-                                                    <span className="font-bold text-slate/70">
-                                                        {item.clicks_count} (
-                                                        {percentage.toFixed(0)}%)
-                                                    </span>
+                                            <div key={index} className="flex flex-col gap-1.5">
+                                                <div className="flex items-center justify-between text-sm">
+                                                    <span className="font-medium text-foreground">{item.platform || 'Other'}</span>
+                                                    <span className="text-muted-foreground">{percentage.toFixed(1)}% <span className="ml-1 text-xs opacity-50">({item.clicks_count})</span></span>
                                                 </div>
-                                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-neutral-100">
-                                                    <div
-                                                        className="h-full rounded-full bg-vivid-indigo transition-all duration-500"
-                                                        style={{
-                                                            width: `${percentage}%`,
-                                                        }}
-                                                    />
+                                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+                                                    <div className="h-full rounded-full bg-foreground transition-all duration-1000" style={{ width: `${percentage}%` }} />
                                                 </div>
                                             </div>
                                         );

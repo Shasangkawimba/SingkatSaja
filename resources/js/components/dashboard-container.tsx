@@ -23,18 +23,20 @@ export function DashboardContainer({
             className={cn('flex flex-col gap-6 py-5 md:py-8', className)}
             {...props}
         >
-            <div className="flex flex-col justify-between gap-4 border-b border-neutral-100 pb-5 md:flex-row md:items-end">
-                <SectionHeader
-                    title={title}
-                    description={description}
-                    align="left"
-                />
-                {actions && (
-                    <div className="flex shrink-0 items-center gap-3">
-                        {actions}
-                    </div>
-                )}
-            </div>
+            {(title || description || actions) && (
+                <div className="flex flex-col justify-between gap-4 border-b border-border/40 pb-5 md:flex-row md:items-end">
+                    <SectionHeader
+                        title={title}
+                        description={description}
+                        align="left"
+                    />
+                    {actions && (
+                        <div className="flex shrink-0 items-center gap-3">
+                            {actions}
+                        </div>
+                    )}
+                </div>
+            )}
 
             <div className="w-full">{children}</div>
         </PageContainer>

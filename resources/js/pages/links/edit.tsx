@@ -1,199 +1,123 @@
 import { Head, Link, useForm } from '@inertiajs/react';
-import { ArrowLeft, Save, Lock } from 'lucide-react';
+import { ArrowLeft, Link as LinkIcon, Zap, Clock, Lock } from 'lucide-react';
 import React from 'react';
 import { toast } from 'sonner';
 import { DashboardContainer } from '@/components/dashboard-container';
 import InputError from '@/components/input-error';
-import { LoadingState } from '@/components/loading-state';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import type { Link as LinkType } from '@/types/link';
+import type { LinkEditProps } from '@/types/link';
 
-interface EditProps {
-    link: LinkType;
-}
-
-export default function Edit({ link }: EditProps) {
-    // Helper to format ISO datetime string to timezone-adjusted input format YYYY-MM-DDTHH:MM
-    const formatDateTime = (dateString: string | null) => {
-        if (!dateString) {
-            return '';
-        }
-
-        const d = new Date(dateString);
-        const offset = d.getTimezoneOffset() * 60000;
-
-        return new Date(d.getTime() - offset).toISOString().slice(0, 16);
-    };
-
-    const { data, setData, patch, processing, errors } = useForm({
+export default function Edit({ link }: LinkEditProps) {
+    const { data, setData, put, processing, errors } = useForm({
         destination_url: link.destination_url,
-        expires_at: formatDateTime(link.expires_at),
+        expires_at: link.expires_at ? link.expires_at.slice(0, 16) : '',
     });
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        patch(`/links/${link.id}`, {
-            onSuccess: () => {
-                toast.success('Short link updated successfully.');
-            },
+        put(`/links/${link.id}`, {
+            onSuccess: () => toast.success('Link updated successfully.'),
         });
     };
 
     return (
-        <DashboardContainer
-            title="Edit Short Link"
-            description="Modify the target destination or expiration window."
-            actions={
-                <Button
-                    asChild
-                    variant="ghost"
-                    className="h-9 rounded-lg border border-neutral-200/80 text-[13px] font-medium text-graphite hover:bg-frost-gray"
-                >
+        <DashboardContainer title="" description="" className="pb-12 max-w-3xl mx-auto">
+            <Head title={`Edit Link - ${link.short_code}`} />
+
+            <div className="mb-6 flex">
+                <Button asChild variant="ghost" size="sm" className="h-8 pl-2 pr-4 text-xs text-muted-foreground hover:text-foreground">
                     <Link href="/links">
-                        <ArrowLeft className="size-3.5" />
+                        <ArrowLeft className="mr-1.5 h-3 w-3" />
                         Back to Links
                     </Link>
                 </Button>
-            }
-        >
-            <Head title="Edit Link" />
+            </div>
 
-            <div className="mx-auto max-w-lg">
-                <Card className="rounded-xl border border-neutral-200/60 bg-white shadow-none">
-                    <CardContent className="p-6">
-                        {processing ? (
-                            <div className="py-10">
-                                <LoadingState
-                                    variant="spinner"
-                                    message="Saving changes..."
+            <Card className="border-border/40 bg-card shadow-sm">
+                <CardHeader className="border-b border-border/40 px-6 py-6">
+                    <CardTitle className="text-xl">Edit short link</CardTitle>
+                    <CardDescription>
+                        Update the destination or expiration for <strong className="text-foreground">{link.short_code}</strong>.
+                    </CardDescription>
+                </CardHeader>
+                
+                <CardContent className="p-6">
+                    <form onSubmit={submit} className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-2">
+                            <Label htmlFor="destination_url" className="text-sm font-semibold">
+                                Destination URL <span className="text-destructive">*</span>
+                            </Label>
+                            <div className="relative flex items-center">
+                                <LinkIcon className="absolute left-3 h-4 w-4 text-muted-foreground" />
+                                <Input
+                                    id="destination_url"
+                                    type="url"
+                                    placeholder="https://example.com/very-long-url-that-needs-shortening"
+                                    value={data.destination_url}
+                                    onChange={(e) => setData('destination_url', e.target.value)}
+                                    required
+                                    autoFocus
+                                    className="pl-9 h-11"
                                 />
                             </div>
-                        ) : (
-                            <form
-                                id="edit-link-form"
-                                onSubmit={submit}
-                                className="flex flex-col gap-5"
-                            >
-                                {/* Form Header */}
-                                <div className="flex items-center gap-2.5 border-b border-neutral-100 pb-4">
-                                    <div className="flex size-8 items-center justify-center rounded-lg bg-neutral-100 text-slate">
-                                        <Save className="size-4" />
-                                    </div>
-                                    <div>
-                                        <p className="text-[13px] font-bold text-graphite">
-                                            Editing:{' '}
-                                            <span className="font-bold text-vivid-indigo">
-                                                {link.short_code}
-                                            </span>
-                                        </p>
-                                        <p className="text-[11px] text-slate">
-                                            The alias cannot be changed after creation.
-                                        </p>
-                                    </div>
-                                </div>
+                            <p className="text-xs text-muted-foreground">The original URL you want to route visitors to.</p>
+                            <InputError message={errors.destination_url} />
+                        </div>
 
-                                {/* Short Code (read-only) */}
-                                <div className="flex flex-col gap-1.5">
-                                    <Label
-                                        htmlFor="short_code"
-                                        className="flex items-center gap-1.5 text-[11px] font-bold tracking-widest text-slate/70 uppercase"
-                                    >
-                                        <Lock className="size-3" />
-                                        Short Code / Alias
-                                    </Label>
+                        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                            <div className="flex flex-col gap-2 opacity-60">
+                                <Label htmlFor="short_code" className="text-sm font-semibold flex items-center gap-1.5">
+                                    Custom Alias <Lock className="h-3 w-3" />
+                                </Label>
+                                <div className="relative flex items-center">
+                                    <div className="flex h-11 items-center rounded-l-md border border-r-0 border-border/40 bg-muted/50 px-3 text-sm text-muted-foreground">
+                                        singkat.saja/
+                                    </div>
                                     <Input
                                         id="short_code"
                                         type="text"
                                         value={link.short_code}
                                         disabled
-                                        className="h-9 cursor-not-allowed rounded-lg border-neutral-200/50 bg-neutral-50/80 text-[14px] font-medium text-slate/60 select-none"
+                                        className="h-11 rounded-l-none pl-3 bg-muted/30"
                                     />
-                                    <span className="text-[11px] text-slate/60">
-                                        The shortened alias URL path cannot be modified after creation.
-                                    </span>
+                                    <Zap className="absolute right-3 h-4 w-4 text-muted-foreground/50" />
                                 </div>
+                                <p className="text-xs text-muted-foreground">Short code cannot be changed after creation.</p>
+                            </div>
 
-                                <div className="flex flex-col gap-1.5">
-                                    <Label
-                                        htmlFor="destination_url"
-                                        className="text-[11px] font-bold tracking-widest text-graphite uppercase"
-                                    >
-                                        Destination URL
-                                    </Label>
-                                    <Input
-                                        id="destination_url"
-                                        type="url"
-                                        value={data.destination_url}
-                                        onChange={(e) =>
-                                            setData(
-                                                'destination_url',
-                                                e.target.value,
-                                            )
-                                        }
-                                        required
-                                        className="h-9 rounded-lg border-neutral-200/80 bg-white text-[14px] focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
-                                    />
-                                    <InputError
-                                        message={errors.destination_url}
-                                    />
-                                    <span className="text-[11px] text-slate/70">
-                                        Must start with http:// or https://
-                                    </span>
-                                </div>
-
-                                <div className="flex flex-col gap-1.5">
-                                    <Label
-                                        htmlFor="expires_at"
-                                        className="text-[11px] font-bold tracking-widest text-graphite uppercase"
-                                    >
-                                        Expiration Date
-                                        <span className="ml-1 font-normal text-slate/60 normal-case tracking-normal">
-                                            (optional)
-                                        </span>
-                                    </Label>
+                            <div className="flex flex-col gap-2">
+                                <Label htmlFor="expires_at" className="text-sm font-semibold">
+                                    Expiration Date <span className="text-muted-foreground font-normal ml-1">(Optional)</span>
+                                </Label>
+                                <div className="relative flex items-center">
                                     <Input
                                         id="expires_at"
                                         type="datetime-local"
                                         value={data.expires_at}
-                                        onChange={(e) =>
-                                            setData(
-                                                'expires_at',
-                                                e.target.value,
-                                            )
-                                        }
-                                        className="h-9 rounded-lg border-neutral-200/80 bg-white text-[14px] focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
+                                        onChange={(e) => setData('expires_at', e.target.value)}
+                                        className="h-11 pl-10"
                                     />
-                                    <InputError message={errors.expires_at} />
-                                    <span className="text-[11px] text-slate/70">
-                                        After this timestamp, redirects automatically return 404.
-                                    </span>
+                                    <Clock className="absolute left-3 h-4 w-4 text-muted-foreground" />
                                 </div>
+                                <p className="text-xs text-muted-foreground">Automatically expire this link after a date.</p>
+                                <InputError message={errors.expires_at} />
+                            </div>
+                        </div>
 
-                                <div className="flex justify-end gap-2.5 border-t border-neutral-100 pt-4">
-                                    <Button
-                                        asChild
-                                        variant="ghost"
-                                        className="h-9 rounded-lg border border-neutral-200/80 px-4 text-[13px] font-medium text-graphite hover:bg-neutral-50"
-                                    >
-                                        <Link href="/links">Cancel</Link>
-                                    </Button>
-                                    <Button
-                                        type="submit"
-                                        disabled={processing}
-                                        className="h-9 rounded-lg bg-vivid-indigo px-5 text-[13px] font-medium text-pure-white shadow-none transition-all hover:bg-vivid-indigo/90 hover:shadow-sm active:scale-[0.98]"
-                                    >
-                                        <Save className="size-3.5" />
-                                        Save Changes
-                                    </Button>
-                                </div>
-                            </form>
-                        )}
-                    </CardContent>
-                </Card>
-            </div>
+                        <div className="mt-4 flex justify-end gap-3 pt-4 border-t border-border/40">
+                            <Button asChild variant="outline" className="h-10 px-6">
+                                <Link href="/links">Cancel</Link>
+                            </Button>
+                            <Button type="submit" disabled={processing} className="h-10 px-6 font-semibold">
+                                Save Changes
+                            </Button>
+                        </div>
+                    </form>
+                </CardContent>
+            </Card>
         </DashboardContainer>
     );
 }

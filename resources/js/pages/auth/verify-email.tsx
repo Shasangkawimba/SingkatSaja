@@ -28,7 +28,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
                             Resend verification email
                         </Button>
 
-                        <div className="mt-4 w-full border-t border-neutral-100 pt-16 text-center text-[13px] font-medium text-slate">
+                        <div className="mt-4 w-full border-t border-neutral-100 pt-16 text-center text-sm font-medium text-slate">
                             <TextLink
                                 href={logout()}
                                 className="font-bold text-vivid-indigo hover:underline"

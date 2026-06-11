@@ -9,11 +9,11 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
     const { auth } = usePage().props as any;
 
     return (
-        <div className="flex min-h-screen flex-col bg-pure-white font-sans text-graphite">
+        <div className="flex min-h-screen flex-col bg-background font-sans text-foreground">
             {/* Top Header */}
-            <header className="sticky top-0 z-50 w-full border-b border-neutral-100/80 bg-pure-white/80 backdrop-blur-md">
-                <div className="mx-auto flex h-14 max-w-[1200px] items-center justify-between px-4 md:px-8">
-                    <Link href="/">
+            <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
+                <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
+                    <Link href="/" className="transition-opacity hover:opacity-80">
                         <AppLogo />
                     </Link>
 
@@ -22,14 +22,15 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                             <>
                                 <Link
                                     href={dashboard()}
-                                    className="text-[13px] font-medium text-slate transition-colors hover:text-vivid-indigo"
+                                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                                 >
                                     Dashboard
                                 </Link>
                                 <Button
                                     asChild
                                     variant="default"
-                                    className="h-8 rounded-lg bg-vivid-indigo px-4 text-[13px] font-medium text-pure-white hover:bg-vivid-indigo/90"
+                                    size="sm"
+                                    className="h-8 rounded-md px-4 text-xs font-medium"
                                 >
                                     <Link href={dashboard()}>Go to app</Link>
                                 </Button>
@@ -38,18 +39,17 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                             <>
                                 <Link
                                     href={login()}
-                                    className="text-[13px] font-medium text-slate transition-colors hover:text-vivid-indigo"
+                                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                                 >
                                     Log In
                                 </Link>
                                 <Button
                                     asChild
                                     variant="default"
-                                    className="h-8 rounded-lg bg-vivid-indigo px-4 text-[13px] font-medium text-pure-white hover:bg-vivid-indigo/90"
+                                    size="sm"
+                                    className="h-8 rounded-md px-4 text-xs font-medium"
                                 >
-                                    <Link href={register()}>
-                                        Get started — it's free
-                                    </Link>
+                                    <Link href={register()}>Sign Up</Link>
                                 </Button>
                             </>
                         )}
@@ -57,17 +57,9 @@ export function PublicLayout({ children }: { children: React.ReactNode }) {
                 </div>
             </header>
 
-            {/* Main content with subtle dot grid background */}
-            <main className="relative w-full flex-1 bg-pure-white">
-                <div
-                    className="pointer-events-none absolute inset-0 opacity-[0.4]"
-                    style={{
-                        backgroundImage:
-                            'radial-gradient(var(--color-frost-gray) 1px, transparent 1px)',
-                        backgroundSize: '16px 16px',
-                    }}
-                />
-                <div className="relative z-10">{children}</div>
+            {/* Main content */}
+            <main className="relative flex w-full flex-1 flex-col items-center justify-center">
+                {children}
             </main>
 
             <Footer />

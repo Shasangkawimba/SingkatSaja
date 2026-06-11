@@ -1,146 +1,110 @@
-import { Form, Head } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
+import { Loader2 } from 'lucide-react';
+import * as React from 'react';
+import { FormEvent } from 'react';
 import InputError from '@/components/input-error';
-import PasswordInput from '@/components/password-input';
-import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Spinner } from '@/components/ui/spinner';
+import { AuthSplitLayout } from '@/layouts/auth/auth-split-layout';
 import { login } from '@/routes';
-import { store } from '@/routes/register';
 
-type Props = {
-    passwordRules: string;
-};
+export default function Register() {
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+    });
 
-export default function Register({ passwordRules }: Props) {
+    const submit = (e: FormEvent) => {
+        e.preventDefault();
+        post('/register', {
+            onFinish: () => reset('password', 'password_confirmation'),
+        });
+    };
+
     return (
-        <>
-            <Head title="Register" />
-            <Form
-                {...store.form()}
-                resetOnSuccess={['password', 'password_confirmation']}
-                disableWhileProcessing
-                className="flex flex-col gap-6"
-            >
-                {({ processing, errors }) => (
-                    <>
-                        <div className="flex flex-col gap-20">
-                            <div className="flex flex-col gap-6">
-                                <Label
-                                    htmlFor="name"
-                                    className="text-[11px] font-bold tracking-wider text-graphite uppercase"
-                                >
-                                    Name
-                                </Label>
-                                <Input
-                                    id="name"
-                                    type="text"
-                                    required
-                                    autoFocus
-                                    tabIndex={1}
-                                    autoComplete="name"
-                                    name="name"
-                                    placeholder="Full name"
-                                    className="h-10 rounded-lg border-neutral-200/80 bg-white text-body focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
-                                />
-                                <InputError message={errors.name} />
-                            </div>
+        <AuthSplitLayout
+            title="Create your account"
+            description="Start shortening and tracking links in seconds."
+        >
+            <Head title="Sign Up" />
 
-                            <div className="flex flex-col gap-6">
-                                <Label
-                                    htmlFor="email"
-                                    className="text-[11px] font-bold tracking-wider text-graphite uppercase"
-                                >
-                                    Email address
-                                </Label>
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    required
-                                    tabIndex={2}
-                                    autoComplete="email"
-                                    name="email"
-                                    placeholder="email@example.com"
-                                    className="h-10 rounded-lg border-neutral-200/80 bg-white text-body focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
-                                />
-                                <InputError message={errors.email} />
-                            </div>
+            <form onSubmit={submit} className="flex flex-col gap-5">
+                <div className="grid gap-2">
+                    <Label htmlFor="name">Full Name</Label>
+                    <Input
+                        id="name"
+                        name="name"
+                        value={data.name}
+                        autoComplete="name"
+                        autoFocus
+                        onChange={(e) => setData('name', e.target.value)}
+                        required
+                    />
+                    <InputError message={errors.name} />
+                </div>
 
-                            <div className="flex flex-col gap-6">
-                                <Label
-                                    htmlFor="password"
-                                    className="text-[11px] font-bold tracking-wider text-graphite uppercase"
-                                >
-                                    Password
-                                </Label>
-                                <PasswordInput
-                                    id="password"
-                                    required
-                                    tabIndex={3}
-                                    autoComplete="new-password"
-                                    name="password"
-                                    placeholder="Password"
-                                    passwordrules={passwordRules}
-                                    className="h-10 rounded-lg border-neutral-200/80 bg-white text-body focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
-                                />
-                                <InputError message={errors.password} />
-                            </div>
+                <div className="grid gap-2">
+                    <Label htmlFor="email">Email address</Label>
+                    <Input
+                        id="email"
+                        type="email"
+                        name="email"
+                        value={data.email}
+                        autoComplete="username"
+                        onChange={(e) => setData('email', e.target.value)}
+                        required
+                    />
+                    <InputError message={errors.email} />
+                </div>
 
-                            <div className="flex flex-col gap-6">
-                                <Label
-                                    htmlFor="password_confirmation"
-                                    className="text-[11px] font-bold tracking-wider text-graphite uppercase"
-                                >
-                                    Confirm password
-                                </Label>
-                                <PasswordInput
-                                    id="password_confirmation"
-                                    required
-                                    tabIndex={4}
-                                    autoComplete="new-password"
-                                    name="password_confirmation"
-                                    placeholder="Confirm password"
-                                    passwordrules={passwordRules}
-                                    className="h-10 rounded-lg border-neutral-200/80 bg-white text-body focus-visible:border-vivid-indigo focus-visible:ring-vivid-indigo/20"
-                                />
-                                <InputError
-                                    message={errors.password_confirmation}
-                                />
-                            </div>
+                <div className="grid gap-2">
+                    <Label htmlFor="password">Password</Label>
+                    <Input
+                        id="password"
+                        type="password"
+                        name="password"
+                        value={data.password}
+                        autoComplete="new-password"
+                        onChange={(e) => setData('password', e.target.value)}
+                        required
+                    />
+                    <InputError message={errors.password} />
+                </div>
 
-                            <Button
-                                type="submit"
-                                className="mt-4 h-10 w-full rounded-lg bg-vivid-indigo font-medium text-pure-white shadow-xs hover:bg-vivid-indigo/90"
-                                tabIndex={5}
-                                data-test="register-user-button"
-                                disabled={processing}
-                            >
-                                {processing && (
-                                    <Spinner className="mr-8 size-16" />
-                                )}
-                                Create account
-                            </Button>
-                        </div>
+                <div className="grid gap-2">
+                    <Label htmlFor="password_confirmation">Confirm Password</Label>
+                    <Input
+                        id="password_confirmation"
+                        type="password"
+                        name="password_confirmation"
+                        value={data.password_confirmation}
+                        autoComplete="new-password"
+                        onChange={(e) =>
+                            setData('password_confirmation', e.target.value)
+                        }
+                        required
+                    />
+                    <InputError message={errors.password_confirmation} />
+                </div>
 
-                        <div className="mt-4 border-t border-neutral-100 pt-16 text-center text-[13px] font-medium text-slate">
-                            Already have an account?{' '}
-                            <TextLink
-                                href={login()}
-                                className="font-bold text-vivid-indigo hover:underline"
-                                tabIndex={6}
-                            >
-                                Log in
-                            </TextLink>
-                        </div>
-                    </>
-                )}
-            </Form>
-        </>
+                <Button type="submit" disabled={processing} className="w-full mt-2">
+                    {processing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    Create account
+                </Button>
+
+                <div className="mt-4 text-center text-sm">
+                    <span className="text-muted-foreground">Already have an account? </span>
+                    <Link
+                        href={login()}
+                        className="font-medium text-foreground hover:underline"
+                    >
+                        Sign in
+                    </Link>
+                </div>
+            </form>
+        </AuthSplitLayout>
     );
 }
-
-Register.layout = {
-    title: 'Create an account',
-    description: 'Enter your details below to create your account',
-};

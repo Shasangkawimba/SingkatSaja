@@ -1,3 +1,5 @@
+import type { Link as LinkType } from '@/types/link';
+
 export type DashboardStats = {
     readonly total_links: number;
     readonly active_links: number;
@@ -7,4 +9,5 @@ export type DashboardStats = {
 
 export type DashboardProps = {
     readonly stats: DashboardStats;
+    readonly recent_links: LinkType[];
 };

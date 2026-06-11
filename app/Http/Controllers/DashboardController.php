@@ -15,9 +15,15 @@ class DashboardController extends Controller
     public function index(Request $request, GetDashboardStatsAction $statsAction): Response
     {
         $stats = $statsAction->execute($request->user());
+        $recentLinks = clone $request->user()->links()
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->withSum('dailyStats as clicks_count', 'clicks_count')
+            ->get();
 
         return Inertia::render('dashboard', [
             'stats' => $stats,
+            'recent_links' => $recentLinks,
         ]);
     }
 }

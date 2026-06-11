@@ -73,7 +73,7 @@ export function LoadingState({
     return (
         <div
             className={cn(
-                'flex min-h-[200px] w-full flex-col items-center justify-center gap-12 text-center',
+                'flex min-h-52 w-full flex-col items-center justify-center gap-12 text-center',
                 className,
             )}
             {...props}
