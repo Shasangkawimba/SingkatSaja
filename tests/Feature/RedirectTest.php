@@ -2,39 +2,49 @@
 
 use App\Models\Link;
 use App\Models\User;
-use App\Jobs\LogClickJob;
+use App\Models\ClickEvent;
+use App\Models\DailyStat;
 use Illuminate\Support\Facades\Redis;
-use Illuminate\Support\Facades\Queue;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-test('redirects immediately from Redis cache hit and dispatches analytics', function () {
-    Queue::fake();
+test('redirects immediately from Redis cache hit and records analytics', function () {
+    $user = User::factory()->create();
+    $link = Link::create([
+        'id' => 99,
+        'user_id' => $user->id,
+        'short_code' => 'cacheonly',
+        'destination_url' => 'https://redis-destination.com'
+    ]);
 
-    // Mock Redis key with no database record existing to prove cache-first lookup
+    // Mock Redis key with cache-first lookup
     $redisKey = 'short:cacheonly';
     $payload = json_encode([
-        'id' => 99,
-        'destination_url' => 'https://redis-destination.com',
+        'id' => $link->id,
+        'destination_url' => $link->destination_url,
         'expires_at' => null,
     ]);
     Redis::shouldReceive('get')->once()->with($redisKey)->andReturn($payload);
+    Redis::shouldReceive('set')
+        ->once()
+        ->with("dedup:{$link->id}:127.0.0.1", 1, 'EX', 60, 'NX')
+        ->andReturn(true);
 
     $response = $this->get('/cacheonly');
 
     $response->assertStatus(302)
         ->assertRedirect('https://redis-destination.com');
 
-    Queue::assertPushed(LogClickJob::class, function ($job) {
-        return $job->payload['link_id'] === 99
-            && $job->payload['ip_address'] !== null;
-    });
+    // Assert that click event was stored directly
+    expect(ClickEvent::count())->toBe(1)
+        ->and(DailyStat::count())->toBe(1);
+
+    $click = ClickEvent::first();
+    expect($click->link_id)->toBe($link->id);
 });
 
-test('redirects from database cache miss, rebuilds cache and dispatches analytics', function () {
-    Queue::fake();
-
+test('redirects from database cache miss, rebuilds cache and records analytics', function () {
     $user = User::factory()->create();
     $link = Link::create([
         'user_id' => $user->id,
@@ -48,13 +58,19 @@ test('redirects from database cache miss, rebuilds cache and dispatches analytic
         $data = json_decode($json, true);
         return $data['id'] === $link->id && $data['destination_url'] === 'https://postgres-destination.com';
     }));
+    Redis::shouldReceive('set')
+        ->once()
+        ->with("dedup:{$link->id}:127.0.0.1", 1, 'EX', 60, 'NX')
+        ->andReturn(true);
 
     $response = $this->get('/dbonly');
 
     $response->assertStatus(302)
         ->assertRedirect('https://postgres-destination.com');
 
-    Queue::assertPushed(LogClickJob::class);
+    // Assert that click event was stored directly
+    expect(ClickEvent::count())->toBe(1)
+        ->and(DailyStat::count())->toBe(1);
 });
 
 test('returns 404 for expired links', function () {

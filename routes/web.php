@@ -18,7 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 require __DIR__.'/settings.php';
 
-Route::get('api/health/queue', [\App\Http\Controllers\QueueHealthController::class, 'show'])->name('queue.health');
+Route::get('api/health', [\App\Http\Controllers\HealthController::class, 'show'])->name('health');
 
 Route::get('robots.txt', [\App\Http\Controllers\SeoController::class, 'robots'])->name('seo.robots');
 Route::get('sitemap.xml', [\App\Http\Controllers\SeoController::class, 'sitemap'])->name('seo.sitemap');

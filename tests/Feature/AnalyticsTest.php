@@ -1,7 +1,7 @@
 <?php
 
 use App\Services\UserAgentParser;
-use App\Jobs\LogClickJob;
+use App\Services\AnalyticsService;
 use App\Models\Link;
 use App\Models\User;
 use App\Models\ClickEvent;
@@ -47,7 +47,7 @@ test('user agent parser detects dimensions correctly', function () {
         ->and($res['device_type'])->toBe('desktop');
 });
 
-test('log click job ingests events and aggregates stats transactionally', function () {
+test('analytics service ingests events and aggregates stats transactionally', function () {
     $user = User::factory()->create();
     $link = Link::create([
         'user_id' => $user->id,
@@ -55,17 +55,16 @@ test('log click job ingests events and aggregates stats transactionally', functi
         'destination_url' => 'https://example.com'
     ]);
 
-    $payload = [
-        'link_id' => $link->id,
-        'ip_address' => '192.168.1.1',
-        'user_agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'referer' => 'https://github.com',
-        'timestamp' => now()->timestamp,
-    ];
+    $service = app(AnalyticsService::class);
 
     // Run first ingestion
-    $job = new LogClickJob($payload);
-    app()->call([$job, 'handle']);
+    $service->recordClick(
+        $link->id,
+        '192.168.1.1',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'https://github.com',
+        now()->timestamp
+    );
 
     expect(ClickEvent::count())->toBe(1)
         ->and(DailyStat::count())->toBe(1);
@@ -75,10 +74,13 @@ test('log click job ingests events and aggregates stats transactionally', functi
         ->and($stat->link_id)->toBe($link->id);
 
     // Run second ingestion on the same day with a different IP to verify upsert increment
-    $payload2 = $payload;
-    $payload2['ip_address'] = '192.168.1.2';
-    $job2 = new LogClickJob($payload2);
-    app()->call([$job2, 'handle']);
+    $service->recordClick(
+        $link->id,
+        '192.168.1.2',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'https://github.com',
+        now()->timestamp
+    );
 
     expect(ClickEvent::count())->toBe(2)
         ->and(DailyStat::count())->toBe(1)

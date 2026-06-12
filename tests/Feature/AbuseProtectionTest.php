@@ -4,11 +4,9 @@ use App\Models\Link;
 use App\Models\User;
 use App\Models\ClickEvent;
 use App\Models\DailyStat;
-use App\Jobs\LogClickJob;
 use App\Actions\CreateLinkAction;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Queue;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -58,8 +56,6 @@ test('successful link creation increments creation rate limit in Redis', functio
 });
 
 test('analytics deduplication discards second hit within 60s from same IP', function () {
-    Queue::fake();
-
     $user = User::factory()->create();
     $link = Link::create([
         'user_id' => $user->id,
@@ -83,12 +79,14 @@ test('analytics deduplication discards second hit within 60s from same IP', func
         ->with("dedup:{$link->id}:127.0.0.1", 1, 'EX', 60, 'NX')
         ->andReturn(false);
 
-    // Perform first redirect (dispatches job)
+    // Perform first redirect (creates database click event)
     $this->get('/dedupcode')->assertStatus(302);
 
-    // Perform second redirect (does not dispatch job due to deduplication)
+    // Perform second redirect (does not create database click event due to deduplication)
     $this->get('/dedupcode')->assertStatus(302);
 
-    // Assert the job was pushed exactly once
-    Queue::assertPushed(LogClickJob::class, 1);
+    // Assert the ClickEvent was recorded exactly once
+    expect(ClickEvent::count())->toBe(1)
+        ->and(DailyStat::count())->toBe(1)
+        ->and(DailyStat::first()->clicks_count)->toBe(1);
 });
