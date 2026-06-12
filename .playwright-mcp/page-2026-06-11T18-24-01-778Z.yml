@@ -1,0 +1,64 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e7]:
+      - button [ref=e9]:
+        - img [ref=e10]
+      - link "SingkatSaja Logo" [ref=e11] [cursor=pointer]:
+        - /url: /dashboard
+        - img "SingkatSaja Logo" [ref=e13]
+      - generic [ref=e14]:
+        - generic [ref=e15]:
+          - button [ref=e16] [cursor=pointer]:
+            - img [ref=e17]
+          - button "Toggle theme" [ref=e20]:
+            - img [ref=e21]
+            - img
+        - button "TU" [ref=e27]:
+          - generic [ref=e29]: TU
+    - main [ref=e30]:
+      - generic [ref=e32]:
+        - link "Back to Links" [ref=e34] [cursor=pointer]:
+          - /url: /links
+          - img [ref=e35]
+          - text: Back to Links
+        - generic [ref=e37]:
+          - generic [ref=e38]:
+            - heading "Edit Link" [level=1] [ref=e39]
+            - paragraph [ref=e40]:
+              - text: Update destination or expiration for
+              - strong [ref=e41]: google
+              - text: .
+          - generic [ref=e42]:
+            - generic [ref=e43]:
+              - generic [ref=e44]:
+                - text: Destination URL
+                - generic [ref=e45]: "*"
+              - generic [ref=e46]:
+                - img [ref=e47]
+                - textbox "Destination URL *" [ref=e50]:
+                  - /placeholder: https://example.com/very-long-url
+                  - text: https://www.google.com
+              - paragraph [ref=e51]: The original URL you want to route visitors to.
+            - generic [ref=e52]:
+              - generic [ref=e53]:
+                - generic [ref=e54]:
+                  - text: Custom Alias
+                  - img [ref=e55]
+                - generic [ref=e58]:
+                  - generic [ref=e59]: singkat.saja/
+                  - textbox "Custom Alias" [disabled] [ref=e60]: google
+                  - img [ref=e61]
+                - paragraph [ref=e63]: Short code cannot be changed.
+              - generic [ref=e64]:
+                - generic [ref=e65]:
+                  - text: Expiration Date
+                  - generic [ref=e66]: (Optional)
+                - generic [ref=e67]:
+                  - img [ref=e68]
+                  - textbox "Expiration Date (Optional)" [ref=e71]: 2026-07-11T18:18
+                - paragraph [ref=e72]: Auto-expire this link.
+            - generic [ref=e73]:
+              - link "Cancel" [ref=e74] [cursor=pointer]:
+                - /url: /links
+              - button "Save Changes" [ref=e75]
+  - region "Notifications alt+T"

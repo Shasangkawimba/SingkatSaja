@@ -1,0 +1,66 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e7]:
+      - button [ref=e9]:
+        - img [ref=e10]
+      - link "SingkatSaja Logo" [ref=e11] [cursor=pointer]:
+        - /url: /dashboard
+        - img "SingkatSaja Logo" [ref=e13]
+      - generic [ref=e14]:
+        - generic [ref=e15]:
+          - button [ref=e16] [cursor=pointer]:
+            - img [ref=e17]
+          - button "Toggle theme" [ref=e20]:
+            - img [ref=e21]
+            - img
+        - button "TU" [ref=e27]:
+          - generic [ref=e29]: TU
+    - main [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - generic [ref=e34]:
+            - heading "My Links" [level=2] [ref=e35]
+            - paragraph [ref=e36]: Manage, monitor, and configure shortened links.
+          - link "Create Link" [ref=e38] [cursor=pointer]:
+            - /url: /links/create
+            - img [ref=e39]
+            - text: Create Link
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - generic [ref=e43]:
+              - img [ref=e44]
+              - textbox "Search links or destinations..." [ref=e47]
+            - combobox [ref=e49]:
+              - generic: Newest First
+              - img
+          - generic [ref=e53]:
+            - generic [ref=e54]:
+              - generic [ref=e55]:
+                - generic [ref=e56]: google
+                - button "Copy URL" [ref=e57]:
+                  - img [ref=e58]
+              - generic [ref=e61]: Active
+            - generic [ref=e63]:
+              - generic [ref=e64]: Destination
+              - link "https://www.google.com" [ref=e65] [cursor=pointer]:
+                - /url: https://www.google.com
+                - generic [ref=e66]: https://www.google.com
+                - img [ref=e67]
+            - generic [ref=e71]:
+              - generic [ref=e72]:
+                - generic [ref=e73]:
+                  - generic [ref=e74]: "233"
+                  - text: clicks
+                - generic [ref=e75]:
+                  - img [ref=e76]
+                  - text: 7/12/2026
+              - generic [ref=e79]:
+                - link "View Analytics" [ref=e80] [cursor=pointer]:
+                  - /url: /links/4
+                  - img [ref=e81]
+                - link "Edit Link" [ref=e83] [cursor=pointer]:
+                  - /url: /links/4/edit
+                  - img [ref=e84]
+                - button "Delete Link" [ref=e86]:
+                  - img [ref=e87]
+  - region "Notifications alt+T"

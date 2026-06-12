@@ -93,7 +93,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                 Navigation menu
                             </SheetTitle>
                             <SheetHeader className="flex justify-start text-left">
-                                <AppLogoIcon className="h-6 w-6 fill-current text-foreground" />
+                                <AppLogoIcon className="h-6 w-auto self-start brightness-0 dark:invert transition-all" />
                             </SheetHeader>
                             <div className="flex h-full flex-1 flex-col space-y-4 p-4">
                                 <div className="flex h-full flex-col justify-between text-sm">
@@ -137,7 +137,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                 <Link
                     href={dashboard()}
                     prefetch
-                    className="flex items-center space-x-2 ml-2 transition-transform hover:scale-105"
+                    className="flex items-center space-x-2 transition-transform hover:scale-105 shrink-0 min-w-0 mr-4"
                 >
                     <AppLogo />
                 </Link>
@@ -235,7 +235,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
             </div>
             
             {/* Breadcrumbs removed from floating header, should be moved to page container if needed, or placed below */}
-            {breadcrumbs.length > 1 && (
+            {breadcrumbs?.length > 1 && (
                 <div className="mx-auto flex h-10 w-full items-center justify-start px-6 text-muted-foreground text-sm mt-2 max-w-7xl">
                     <Breadcrumbs breadcrumbs={breadcrumbs} />
                 </div>

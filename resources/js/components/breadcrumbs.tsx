@@ -17,7 +17,7 @@ export function Breadcrumbs({
 }) {
     return (
         <>
-            {breadcrumbs.length > 0 && (
+            {breadcrumbs && breadcrumbs.length > 0 && (
                 <Breadcrumb>
                     <BreadcrumbList>
                         {breadcrumbs.map((item, index) => {

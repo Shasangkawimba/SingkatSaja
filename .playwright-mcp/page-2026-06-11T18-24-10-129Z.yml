@@ -1,0 +1,117 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e7]:
+        - button [ref=e9]:
+          - img [ref=e10]
+        - link "SingkatSaja Logo" [ref=e11] [cursor=pointer]:
+          - /url: /dashboard
+          - img "SingkatSaja Logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]:
+            - button [ref=e16] [cursor=pointer]:
+              - img [ref=e17]
+            - button "Toggle theme" [ref=e20]:
+              - img [ref=e21]
+              - img
+          - button "TU" [ref=e27]:
+            - generic [ref=e29]: TU
+      - main [ref=e30]:
+        - generic [ref=e32]:
+          - link "Back to Links" [ref=e34] [cursor=pointer]:
+            - /url: /links
+            - img [ref=e35]
+            - text: Back to Links
+          - generic [ref=e37]:
+            - generic [ref=e39]:
+              - generic [ref=e40]:
+                - generic [ref=e41]:
+                  - heading "google" [level=1] [ref=e42]
+                  - button "Copy short link" [ref=e43]:
+                    - img [ref=e44]
+                - generic [ref=e47]:
+                  - generic [ref=e48]: "Destination:"
+                  - link "https://www.google.com" [ref=e49] [cursor=pointer]:
+                    - /url: https://www.google.com
+                    - generic [ref=e50]: https://www.google.com
+                    - img [ref=e51]
+                - generic [ref=e55]:
+                  - generic [ref=e56]: Active
+                  - generic [ref=e58]:
+                    - img [ref=e59]
+                    - text: Expires 7/12/2026
+              - generic [ref=e61]:
+                - generic [ref=e62]:
+                  - img [ref=e63]
+                  - text: Total Clicks
+                - generic [ref=e69]: "233"
+            - generic [ref=e70]:
+              - heading "30 Day Performance" [level=3] [ref=e72]:
+                - img [ref=e73]
+                - text: 30 Day Performance
+              - application [ref=e78]:
+                - generic [ref=e89]:
+                  - generic [ref=e90]:
+                    - generic [ref=e92]: May 20
+                    - generic [ref=e94]: May 31
+                    - generic [ref=e96]: Jun 11
+                  - generic [ref=e97]:
+                    - generic [ref=e99]: "0"
+                    - generic [ref=e101]: "15"
+                    - generic [ref=e103]: "30"
+                    - generic [ref=e105]: "45"
+                    - generic [ref=e107]: "60"
+            - generic [ref=e108]:
+              - generic [ref=e109]:
+                - heading "Top Browsers" [level=3] [ref=e111]:
+                  - img [ref=e112]
+                  - text: Top Browsers
+                - generic [ref=e116]:
+                  - generic [ref=e118]:
+                    - generic [ref=e119]: Firefox
+                    - generic [ref=e120]: 30.0% 30
+                  - generic [ref=e125]:
+                    - generic [ref=e126]: Edge
+                    - generic [ref=e127]: 25.0% 25
+                  - generic [ref=e132]:
+                    - generic [ref=e133]: Chrome
+                    - generic [ref=e134]: 23.0% 23
+                  - generic [ref=e139]:
+                    - generic [ref=e140]: Safari
+                    - generic [ref=e141]: 22.0% 22
+              - generic [ref=e145]:
+                - heading "Top Devices" [level=3] [ref=e147]:
+                  - img [ref=e148]
+                  - text: Top Devices
+                - generic [ref=e151]:
+                  - generic [ref=e153]:
+                    - generic [ref=e154]: Mobile
+                    - generic [ref=e155]: 40.0% 40
+                  - generic [ref=e160]:
+                    - generic [ref=e161]: Desktop
+                    - generic [ref=e162]: 32.0% 32
+                  - generic [ref=e167]:
+                    - generic [ref=e168]: Tablet
+                    - generic [ref=e169]: 28.0% 28
+              - generic [ref=e173]:
+                - heading "Top Platforms" [level=3] [ref=e175]:
+                  - img [ref=e176]
+                  - text: Top Platforms
+                - generic [ref=e179]:
+                  - generic [ref=e181]:
+                    - generic [ref=e182]: Linux
+                    - generic [ref=e183]: 27.0% 27
+                  - generic [ref=e188]:
+                    - generic [ref=e189]: Windows
+                    - generic [ref=e190]: 24.0% 24
+                  - generic [ref=e195]:
+                    - generic [ref=e196]: macOS
+                    - generic [ref=e197]: 22.0% 22
+                  - generic [ref=e202]:
+                    - generic [ref=e203]: Android
+                    - generic [ref=e204]: 15.0% 15
+                  - generic [ref=e209]:
+                    - generic [ref=e210]: iOS
+                    - generic [ref=e211]: 12.0% 12
+    - region "Notifications alt+T"
+  - generic [ref=e215]: "0"

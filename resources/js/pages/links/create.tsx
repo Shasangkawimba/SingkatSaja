@@ -35,7 +35,7 @@ export default function Create() {
                 </Button>
             </div>
 
-            <div className="glass-panel p-8 sm:p-10 rounded-3xl border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]">
+            <div className="glass-panel p-6 sm:p-10 rounded-3xl border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]">
                 <div className="mb-8">
                     <h1 className="text-3xl font-extrabold tracking-tight text-foreground mb-2">Create Link</h1>
                     <p className="text-muted-foreground text-lg font-medium">

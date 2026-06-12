@@ -64,6 +64,11 @@ export default function Analytics({ analytics }: AnalyticsProps) {
         top_devices,
     } = analytics;
     const [copied, setCopied] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
+
+    React.useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     const handleCopy = () => {
         const fullUrl = `${window.location.origin}/${link.short_code}`;
@@ -78,11 +83,12 @@ export default function Analytics({ analytics }: AnalyticsProps) {
         return new Date(link.expires_at) < new Date();
     };
 
-    const totalBrowserClicks = top_browsers.reduce((acc, curr) => acc + curr.clicks_count, 0);
-    const totalDeviceClicks = top_devices.reduce((acc, curr) => acc + curr.clicks_count, 0);
-    const totalPlatformClicks = top_platforms.reduce((acc, curr) => acc + curr.clicks_count, 0);
+    const totalBrowserClicks = top_browsers?.reduce((acc, curr) => acc + curr.clicks_count, 0) ?? 0;
+    const totalDeviceClicks = top_devices?.reduce((acc, curr) => acc + curr.clicks_count, 0) ?? 0;
+    const totalPlatformClicks = top_platforms?.reduce((acc, curr) => acc + curr.clicks_count, 0) ?? 0;
 
     const formattedDate = (dateString: string) => {
+        if (!isMounted) return '';
         const d = new Date(dateString);
         return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
     };
@@ -155,7 +161,7 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                 )}
                                 <span className="flex items-center gap-2 text-xs font-bold text-muted-foreground bg-background/50 rounded-full px-4 py-1.5 border border-white/10 shadow-sm">
                                     <CalendarDays className="h-4 w-4 text-primary/70" />
-                                    {link.expires_at ? `Expires ${new Date(link.expires_at).toLocaleDateString()}` : 'Never expires'}
+                                    {link.expires_at ? (isMounted ? `Expires ${new Date(link.expires_at).toLocaleDateString()}` : 'Expires ...') : 'Never expires'}
                                 </span>
                             </div>
                         </div>
@@ -182,7 +188,7 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                         </h3>
                     </div>
                     <div className="h-[400px] p-8 pt-10">
-                        <ResponsiveContainer width="100%" height="100%">
+                        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                             <AreaChart data={stats_30_days} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                                 <defs>
                                     <linearGradient id="colorClicks" x1="0" y1="0" x2="0" y2="1">
@@ -225,7 +231,7 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                             </h3>
                         </div>
                         <div className="p-6 h-full min-h-[280px]">
-                            {top_browsers.length === 0 ? (
+                            {top_browsers?.length === 0 ? (
                                 <div className="flex h-full items-center justify-center text-sm font-medium text-muted-foreground">No data available</div>
                             ) : (
                                 <div className="flex flex-col gap-6">
@@ -259,7 +265,7 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                             </h3>
                         </div>
                         <div className="p-6 h-full min-h-[280px]">
-                            {top_devices.length === 0 ? (
+                            {top_devices?.length === 0 ? (
                                 <div className="flex h-full items-center justify-center text-sm font-medium text-muted-foreground">No data available</div>
                             ) : (
                                 <div className="flex flex-col gap-6">
@@ -294,7 +300,7 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                             </h3>
                         </div>
                         <div className="p-6 h-full min-h-[280px]">
-                            {top_platforms.length === 0 ? (
+                            {top_platforms?.length === 0 ? (
                                 <div className="flex h-full items-center justify-center text-sm font-medium text-muted-foreground">No data available</div>
                             ) : (
                                 <div className="flex flex-col gap-6">

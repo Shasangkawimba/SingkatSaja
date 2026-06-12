@@ -1,0 +1,94 @@
+- generic:
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - button [expanded]:
+                - img
+            - link:
+              - /url: /dashboard
+              - generic:
+                - img
+            - generic:
+              - generic:
+                - button:
+                  - img
+                - button:
+                  - img
+              - button:
+                - generic:
+                  - generic: TU
+        - main:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=2]: My Links
+                  - paragraph: Manage, monitor, and configure shortened links.
+              - generic:
+                - link:
+                  - /url: /links/create
+                  - img
+                  - text: Create Link
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                    - textbox:
+                      - /placeholder: Search links or destinations...
+                  - generic:
+                    - combobox:
+                      - generic: Newest First
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: google
+                            - button:
+                              - img
+                          - generic: Active
+                        - generic:
+                          - generic: Destination
+                          - link:
+                            - /url: https://www.google.com
+                            - generic: https://www.google.com
+                            - img
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic: "233"
+                              - text: clicks
+                            - generic:
+                              - img
+                              - text: 7/12/2026
+                          - generic:
+                            - link:
+                              - /url: /links/4
+                              - img
+                            - link:
+                              - /url: /links/4/edit
+                              - img
+                            - button:
+                              - img
+    - region "Notifications alt+T"
+  - dialog "Navigation menu" [ref=e91]:
+    - heading "Navigation menu" [level=2] [ref=e92]
+    - img "SingkatSaja Logo" [ref=e94]
+    - generic [ref=e97]:
+      - link "Dashboard" [ref=e98] [cursor=pointer]:
+        - /url: /dashboard
+        - img [ref=e99]
+        - generic [ref=e104]: Dashboard
+      - link "My Links" [ref=e105] [cursor=pointer]:
+        - /url: /links
+        - img [ref=e106]
+        - generic [ref=e109]: My Links
+    - button "Close" [active] [ref=e110]:
+      - img [ref=e111]
+      - generic [ref=e114]: Close

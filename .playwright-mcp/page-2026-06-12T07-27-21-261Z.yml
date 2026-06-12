@@ -1,0 +1,104 @@
+- generic [ref=e2]:
+  - generic [ref=e64]:
+    - generic [ref=e67]:
+      - link "SingkatSaja Logo SingkatSaja" [ref=e68] [cursor=pointer]:
+        - /url: /dashboard
+        - generic [ref=e69]:
+          - img "SingkatSaja Logo" [ref=e70]
+          - generic [ref=e72]: SingkatSaja
+      - navigation "Main" [ref=e74]:
+        - list [ref=e76]:
+          - listitem [ref=e77]:
+            - link "Dashboard" [ref=e78] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e79]
+              - text: Dashboard
+          - listitem [ref=e84]:
+            - link "My Links" [ref=e85] [cursor=pointer]:
+              - /url: /links
+              - img [ref=e86]
+              - text: My Links
+      - generic [ref=e89]:
+        - generic [ref=e90]:
+          - button [ref=e91] [cursor=pointer]:
+            - img [ref=e92]
+          - button "Toggle theme" [ref=e95]:
+            - img [ref=e96]
+            - img
+        - button "TU" [ref=e102]:
+          - generic [ref=e104]: TU
+    - main [ref=e105]:
+      - generic [ref=e108]:
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - heading "Good afternoon, Test" [level=1] [ref=e111]
+            - paragraph [ref=e112]: Here's what's happening with your links today.
+          - generic [ref=e114]:
+            - generic [ref=e115]:
+              - img [ref=e116]
+              - textbox "https://example.com/long-url" [ref=e118]
+            - button "Shorten" [ref=e119]
+        - generic [ref=e120]:
+          - generic [ref=e122]:
+            - generic [ref=e123]:
+              - generic [ref=e124]: Total Links
+              - img [ref=e126]
+            - generic [ref=e130]: "1"
+          - generic [ref=e132]:
+            - generic [ref=e133]:
+              - generic [ref=e134]: Active Links
+              - img [ref=e136]
+            - generic [ref=e138]:
+              - generic [ref=e139]: "1"
+              - generic [ref=e140]: LIVE
+          - generic [ref=e142]:
+            - generic [ref=e143]:
+              - generic [ref=e144]: Total Clicks
+              - img [ref=e146]
+            - generic [ref=e150]: "233"
+          - generic [ref=e152]:
+            - generic [ref=e153]:
+              - generic [ref=e154]: Clicks Today
+              - img [ref=e156]
+            - generic [ref=e159]:
+              - generic [ref=e160]: "0"
+              - generic [ref=e161]: "--"
+        - generic [ref=e162]:
+          - generic [ref=e163]:
+            - heading "Recent Links" [level=2] [ref=e164]
+            - link "View all" [ref=e165] [cursor=pointer]:
+              - /url: /links
+              - text: View all
+              - img [ref=e166]
+          - table [ref=e171]:
+            - rowgroup [ref=e172]:
+              - row "Link Destination Clicks Status Last Activity Actions" [ref=e173]:
+                - columnheader "Link" [ref=e174]
+                - columnheader "Destination" [ref=e175]
+                - columnheader "Clicks" [ref=e176]
+                - columnheader "Status" [ref=e177]
+                - columnheader "Last Activity" [ref=e178]
+                - columnheader "Actions" [ref=e179]
+            - rowgroup [ref=e180]:
+              - row "google https://www.google.com 233 Active 13h ago Analytics" [ref=e181]:
+                - cell "google" [ref=e182]:
+                  - generic [ref=e183]:
+                    - generic [ref=e184]: google
+                    - button "Copy URL" [ref=e185]:
+                      - img [ref=e186]
+                - cell "https://www.google.com" [ref=e189]:
+                  - generic "https://www.google.com" [ref=e190]
+                - cell "233" [ref=e191]:
+                  - generic [ref=e192]: "233"
+                - cell "Active" [ref=e193]:
+                  - generic [ref=e194]: Active
+                - cell "13h ago" [ref=e196]:
+                  - generic [ref=e197]:
+                    - img [ref=e198]
+                    - text: 13h ago
+                - cell "Analytics" [ref=e201]:
+                  - link "Analytics" [ref=e202] [cursor=pointer]:
+                    - /url: /links/4
+                    - img [ref=e203]
+                    - generic [ref=e205]: Analytics
+  - region "Notifications alt+T"

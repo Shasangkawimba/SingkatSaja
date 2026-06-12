@@ -1,0 +1,86 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e7]:
+      - button [ref=e9]:
+        - img [ref=e10]
+      - link "SingkatSaja Logo" [ref=e11] [cursor=pointer]:
+        - /url: /dashboard
+        - img "SingkatSaja Logo" [ref=e13]
+      - generic [ref=e14]:
+        - generic [ref=e15]:
+          - button [ref=e16] [cursor=pointer]:
+            - img [ref=e17]
+          - button "Toggle theme" [ref=e20]:
+            - img [ref=e21]
+            - img
+        - button "TU" [ref=e27]:
+          - generic [ref=e29]: TU
+    - main [ref=e30]:
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - heading "Good afternoon, Test" [level=1] [ref=e35]
+          - paragraph [ref=e36]: Here's what's happening with your links today.
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - img [ref=e41]
+            - text: Quick Shorten
+          - generic [ref=e43]:
+            - generic [ref=e44]:
+              - img [ref=e45]
+              - textbox "Paste your long URL here (e.g. https://example.com/some/long/path)" [ref=e48]
+            - button "Shorten URL" [ref=e49]
+        - generic [ref=e50]:
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - generic [ref=e54]: Total Links
+              - img [ref=e56]
+            - generic [ref=e60]: "1"
+          - generic [ref=e62]:
+            - generic [ref=e63]:
+              - generic [ref=e64]: Active Links
+              - img [ref=e66]
+            - generic [ref=e68]:
+              - generic [ref=e69]: "1"
+              - generic [ref=e70]: LIVE
+          - generic [ref=e72]:
+            - generic [ref=e73]:
+              - generic [ref=e74]: Total Clicks
+              - img [ref=e76]
+            - generic [ref=e80]: "233"
+          - generic [ref=e82]:
+            - generic [ref=e83]:
+              - generic [ref=e84]: Clicks Today
+              - img [ref=e86]
+            - generic [ref=e89]:
+              - generic [ref=e90]: "0"
+              - generic [ref=e91]: "--"
+        - generic [ref=e92]:
+          - generic [ref=e93]:
+            - heading "Recent Links" [level=2] [ref=e94]
+            - link "View all" [ref=e95] [cursor=pointer]:
+              - /url: /links
+              - text: View all
+              - img [ref=e96]
+          - generic [ref=e100]:
+            - generic [ref=e101]:
+              - generic [ref=e102]:
+                - generic [ref=e103]: google
+                - button "Copy URL" [ref=e104]:
+                  - img [ref=e105]
+              - generic [ref=e108]: Active
+            - generic [ref=e110]:
+              - generic [ref=e111]: Destination
+              - generic "https://www.google.com" [ref=e112]:
+                - generic [ref=e113]: https://www.google.com
+            - generic [ref=e114]:
+              - generic [ref=e115]:
+                - generic [ref=e116]:
+                  - generic [ref=e117]: "233"
+                  - text: clicks
+                - generic [ref=e118]:
+                  - img [ref=e119]
+                  - text: 13h ago
+              - link "View Analytics" [ref=e122] [cursor=pointer]:
+                - /url: /links/4
+                - img [ref=e123]
+  - region "Notifications alt+T"

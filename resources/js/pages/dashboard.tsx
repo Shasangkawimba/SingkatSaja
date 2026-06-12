@@ -37,6 +37,11 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
     });
 
     const [copiedId, setCopiedId] = useState<number | null>(null);
+    const [isMounted, setIsMounted] = useState(false);
+
+    React.useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -96,49 +101,55 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
             <Head title="Dashboard" />
 
             <div className="flex flex-col gap-10 pb-12 pt-4">
-                {/* TOP SECTION: Greeting & Quick Create */}
-                <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between glass-panel p-8 rounded-3xl border border-white/40 dark:border-white/20">
-                    <div className="flex flex-col gap-2">
-                        <h1 className="text-4xl font-extrabold tracking-tight text-foreground">
-                            Good {new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 18 ? 'afternoon' : 'evening'}, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">{auth.user?.name.split(' ')[0]}</span>
-                        </h1>
-                        <p className="text-muted-foreground text-lg font-medium">
-                            Here's what's happening with your links today.
-                        </p>
-                    </div>
+                {/* Greeting Header */}
+                <div className="flex flex-col gap-1.5 pl-1 mb-2">
+                    <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
+                        Good {isMounted ? (new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 18 ? 'afternoon' : 'evening') : 'day'}, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">{auth.user?.name.split(' ')[0]}</span>
+                    </h1>
+                    <p className="text-muted-foreground text-sm sm:text-base font-medium">
+                        Here's what's happening with your links today.
+                    </p>
+                </div>
 
-                    <div className="flex flex-col w-full md:max-w-md">
+                {/* Quick Shortener Card */}
+                <Card className="border border-white/40 dark:border-white/10 glass-panel overflow-hidden">
+                    <CardContent className="p-6 sm:p-8 flex flex-col gap-5">
+                        <div className="flex items-center gap-2.5 text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                            <Zap className="h-4.5 w-4.5 text-primary animate-pulse" />
+                            Quick Shorten
+                        </div>
+                        
                         <form 
                             onSubmit={submit}
-                            className="flex w-full items-center gap-2 rounded-2xl border border-white/40 dark:border-white/20 bg-white/30 dark:bg-black/20 backdrop-blur-xl p-1.5 shadow-sm transition-all focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary/50"
+                            className="flex flex-col sm:flex-row gap-3 w-full items-stretch"
                         >
-                            <div className="flex flex-1 items-center pl-4">
-                                <Zap className="mr-3 h-5 w-5 text-primary animate-pulse" />
+                            <div className="flex flex-1 items-center gap-3 rounded-xl border border-white/50 dark:border-white/10 bg-white/30 dark:bg-black/20 backdrop-blur-md px-4 py-2 transition-all focus-within:ring-2 focus-within:ring-primary/50">
+                                <Link2 className="h-5 w-5 text-muted-foreground shrink-0" />
                                 <Input
                                     type="url"
-                                    placeholder="https://example.com/long-url"
+                                    placeholder="Paste your long URL here (e.g. https://example.com/some/long/path)"
                                     value={data.destination_url}
                                     onChange={(e) => setData('destination_url', e.target.value)}
                                     required
-                                    className="h-12 border-0 bg-transparent px-0 shadow-none focus-visible:ring-0 text-base font-medium"
+                                    className="h-10 border-0 bg-transparent px-0 shadow-none focus-visible:ring-0 text-base font-medium w-full placeholder:text-muted-foreground/60"
                                 />
                             </div>
                             <Button
                                 type="submit"
                                 disabled={processing}
-                                className="h-12 shrink-0 px-8 font-bold rounded-xl shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]"
+                                className="h-14 sm:h-12 shrink-0 px-8 font-bold rounded-xl bg-vivid-indigo hover:bg-vivid-indigo/90 text-white shadow-sm transition-all"
                             >
-                                Shorten
+                                {processing ? 'Shortening...' : 'Shorten URL'}
                             </Button>
                         </form>
                         {errors.destination_url && (
-                            <InputError message={errors.destination_url} className="mt-3 text-right px-4 font-medium" />
+                            <InputError message={errors.destination_url} className="mt-1 text-sm font-medium" />
                         )}
-                    </div>
-                </div>
+                    </CardContent>
+                </Card>
 
                 {/* MIDDLE SECTION: KPI Cards */}
-                <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:grid-cols-4">
                     <Card className="hover:-translate-y-1 transition-transform duration-500 border border-white/40 dark:border-white/10">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Total Links</CardTitle>
@@ -223,37 +234,106 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                         </Button>
                     </div>
 
-                    <div className="glass-panel rounded-3xl border border-white/50 dark:border-white/20 shadow-sm overflow-hidden">
-                        <div className="overflow-x-auto">
-                            <table className="w-full text-left whitespace-nowrap">
-                                <thead className="border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-md text-xs uppercase tracking-wider font-bold text-muted-foreground">
-                                    <tr>
-                                        <th className="px-8 py-5">Link</th>
-                                        <th className="hidden px-8 py-5 sm:table-cell">Destination</th>
-                                        <th className="px-8 py-5 text-center">Clicks</th>
-                                        <th className="hidden px-8 py-5 md:table-cell">Status</th>
-                                        <th className="hidden px-8 py-5 lg:table-cell">Last Activity</th>
-                                        <th className="px-8 py-5 text-right">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-white/20 dark:divide-white/5 bg-transparent text-sm">
-                                    {recent_links.length === 0 ? (
-                                        <tr>
-                                            <td colSpan={6} className="px-8 py-16 text-center text-base font-medium text-muted-foreground">
-                                                No links created yet. Use the input above to get started.
-                                            </td>
-                                        </tr>
-                                    ) : (
-                                        recent_links.map((link) => (
-                                            <tr key={link.id} className="group transition-colors duration-300 hover:bg-white/30 dark:hover:bg-white/5">
-                                                <td className="px-8 py-5">
-                                                    <div className="flex items-center gap-3">
-                                                        <span className="font-mono text-sm font-bold text-foreground bg-white/50 dark:bg-black/30 px-3 py-1.5 rounded-lg border border-white/40 dark:border-white/10 shadow-sm backdrop-blur-sm">
+                    <div className="p-1">
+                        {recent_links?.length === 0 ? (
+                            <div className="glass-panel p-16 text-center text-base font-medium text-muted-foreground rounded-2xl border border-white/20">
+                                No links created yet. Use the input above to get started.
+                            </div>
+                        ) : (
+                            <>
+                                {/* Desktop View */}
+                                <div className="hidden lg:block glass-panel rounded-3xl border border-white/50 dark:border-white/20 shadow-sm overflow-hidden">
+                                    <div className="overflow-x-auto">
+                                        <table className="w-full text-left whitespace-nowrap">
+                                            <thead className="border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-md text-xs uppercase tracking-wider font-bold text-muted-foreground">
+                                                <tr>
+                                                    <th className="px-8 py-5">Link</th>
+                                                    <th className="hidden px-8 py-5 sm:table-cell">Destination</th>
+                                                    <th className="px-8 py-5 text-center">Clicks</th>
+                                                    <th className="hidden px-8 py-5 md:table-cell">Status</th>
+                                                    <th className="hidden px-8 py-5 lg:table-cell">Last Activity</th>
+                                                    <th className="px-8 py-5 text-right">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className="divide-y divide-white/20 dark:divide-white/5 bg-transparent text-sm">
+                                                {recent_links.map((link) => (
+                                                    <tr key={link.id} className="group transition-colors duration-300 hover:bg-white/30 dark:hover:bg-white/5">
+                                                        <td className="px-8 py-5">
+                                                            <div className="flex items-center gap-3">
+                                                                <span className="font-mono text-sm font-bold text-foreground bg-white/50 dark:bg-black/30 px-3 py-1.5 rounded-lg border border-white/40 dark:border-white/10 shadow-sm backdrop-blur-sm">
+                                                                    {link.short_code}
+                                                                </span>
+                                                                <button
+                                                                    onClick={() => handleCopy(link.short_code, link.id)}
+                                                                    className="flex h-8 w-8 items-center justify-center rounded-full bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/60 dark:hover:bg-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-sm"
+                                                                    title="Copy URL"
+                                                                >
+                                                                    {copiedId === link.id ? (
+                                                                        <Check className="h-4 w-4 text-emerald-500" />
+                                                                    ) : (
+                                                                        <Copy className="h-4 w-4" />
+                                                                    )}
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                        <td className="hidden px-8 py-5 sm:table-cell">
+                                                            <div className="max-w-[200px] truncate text-muted-foreground lg:max-w-[300px] font-medium" title={link.destination_url}>
+                                                                {link.destination_url}
+                                                            </div>
+                                                        </td>
+                                                        <td className="px-8 py-5 text-center">
+                                                            <span className="inline-flex items-center justify-center rounded-full bg-primary/10 border border-primary/10 px-3 py-1 text-xs font-bold text-primary shadow-sm backdrop-blur-sm">
+                                                                {link.clicks_count ?? 0}
+                                                            </span>
+                                                        </td>
+                                                        <td className="hidden px-8 py-5 md:table-cell">
+                                                            {isLinkExpired(link.expires_at) ? (
+                                                                <span className="inline-flex items-center gap-2 rounded-full bg-destructive/10 border border-destructive/20 px-3 py-1 text-xs font-bold text-destructive shadow-sm backdrop-blur-sm">
+                                                                    <div className="h-2 w-2 rounded-full bg-destructive" />
+                                                                    Expired
+                                                                </span>
+                                                            ) : (
+                                                                <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 shadow-sm backdrop-blur-sm">
+                                                                    <div className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                                                                    Active
+                                                                </span>
+                                                            )}
+                                                        </td>
+                                                        <td className="hidden px-8 py-5 lg:table-cell text-muted-foreground font-medium">
+                                                            <div className="flex items-center gap-2">
+                                                                 <Clock className="h-4 w-4" />
+                                                                 {isMounted ? timeAgo(link.created_at) : ''}
+                                                            </div>
+                                                        </td>
+                                                        <td className="px-8 py-5 text-right">
+                                                            <Button asChild variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md transition-all hover:bg-white/60 dark:hover:bg-white/20">
+                                                                <Link href={`/links/${link.id}`} title="View Analytics">
+                                                                    <BarChart3 className="h-5 w-5" />
+                                                                    <span className="sr-only">Analytics</span>
+                                                                </Link>
+                                                            </Button>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                {/* Mobile/Tablet View */}
+                                <div className="flex flex-col gap-4 lg:hidden">
+                                    {recent_links.map((link) => {
+                                        const expired = isLinkExpired(link.expires_at);
+                                        return (
+                                            <div key={link.id} className="glass-panel p-5 rounded-2xl border border-white/30 dark:border-white/10 shadow-sm flex flex-col gap-4">
+                                                <div className="flex items-center justify-between">
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="font-mono text-sm font-bold text-foreground bg-white/50 dark:bg-black/30 px-3 py-1.5 rounded-lg border border-white/40 dark:border-white/10 shadow-sm">
                                                             {link.short_code}
                                                         </span>
                                                         <button
                                                             onClick={() => handleCopy(link.short_code, link.id)}
-                                                            className="flex h-8 w-8 items-center justify-center rounded-full bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/60 dark:hover:bg-white/20 opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-sm"
+                                                            className="flex h-8 w-8 items-center justify-center rounded-full bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 text-muted-foreground hover:text-foreground shadow-sm"
                                                             title="Copy URL"
                                                         >
                                                             {copiedId === link.id ? (
@@ -263,50 +343,48 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                                                             )}
                                                         </button>
                                                     </div>
-                                                </td>
-                                                <td className="hidden px-8 py-5 sm:table-cell">
-                                                    <div className="max-w-[200px] truncate text-muted-foreground lg:max-w-[300px] font-medium" title={link.destination_url}>
-                                                        {link.destination_url}
-                                                    </div>
-                                                </td>
-                                                <td className="px-8 py-5 text-center">
-                                                    <span className="inline-flex items-center justify-center rounded-full bg-primary/10 border border-primary/10 px-3 py-1 text-xs font-bold text-primary shadow-sm backdrop-blur-sm">
-                                                        {link.clicks_count ?? 0}
-                                                    </span>
-                                                </td>
-                                                <td className="hidden px-8 py-5 md:table-cell">
-                                                    {isLinkExpired(link.expires_at) ? (
-                                                        <span className="inline-flex items-center gap-2 rounded-full bg-destructive/10 border border-destructive/20 px-3 py-1 text-xs font-bold text-destructive shadow-sm backdrop-blur-sm">
-                                                            <div className="h-2 w-2 rounded-full bg-destructive" />
+                                                    {expired ? (
+                                                        <span className="inline-flex items-center gap-1.5 rounded-full bg-destructive/10 border border-destructive/20 px-2.5 py-0.5 text-xs font-bold text-destructive">
+                                                            <div className="h-1.5 w-1.5 rounded-full bg-destructive" />
                                                             Expired
                                                         </span>
                                                     ) : (
-                                                        <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 shadow-sm backdrop-blur-sm">
-                                                            <div className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                                                        <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                                                            <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                                                             Active
                                                         </span>
                                                     )}
-                                                </td>
-                                                <td className="hidden px-8 py-5 lg:table-cell text-muted-foreground font-medium">
-                                                    <div className="flex items-center gap-2">
-                                                        <Clock className="h-4 w-4" />
-                                                        {timeAgo(link.created_at)}
+                                                </div>
+
+                                                <div className="flex flex-col gap-1.5">
+                                                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Destination</span>
+                                                    <div className="text-sm text-muted-foreground font-medium break-all" title={link.destination_url}>
+                                                        <span className="line-clamp-2">{link.destination_url}</span>
                                                     </div>
-                                                </td>
-                                                <td className="px-8 py-5 text-right">
-                                                    <Button asChild variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md transition-all hover:bg-white/60 dark:hover:bg-white/20">
+                                                </div>
+
+                                                <div className="flex items-center justify-between border-t border-white/10 dark:border-white/5 pt-4">
+                                                    <div className="flex items-center gap-4 text-xs font-medium text-muted-foreground">
+                                                        <div className="flex items-center gap-1">
+                                                            <span className="font-bold text-foreground">{link.clicks_count ?? 0}</span> clicks
+                                                        </div>
+                                                        <div className="flex items-center gap-1">
+                                                            <Clock className="h-3.5 w-3.5" />
+                                                            {isMounted ? timeAgo(link.created_at) : ''}
+                                                        </div>
+                                                    </div>
+                                                    <Button asChild variant="ghost" size="icon" className="h-9 w-9 rounded-xl bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:bg-white/60 dark:hover:bg-white/20">
                                                         <Link href={`/links/${link.id}`} title="View Analytics">
-                                                            <BarChart3 className="h-5 w-5" />
-                                                            <span className="sr-only">Analytics</span>
+                                                            <BarChart3 className="h-4.5 w-4.5" />
                                                         </Link>
                                                     </Button>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    )}
-                                </tbody>
-                            </table>
-                        </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
