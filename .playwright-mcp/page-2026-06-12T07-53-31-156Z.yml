@@ -1,0 +1,87 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e7]:
+      - link "SingkatSaja Logo SingkatSaja" [ref=e8] [cursor=pointer]:
+        - /url: /dashboard
+        - generic [ref=e9]:
+          - img "SingkatSaja Logo" [ref=e10]
+          - generic [ref=e12]: SingkatSaja
+      - navigation "Main" [ref=e14]:
+        - list [ref=e16]:
+          - listitem [ref=e17]:
+            - link "Dashboard" [ref=e18] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e19]
+              - text: Dashboard
+          - listitem [ref=e24]:
+            - link "My Links" [ref=e25] [cursor=pointer]:
+              - /url: /links
+              - img [ref=e26]
+              - text: My Links
+      - generic [ref=e29]:
+        - button "Toggle theme" [ref=e31]:
+          - img [ref=e32]
+          - img
+        - button "TU" [ref=e38]:
+          - generic [ref=e40]: TU
+    - main [ref=e41]:
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - generic [ref=e45]:
+            - heading "My Links" [level=2] [ref=e46]
+            - paragraph [ref=e47]: Manage, monitor, and configure shortened links.
+          - link "Create Link" [ref=e49] [cursor=pointer]:
+            - /url: /links/create
+            - img [ref=e50]
+            - text: Create Link
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - generic [ref=e54]:
+              - img [ref=e55]
+              - textbox "Search links or destinations..." [ref=e58]
+            - combobox [ref=e60]:
+              - generic: Newest First
+              - img
+          - table [ref=e64]:
+            - rowgroup [ref=e65]:
+              - row "Short Code Destination Clicks Status Expiration Actions" [ref=e66]:
+                - columnheader "Short Code" [ref=e67]
+                - columnheader "Destination" [ref=e68]
+                - columnheader "Clicks" [ref=e69]
+                - columnheader "Status" [ref=e70]
+                - columnheader "Expiration" [ref=e71]
+                - columnheader "Actions" [ref=e72]
+            - rowgroup [ref=e73]:
+              - row "google https://www.google.com 233 Active 7/12/2026 Analytics Edit Delete" [ref=e74]:
+                - cell "google" [ref=e75]:
+                  - generic [ref=e76]:
+                    - generic [ref=e77]: google
+                    - button "Copy URL" [ref=e78]:
+                      - img [ref=e79]
+                - cell "https://www.google.com" [ref=e82]:
+                  - link "https://www.google.com" [ref=e83] [cursor=pointer]:
+                    - /url: https://www.google.com
+                    - generic [ref=e84]: https://www.google.com
+                    - img [ref=e85]
+                - cell "233" [ref=e89]:
+                  - generic [ref=e90]: "233"
+                - cell "Active" [ref=e91]:
+                  - generic [ref=e92]: Active
+                - cell "7/12/2026" [ref=e94]:
+                  - generic [ref=e95]:
+                    - img [ref=e96]
+                    - text: 7/12/2026
+                - cell "Analytics Edit Delete" [ref=e99]:
+                  - generic [ref=e100]:
+                    - link "Analytics" [ref=e101] [cursor=pointer]:
+                      - /url: /links/4
+                      - img [ref=e102]
+                      - generic [ref=e104]: Analytics
+                    - link "Edit" [ref=e105] [cursor=pointer]:
+                      - /url: /links/4/edit
+                      - img [ref=e106]
+                      - generic [ref=e108]: Edit
+                    - button "Delete" [ref=e109]:
+                      - img [ref=e110]
+                      - generic [ref=e113]: Delete
+  - region "Notifications alt+T"

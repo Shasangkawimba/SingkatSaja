@@ -131,7 +131,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                                     value={data.destination_url}
                                     onChange={(e) => setData('destination_url', e.target.value)}
                                     required
-                                    className="h-10 border-0 bg-transparent px-0 shadow-none focus-visible:ring-0 text-base font-medium w-full placeholder:text-muted-foreground/60"
+                                    className="h-10 border-0 bg-transparent pl-2.5 pr-0 shadow-none focus-visible:ring-0 text-base font-medium w-full placeholder:text-muted-foreground/60"
                                 />
                             </div>
                             <Button
@@ -244,21 +244,21 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                                 {/* Desktop View */}
                                 <div className="hidden lg:block glass-panel rounded-3xl border border-white/50 dark:border-white/20 shadow-sm overflow-hidden">
                                     <div className="overflow-x-auto">
-                                        <table className="w-full text-left whitespace-nowrap">
-                                            <thead className="border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-md text-xs uppercase tracking-wider font-bold text-muted-foreground">
+                                        <table className="w-full text-left">
+                                            <thead className="border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-md text-xs uppercase tracking-wider font-bold text-muted-foreground whitespace-nowrap">
                                                 <tr>
-                                                    <th className="px-8 py-5">Link</th>
-                                                    <th className="hidden px-8 py-5 sm:table-cell">Destination</th>
-                                                    <th className="px-8 py-5 text-center">Clicks</th>
-                                                    <th className="hidden px-8 py-5 md:table-cell">Status</th>
-                                                    <th className="hidden px-8 py-5 lg:table-cell">Last Activity</th>
-                                                    <th className="px-8 py-5 text-right">Actions</th>
+                                                    <th className="px-5 py-4">Link</th>
+                                                    <th className="hidden px-5 py-4 sm:table-cell">Destination</th>
+                                                    <th className="px-5 py-4 text-center">Clicks</th>
+                                                    <th className="hidden px-5 py-4 md:table-cell">Status</th>
+                                                    <th className="hidden px-5 py-4 lg:table-cell">Last Activity</th>
+                                                    <th className="px-5 py-4 text-right">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-white/20 dark:divide-white/5 bg-transparent text-sm">
                                                 {recent_links.map((link) => (
                                                     <tr key={link.id} className="group transition-colors duration-300 hover:bg-white/30 dark:hover:bg-white/5">
-                                                        <td className="px-8 py-5">
+                                                        <td className="px-5 py-4 whitespace-nowrap">
                                                             <div className="flex items-center gap-3">
                                                                 <span className="font-mono text-sm font-bold text-foreground bg-white/50 dark:bg-black/30 px-3 py-1.5 rounded-lg border border-white/40 dark:border-white/10 shadow-sm backdrop-blur-sm">
                                                                     {link.short_code}
@@ -276,17 +276,17 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                                                                 </button>
                                                             </div>
                                                         </td>
-                                                        <td className="hidden px-8 py-5 sm:table-cell">
+                                                        <td className="hidden px-5 py-4 sm:table-cell">
                                                             <div className="max-w-[200px] truncate text-muted-foreground lg:max-w-[300px] font-medium" title={link.destination_url}>
                                                                 {link.destination_url}
                                                             </div>
                                                         </td>
-                                                        <td className="px-8 py-5 text-center">
+                                                        <td className="px-5 py-4 text-center">
                                                             <span className="inline-flex items-center justify-center rounded-full bg-primary/10 border border-primary/10 px-3 py-1 text-xs font-bold text-primary shadow-sm backdrop-blur-sm">
                                                                 {link.clicks_count ?? 0}
                                                             </span>
                                                         </td>
-                                                        <td className="hidden px-8 py-5 md:table-cell">
+                                                        <td className="hidden px-5 py-4 md:table-cell">
                                                             {isLinkExpired(link.expires_at) ? (
                                                                 <span className="inline-flex items-center gap-2 rounded-full bg-destructive/10 border border-destructive/20 px-3 py-1 text-xs font-bold text-destructive shadow-sm backdrop-blur-sm">
                                                                     <div className="h-2 w-2 rounded-full bg-destructive" />
@@ -299,13 +299,13 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                                                                 </span>
                                                             )}
                                                         </td>
-                                                        <td className="hidden px-8 py-5 lg:table-cell text-muted-foreground font-medium">
+                                                        <td className="hidden px-5 py-4 lg:table-cell text-muted-foreground font-medium">
                                                             <div className="flex items-center gap-2">
                                                                  <Clock className="h-4 w-4" />
                                                                  {isMounted ? timeAgo(link.created_at) : ''}
                                                             </div>
                                                         </td>
-                                                        <td className="px-8 py-5 text-right">
+                                                        <td className="px-5 py-4 text-right whitespace-nowrap">
                                                             <Button asChild variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md transition-all hover:bg-white/60 dark:hover:bg-white/20">
                                                                 <Link href={`/links/${link.id}`} title="View Analytics">
                                                                     <BarChart3 className="h-5 w-5" />

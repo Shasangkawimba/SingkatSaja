@@ -164,15 +164,15 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                     <>
                                         {/* Desktop View */}
                                         <div className="hidden lg:block overflow-x-auto">
-                                            <table className="w-full min-w-[800px] border-collapse text-left whitespace-nowrap">
+                                            <table className="w-full border-collapse text-left">
                                                 <thead>
-                                                    <tr className="border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-md text-xs uppercase tracking-wider font-bold text-muted-foreground">
-                                                        <th className="px-8 py-5">Short Code</th>
-                                                        <th className="px-8 py-5">Destination</th>
-                                                        <th className="px-8 py-5 text-center">Clicks</th>
-                                                        <th className="px-8 py-5 text-center">Status</th>
-                                                        <th className="px-8 py-5">Expiration</th>
-                                                        <th className="px-8 py-5 text-right">Actions</th>
+                                                    <tr className="border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-md text-xs uppercase tracking-wider font-bold text-muted-foreground whitespace-nowrap">
+                                                        <th className="px-5 py-4">Short Code</th>
+                                                        <th className="px-5 py-4">Destination</th>
+                                                        <th className="px-5 py-4 text-center">Clicks</th>
+                                                        <th className="px-5 py-4 text-center">Status</th>
+                                                        <th className="px-5 py-4">Expiration</th>
+                                                        <th className="px-5 py-4 text-right">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody className="divide-y divide-white/20 dark:divide-white/5 bg-transparent text-sm">
@@ -180,7 +180,7 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                                         const expired = isLinkExpired(link);
                                                         return (
                                                             <tr key={link.id} className="group transition-colors duration-300 hover:bg-white/30 dark:hover:bg-white/5">
-                                                                <td className="px-8 py-5">
+                                                                <td className="px-5 py-4 whitespace-nowrap">
                                                                     <div className="flex items-center gap-3">
                                                                         <span className="font-mono text-sm font-bold text-foreground bg-white/50 dark:bg-black/30 px-3 py-1.5 rounded-lg border border-white/40 dark:border-white/10 shadow-sm backdrop-blur-sm">
                                                                             {link.short_code}
@@ -198,24 +198,24 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                                                         </button>
                                                                     </div>
                                                                 </td>
-                                                                <td className="px-8 py-5">
+                                                                <td className="px-5 py-4">
                                                                     <a
                                                                         href={link.destination_url}
                                                                         target="_blank"
                                                                         rel="noopener noreferrer"
-                                                                        className="flex max-w-[250px] md:max-w-[350px] items-center gap-2 truncate text-muted-foreground transition-colors hover:text-primary font-medium"
+                                                                        className="flex max-w-[200px] md:max-w-[300px] items-center gap-2 truncate text-muted-foreground transition-colors hover:text-primary font-medium"
                                                                         title={link.destination_url}
                                                                     >
                                                                         <span className="truncate">{link.destination_url}</span>
                                                                         <ExternalLink className="h-4 w-4 shrink-0 opacity-50" />
                                                                     </a>
                                                                 </td>
-                                                                <td className="px-8 py-5 text-center">
+                                                                <td className="px-5 py-4 text-center">
                                                                     <span className="inline-flex items-center justify-center rounded-full bg-primary/10 border border-primary/10 px-3 py-1 text-xs font-bold text-primary shadow-sm backdrop-blur-sm">
                                                                         {link.clicks_count ?? 0}
                                                                     </span>
                                                                 </td>
-                                                                <td className="px-8 py-5 text-center">
+                                                                <td className="px-5 py-4 text-center">
                                                                     {expired ? (
                                                                         <span className="inline-flex items-center gap-2 rounded-full bg-destructive/10 border border-destructive/20 px-3 py-1 text-xs font-bold text-destructive shadow-sm backdrop-blur-sm">
                                                                             <div className="h-2 w-2 rounded-full bg-destructive" />
@@ -228,7 +228,7 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                                                         </span>
                                                                     )}
                                                                 </td>
-                                                                <td className="px-8 py-5 text-muted-foreground font-medium">
+                                                                <td className="px-5 py-4 text-muted-foreground font-medium">
                                                                     {link.expires_at ? (
                                                                         <div className="flex items-center gap-2">
                                                                             <Clock className="h-4 w-4" />
@@ -238,7 +238,7 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                                                         <span className="text-muted-foreground/50">--</span>
                                                                     )}
                                                                 </td>
-                                                                <td className="px-8 py-5 text-right">
+                                                                <td className="px-5 py-4 text-right whitespace-nowrap">
                                                                     <div className="flex items-center justify-end gap-2">
                                                                         <Button asChild variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:shadow-md transition-all hover:bg-white/60 dark:hover:bg-white/20">
                                                                             <Link href={`/links/${link.id}`} title="View Analytics">

@@ -175,13 +175,6 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
 
                 <div className="ml-auto flex items-center space-x-2 pr-1">
                     <div className="relative flex items-center space-x-1">
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="group h-10 w-10 cursor-pointer rounded-full text-muted-foreground hover:text-foreground"
-                        >
-                            <Search className="size-4! opacity-80 group-hover:opacity-100" />
-                        </Button>
                         <div className="ml-1 hidden gap-1 lg:flex">
                             {rightNavItems.map((item) => (
                                 <Tooltip key={item.title}>
