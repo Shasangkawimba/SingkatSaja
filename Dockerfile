@@ -35,3 +35,10 @@ RUN chmod -R 777 storage bootstrap/cache
 RUN php artisan config:cache && \
     php artisan route:cache && \
     php artisan view:cache
+
+# Create startup script to run database migrations automatically on boot
+RUN mkdir -p /opt/docker/provision/entrypoint.d && \
+    echo '#!/bin/sh' > /opt/docker/provision/entrypoint.d/90-migrate.sh && \
+    echo 'cd /app && php artisan migrate --force' >> /opt/docker/provision/entrypoint.d/90-migrate.sh && \
+    chmod +x /opt/docker/provision/entrypoint.d/90-migrate.sh
+
