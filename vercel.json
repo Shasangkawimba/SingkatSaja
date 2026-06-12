@@ -17,12 +17,8 @@
       "dest": "/public/$1/$2"
     },
     {
-      "src": "/favicon.ico",
-      "dest": "/public/favicon.ico"
-    },
-    {
-      "src": "/robots.txt",
-      "dest": "/public/robots.txt"
+      "src": "/(favicon\\.ico|favicon\\.svg|logo\\.png|apple-touch-icon\\.png|robots\\.txt|sitemap\\.xml)",
+      "dest": "/public/$1"
     },
     {
       "src": "/(.*)",
