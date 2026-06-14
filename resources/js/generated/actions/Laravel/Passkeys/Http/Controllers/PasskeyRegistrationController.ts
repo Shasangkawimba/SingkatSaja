@@ -1,4 +1,5 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../../wayfinder'
+import { queryParams,   applyUrlDefaults } from './../../../../../wayfinder'
+import type {RouteQueryOptions, RouteDefinition} from './../../../../../wayfinder';
 /**
 * @see \Laravel\Passkeys\Http\Controllers\PasskeyRegistrationController::index
  * @see vendor/laravel/passkeys/src/Http/Controllers/PasskeyRegistrationController.php:29

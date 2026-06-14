@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react';
 import { Fragment } from 'react';
+import type { BreadcrumbItem as BreadcrumbItemType } from '@/shared/types';
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -8,7 +9,6 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from '@/shared/ui/breadcrumb';
-import type { BreadcrumbItem as BreadcrumbItemType } from '@/shared/types';
 
 export function Breadcrumbs({
     breadcrumbs,

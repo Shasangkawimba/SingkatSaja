@@ -1,11 +1,11 @@
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { Toaster } from '@/shared/ui/sonner';
-import { TooltipProvider } from '@/shared/ui/tooltip';
 import { initializeTheme } from '@/shared/hooks/use-appearance';
 import AppLayout from '@/shared/layouts/app-layout';
 import AuthLayout from '@/shared/layouts/auth-layout';
 import SettingsLayout from '@/shared/layouts/settings/layout';
+import { Toaster } from '@/shared/ui/sonner';
+import { TooltipProvider } from '@/shared/ui/tooltip';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -13,6 +13,7 @@ createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     resolve: (name) => {
         let path = '';
+
         if (name === 'welcome' || name === 'error') {
             path = `./pages/${name}.tsx`;
         } else if (name === 'dashboard') {
@@ -21,6 +22,7 @@ createInertiaApp({
             const [feature, page] = name.split('/');
             path = `./features/${feature}/pages/${page}.tsx`;
         }
+
         return resolvePageComponent(
             path,
             import.meta.glob(['./features/**/*.tsx', './pages/**/*.tsx'])

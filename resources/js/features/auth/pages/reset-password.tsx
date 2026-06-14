@@ -1,11 +1,11 @@
 import { Form, Head } from '@inertiajs/react';
+import { update } from '@/generated/routes/password';
 import InputError from '@/shared/components/input-error';
 import PasswordInput from '@/shared/components/password-input';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { Label } from '@/shared/ui/label';
 import { Spinner } from '@/shared/ui/spinner';
-import { update } from '@/generated/routes/password';
 
 type Props = {
     token: string;

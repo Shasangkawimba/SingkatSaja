@@ -1,9 +1,9 @@
 import { Link, usePage } from '@inertiajs/react';
 import * as React from 'react';
+import { dashboard, login, register } from '@/generated/routes';
 import AppLogo from '@/shared/components/app-logo';
 import { Footer } from '@/shared/components/footer';
 import { Button } from '@/shared/ui/button';
-import { dashboard, login, register } from '@/generated/routes';
 
 export function PublicLayout({ children }: { children: React.ReactNode }) {
     const { auth } = usePage().props as any;

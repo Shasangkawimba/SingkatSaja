@@ -11,10 +11,10 @@ import {
     MousePointerClick,
     Activity
 } from 'lucide-react';
-import { SEO } from '@/shared/components/seo';
-import { Button } from '@/shared/ui/button';
-import { PublicLayout } from '@/shared/layouts/public-layout';
 import { dashboard, register, login } from '@/generated/routes';
+import { SEO } from '@/shared/components/seo';
+import { PublicLayout } from '@/shared/layouts/public-layout';
+import { Button } from '@/shared/ui/button';
 
 export default function Welcome() {
     const { auth } = usePage().props as any;

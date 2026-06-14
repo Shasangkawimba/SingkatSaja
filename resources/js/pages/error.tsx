@@ -10,10 +10,10 @@ import {
 } from 'lucide-react';
 import React from 'react';
 import { PageContainer } from '@/shared/components/page-container';
+import { PublicLayout } from '@/shared/layouts/public-layout';
 import { Badge } from '@/shared/ui/badge';
 import { Button } from '@/shared/ui/button';
 import { Card } from '@/shared/ui/card';
-import { PublicLayout } from '@/shared/layouts/public-layout';
 
 interface ErrorProps {
     status: number;

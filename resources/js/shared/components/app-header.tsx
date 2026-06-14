@@ -2,15 +2,21 @@ import { Link, usePage } from '@inertiajs/react';
 import {
     LayoutGrid,
     Menu,
-    Search,
     LinkIcon,
 } from 'lucide-react';
+import { dashboard } from '@/generated/routes';
+import links from '@/generated/routes/links';
 import AppLogo from '@/shared/components/app-logo';
 import AppLogoIcon from '@/shared/components/app-logo-icon';
+import { AppearanceToggle } from '@/shared/components/appearance-toggle';
 import { Breadcrumbs } from '@/shared/components/breadcrumbs';
+import { UserMenuContent } from '@/shared/components/user-menu-content';
+import { useCurrentUrl } from '@/shared/hooks/use-current-url';
+import { useInitials } from '@/shared/hooks/use-initials';
+import { cn, toUrl } from '@/shared/lib/utils';
+import type { BreadcrumbItem, NavItem } from '@/shared/types';
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar';
 import { Button } from '@/shared/ui/button';
-import { AppearanceToggle } from '@/shared/components/appearance-toggle';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -34,13 +40,6 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from '@/shared/ui/tooltip';
-import { UserMenuContent } from '@/shared/components/user-menu-content';
-import { useCurrentUrl } from '@/shared/hooks/use-current-url';
-import { useInitials } from '@/shared/hooks/use-initials';
-import { cn, toUrl } from '@/shared/lib/utils';
-import { dashboard } from '@/generated/routes';
-import links from '@/generated/routes/links';
-import type { BreadcrumbItem, NavItem } from '@/shared/types';
 
 type Props = {
     breadcrumbs?: BreadcrumbItem[];
@@ -66,9 +65,9 @@ const activeItemStyles =
 
 export function AppHeader({ breadcrumbs = [] }: Props) {
     const page = usePage();
-    const { auth } = page.props;
+    const auth = (page.props as any).auth;
     const getInitials = useInitials();
-    const { isCurrentUrl, whenCurrentUrl } = useCurrentUrl();
+    const { whenCurrentUrl } = useCurrentUrl();
 
     return (
         <div className="sticky top-4 z-50 mx-auto w-[calc(100%-2rem)] max-w-7xl md:mt-4">
@@ -209,17 +208,17 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                             >
                                 <Avatar className="size-full overflow-hidden rounded-full">
                                     <AvatarImage
-                                        src={auth.user?.avatar}
-                                        alt={auth.user?.name}
+                                        src={auth?.user?.avatar}
+                                        alt={auth?.user?.name}
                                     />
                                     <AvatarFallback className="rounded-full bg-primary/10 text-primary text-xs font-bold">
-                                        {getInitials(auth.user?.name ?? '')}
+                                        {getInitials(auth?.user?.name ?? '')}
                                     </AvatarFallback>
                                 </Avatar>
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-56 mt-2 rounded-xl" align="end">
-                            {auth.user && (
+                            {auth?.user && (
                                 <UserMenuContent user={auth.user} />
                             )}
                         </DropdownMenuContent>

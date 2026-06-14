@@ -1,16 +1,16 @@
 import { Form, Head } from '@inertiajs/react';
 import { useRef } from 'react';
-import SecurityController from '@/generated/actions/App/Http/Controllers/Settings/SecurityController';
-import Heading from '@/shared/components/heading';
-import InputError from '@/shared/components/input-error';
 import type { Props as ManagePasskeysProps } from '@/features/settings/components/manage-passkeys';
 import ManagePasskeys from '@/features/settings/components/manage-passkeys';
 import type { Props as ManageTwoFactorProps } from '@/features/settings/components/manage-two-factor';
 import ManageTwoFactor from '@/features/settings/components/manage-two-factor';
+import SecurityController from '@/generated/actions/App/Http/Controllers/Settings/SecurityController';
+import { edit } from '@/generated/routes/security';
+import Heading from '@/shared/components/heading';
+import InputError from '@/shared/components/input-error';
 import PasswordInput from '@/shared/components/password-input';
 import { Button } from '@/shared/ui/button';
 import { Label } from '@/shared/ui/label';
-import { edit } from '@/generated/routes/security';
 
 type Props = {
     passwordRules: string;

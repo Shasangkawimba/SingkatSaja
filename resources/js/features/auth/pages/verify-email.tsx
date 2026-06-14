@@ -1,9 +1,9 @@
 import { Form, Head } from '@inertiajs/react';
+import { logout } from '@/generated/routes';
+import { send } from '@/generated/routes/verification';
 import TextLink from '@/shared/components/text-link';
 import { Button } from '@/shared/ui/button';
 import { Spinner } from '@/shared/ui/spinner';
-import { logout } from '@/generated/routes';
-import { send } from '@/generated/routes/verification';
 
 export default function VerifyEmail({ status }: { status?: string }) {
     return (

@@ -1,4 +1,5 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../wayfinder'
+import { queryParams,   applyUrlDefaults } from './../../wayfinder'
+import type {RouteQueryOptions, RouteDefinition} from './../../wayfinder';
 /**
 * @see \App\Http\Controllers\LinkController::index
  * @see app/Http/Controllers/LinkController.php:24

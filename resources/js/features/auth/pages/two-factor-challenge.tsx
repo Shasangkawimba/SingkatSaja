@@ -1,6 +1,8 @@
 import { Form, Head, setLayoutProps } from '@inertiajs/react';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 import { useMemo, useState } from 'react';
+import { OTP_MAX_LENGTH } from '@/features/settings/hooks/use-two-factor-auth';
+import { store } from '@/generated/routes/two-factor/login';
 import InputError from '@/shared/components/input-error';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
@@ -9,8 +11,6 @@ import {
     InputOTPGroup,
     InputOTPSlot,
 } from '@/shared/ui/input-otp';
-import { OTP_MAX_LENGTH } from '@/features/settings/hooks/use-two-factor-auth';
-import { store } from '@/generated/routes/two-factor/login';
 
 export default function TwoFactorChallenge() {
     const [showRecoveryInput, setShowRecoveryInput] = useState<boolean>(false);

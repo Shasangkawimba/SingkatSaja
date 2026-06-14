@@ -1,4 +1,5 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../wayfinder'
+import { queryParams,   applyUrlDefaults } from './../../../wayfinder'
+import type {RouteQueryOptions, RouteDefinition} from './../../../wayfinder';
 /**
  * @see vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemServiceProvider.php:119
  * @route '/storage/{path}'

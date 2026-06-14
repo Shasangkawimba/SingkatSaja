@@ -1,4 +1,5 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../wayfinder'
+import { queryParams   } from './../../wayfinder'
+import type {RouteQueryOptions, RouteDefinition} from './../../wayfinder';
 /**
 * @see \App\Http\Controllers\SeoController::robots
  * @see app/Http/Controllers/SeoController.php:12

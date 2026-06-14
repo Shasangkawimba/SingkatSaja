@@ -1,4 +1,5 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../wayfinder'
+import { queryParams   } from './../../../../wayfinder'
+import type {RouteQueryOptions, RouteDefinition} from './../../../../wayfinder';
 /**
 * @see \App\Http\Controllers\HealthController::show
  * @see app/Http/Controllers/HealthController.php:14

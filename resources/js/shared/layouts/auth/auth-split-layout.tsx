@@ -1,8 +1,8 @@
 import { Link } from '@inertiajs/react';
 import { Shield, Zap, BarChart3, CheckCircle2 } from 'lucide-react';
 import * as React from 'react';
-import AppLogo from '@/shared/components/app-logo';
 import { home } from '@/generated/routes';
+import AppLogo from '@/shared/components/app-logo';
 
 interface AuthSplitLayoutProps {
     title: string;

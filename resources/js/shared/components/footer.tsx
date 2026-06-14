@@ -1,7 +1,7 @@
 import { Link } from '@inertiajs/react';
 import * as React from 'react';
-import AppLogo from '@/shared/components/app-logo';
 import { dashboard } from '@/generated/routes';
+import AppLogo from '@/shared/components/app-logo';
 
 export function Footer() {
     return (

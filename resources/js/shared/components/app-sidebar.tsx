@@ -1,9 +1,11 @@
 import { Link } from '@inertiajs/react';
 import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
+import { dashboard } from '@/generated/routes';
 import AppLogo from '@/shared/components/app-logo';
 import { NavFooter } from '@/shared/components/nav-footer';
 import { NavMain } from '@/shared/components/nav-main';
 import { NavUser } from '@/shared/components/nav-user';
+import type { NavItem } from '@/shared/types';
 import {
     Sidebar,
     SidebarContent,
@@ -13,8 +15,6 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/shared/ui/sidebar';
-import { dashboard } from '@/generated/routes';
-import type { NavItem } from '@/shared/types';
 
 const mainNavItems: NavItem[] = [
     {

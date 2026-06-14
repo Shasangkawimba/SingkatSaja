@@ -1,8 +1,8 @@
 import { Link } from '@inertiajs/react';
-import AppLogoIcon from '@/shared/components/app-logo-icon';
-import { Card, CardContent } from '@/shared/ui/card';
 import { home } from '@/generated/routes';
+import AppLogoIcon from '@/shared/components/app-logo-icon';
 import type { AuthLayoutProps } from '@/shared/types';
+import { Card, CardContent } from '@/shared/ui/card';
 
 export default function AuthSimpleLayout({
     children,

@@ -1,5 +1,6 @@
 import { Link } from '@inertiajs/react';
 import type { PropsWithChildren } from 'react';
+import { home } from '@/generated/routes';
 import AppLogoIcon from '@/shared/components/app-logo-icon';
 import {
     Card,
@@ -8,7 +9,6 @@ import {
     CardHeader,
     CardTitle,
 } from '@/shared/ui/card';
-import { home } from '@/generated/routes';
 
 export default function AuthCardLayout({
     children,

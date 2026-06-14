@@ -28,8 +28,8 @@ import type {
 } from 'recharts/types/component/DefaultTooltipContent';
 import { toast } from 'sonner';
 import { DashboardContainer } from '@/features/dashboard/components/dashboard-container';
-import { Button } from '@/shared/ui/button';
 import type { AnalyticsProps } from '@/features/links/types/analytics';
+import { Button } from '@/shared/ui/button';
 
 const CustomTooltip = ({
     active,
@@ -38,6 +38,7 @@ const CustomTooltip = ({
 }: TooltipProps<ValueType, NameType>) => {
     if (active && payload && payload.length && label) {
         const dateStr = typeof label === 'string' ? label : '';
+
         return (
             <div className="glass-panel px-4 py-3 rounded-xl border border-white/20 shadow-xl backdrop-blur-xl">
                 <p className="mb-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">
@@ -52,6 +53,7 @@ const CustomTooltip = ({
             </div>
         );
     }
+
     return null;
 }
 
@@ -67,6 +69,7 @@ export default function Analytics({ analytics }: AnalyticsProps) {
     const [isMounted, setIsMounted] = useState(false);
 
     React.useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsMounted(true);
     }, []);
 
@@ -79,7 +82,10 @@ export default function Analytics({ analytics }: AnalyticsProps) {
     };
 
     const isLinkExpired = () => {
-        if (!link.expires_at) return false;
+        if (!link.expires_at) {
+return false;
+}
+
         return new Date(link.expires_at) < new Date();
     };
 
@@ -88,8 +94,12 @@ export default function Analytics({ analytics }: AnalyticsProps) {
     const totalPlatformClicks = top_platforms?.reduce((acc, curr) => acc + curr.clicks_count, 0) ?? 0;
 
     const formattedDate = (dateString: string) => {
-        if (!isMounted) return '';
+        if (!isMounted) {
+return '';
+}
+
         const d = new Date(dateString);
+
         return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
     };
 
@@ -237,6 +247,7 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                 <div className="flex flex-col gap-6">
                                     {top_browsers.map((item, index) => {
                                         const percentage = totalBrowserClicks > 0 ? (item.clicks_count / totalBrowserClicks) * 100 : 0;
+
                                         return (
                                             <div key={index} className="flex flex-col gap-3">
                                                 <div className="flex items-center justify-between text-sm">
@@ -272,6 +283,7 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                     {top_devices.map((item, index) => {
                                         const percentage = totalDeviceClicks > 0 ? (item.clicks_count / totalDeviceClicks) * 100 : 0;
                                         const label = item.device_type ? item.device_type.charAt(0).toUpperCase() + item.device_type.slice(1) : 'Other';
+
                                         return (
                                             <div key={index} className="flex flex-col gap-3">
                                                 <div className="flex items-center justify-between text-sm">
@@ -306,6 +318,7 @@ export default function Analytics({ analytics }: AnalyticsProps) {
                                 <div className="flex flex-col gap-6">
                                     {top_platforms.map((item, index) => {
                                         const percentage = totalPlatformClicks > 0 ? (item.clicks_count / totalPlatformClicks) * 100 : 0;
+
                                         return (
                                             <div key={index} className="flex flex-col gap-3">
                                                 <div className="flex items-center justify-between text-sm">

@@ -1,4 +1,6 @@
 import { Link } from '@inertiajs/react';
+import { useCurrentUrl } from '@/shared/hooks/use-current-url';
+import type { NavItem } from '@/shared/types';
 import {
     SidebarGroup,
     SidebarGroupLabel,
@@ -6,8 +8,6 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/shared/ui/sidebar';
-import { useCurrentUrl } from '@/shared/hooks/use-current-url';
-import type { NavItem } from '@/shared/types';
 
 export function NavMain({ items = [] }: { items: NavItem[] }) {
     const { isCurrentUrl } = useCurrentUrl();

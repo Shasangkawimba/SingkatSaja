@@ -1,8 +1,8 @@
 import * as React from 'react';
+import { cn } from '@/shared/lib/utils';
 import { Card, CardContent } from '@/shared/ui/card';
 import { Skeleton } from '@/shared/ui/skeleton';
 import { Spinner } from '@/shared/ui/spinner';
-import { cn } from '@/shared/lib/utils';
 
 interface LoadingStateProps extends React.HTMLAttributes<HTMLDivElement> {
     variant?: 'spinner' | 'cards' | 'table';

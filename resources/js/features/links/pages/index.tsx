@@ -1,7 +1,6 @@
 import { Head, Link, router } from '@inertiajs/react';
 import {
     Search,
-    Eye,
     Edit2,
     Trash2,
     Copy,
@@ -15,9 +14,9 @@ import {
 import React, { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { DashboardContainer } from '@/features/dashboard/components/dashboard-container';
+import type { LinksIndexProps, Link as LinkType } from '@/features/links/types/link';
 import { EmptyState } from '@/shared/components/empty-state';
 import { LoadingState } from '@/shared/components/loading-state';
-import { Badge } from '@/shared/ui/badge';
 import { Button } from '@/shared/ui/button';
 import {
     Dialog,
@@ -35,7 +34,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/shared/ui/select';
-import type { LinksIndexProps, Link as LinkType } from '@/features/links/types/link';
 
 export default function Index({ links, filters }: LinksIndexProps) {
     const [searchQuery, setSearchQuery] = useState('');
@@ -46,9 +44,11 @@ export default function Index({ links, filters }: LinksIndexProps) {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsMounted(true);
         const unbindStart = router.on('start', () => setIsLoading(true));
         const unbindFinish = router.on('finish', () => setIsLoading(false));
+
         return () => {
             unbindStart();
             unbindFinish();
@@ -68,7 +68,10 @@ export default function Index({ links, filters }: LinksIndexProps) {
     };
 
     const handleDelete = () => {
-        if (!selectedLinkToDelete) return;
+        if (!selectedLinkToDelete) {
+return;
+}
+
         router.delete(`/links/${selectedLinkToDelete.id}`, {
             onSuccess: () => {
                 setSelectedLinkToDelete(null);
@@ -77,14 +80,19 @@ export default function Index({ links, filters }: LinksIndexProps) {
         });
     };
 
-    const filteredLinks = links.data.filter(
+    const linksData = links?.data ?? [];
+
+    const filteredLinks = linksData.filter(
         (link) =>
             link.short_code.toLowerCase().includes(searchQuery.toLowerCase()) ||
             link.destination_url.toLowerCase().includes(searchQuery.toLowerCase()),
     );
 
     const isLinkExpired = (link: LinkType) => {
-        if (!link.expires_at) return false;
+        if (!link.expires_at) {
+return false;
+}
+
         return new Date(link.expires_at) < new Date();
     };
 
@@ -104,7 +112,7 @@ export default function Index({ links, filters }: LinksIndexProps) {
         >
             <Head title="My Links" />
 
-            {links?.data?.length === 0 ? (
+            {linksData.length === 0 ? (
                 <div className="glass-panel mt-8 border border-white/40 dark:border-white/20">
                     <EmptyState
                         title="No links created yet"
@@ -178,6 +186,7 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                                 <tbody className="divide-y divide-white/20 dark:divide-white/5 bg-transparent text-sm">
                                                     {filteredLinks.map((link) => {
                                                         const expired = isLinkExpired(link);
+
                                                         return (
                                                             <tr key={link.id} className="group transition-colors duration-300 hover:bg-white/30 dark:hover:bg-white/5">
                                                                 <td className="px-5 py-4 whitespace-nowrap">
@@ -275,6 +284,7 @@ export default function Index({ links, filters }: LinksIndexProps) {
                                         <div className="flex flex-col gap-4 lg:hidden">
                                             {filteredLinks.map((link) => {
                                                 const expired = isLinkExpired(link);
+
                                                 return (
                                                     <div key={link.id} className="glass-panel p-5 rounded-2xl border border-white/30 dark:border-white/10 shadow-sm flex flex-col gap-4">
                                                         <div className="flex items-center justify-between">
@@ -369,6 +379,7 @@ export default function Index({ links, filters }: LinksIndexProps) {
                         <div className="flex items-center justify-center gap-2 pt-6">
                             {links.links.map((pageLink, index) => {
                                 const label = pageLink.label.replace('&laquo; Previous', 'Prev').replace('Next &raquo;', 'Next');
+
                                 return (
                                     <Button
                                         key={index}

@@ -3,11 +3,11 @@ import { ArrowLeft, Link as LinkIcon, Zap, Clock, Lock } from 'lucide-react';
 import React from 'react';
 import { toast } from 'sonner';
 import { DashboardContainer } from '@/features/dashboard/components/dashboard-container';
+import type { LinkEditProps } from '@/features/links/types/link';
 import InputError from '@/shared/components/input-error';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { Label } from '@/shared/ui/label';
-import type { LinkEditProps } from '@/features/links/types/link';
 
 export default function Edit({ link }: LinkEditProps) {
     const { data, setData, put, processing, errors } = useForm({

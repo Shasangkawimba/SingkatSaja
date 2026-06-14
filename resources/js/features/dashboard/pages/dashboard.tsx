@@ -14,6 +14,9 @@ import {
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { DashboardContainer } from '@/features/dashboard/components/dashboard-container';
+import type { DashboardProps } from '@/features/dashboard/types/dashboard';
+import { dashboard } from '@/generated/routes';
+import links from '@/generated/routes/links';
 import InputError from '@/shared/components/input-error';
 import { Badge } from '@/shared/ui/badge';
 import { Button } from '@/shared/ui/button';
@@ -24,12 +27,10 @@ import {
     CardTitle
 } from '@/shared/ui/card';
 import { Input } from '@/shared/ui/input';
-import { dashboard } from '@/generated/routes';
-import links from '@/generated/routes/links';
-import type { DashboardProps } from '@/features/dashboard/types/dashboard';
 
 export default function Dashboard({ stats, recent_links }: DashboardProps) {
-    const { auth } = usePage().props as any;
+    const auth = (usePage().props as any).auth;
+    const linksList = recent_links ?? [];
     const { data, setData, post, processing, errors, reset } = useForm({
         destination_url: '',
         short_code: '',
@@ -40,6 +41,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
     const [isMounted, setIsMounted] = useState(false);
 
     React.useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsMounted(true);
     }, []);
 
@@ -104,7 +106,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                 {/* Greeting Header */}
                 <div className="flex flex-col gap-1.5 pl-1 mb-2">
                     <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-                        Good {isMounted ? (new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 18 ? 'afternoon' : 'evening') : 'day'}, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">{auth.user?.name.split(' ')[0]}</span>
+                        Good {isMounted ? (new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 18 ? 'afternoon' : 'evening') : 'day'}, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">{auth?.user?.name ? auth.user.name.split(' ')[0] : 'user'}</span>
                     </h1>
                     <p className="text-muted-foreground text-sm sm:text-base font-medium">
                         Here's what's happening with your links today.
@@ -235,7 +237,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                     </div>
 
                     <div className="p-1">
-                        {recent_links?.length === 0 ? (
+                        {linksList.length === 0 ? (
                             <div className="glass-panel p-16 text-center text-base font-medium text-muted-foreground rounded-2xl border border-white/20">
                                 No links created yet. Use the input above to get started.
                             </div>
@@ -256,7 +258,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                                                 </tr>
                                             </thead>
                                             <tbody className="divide-y divide-white/20 dark:divide-white/5 bg-transparent text-sm">
-                                                {recent_links.map((link) => (
+                                                {linksList.map((link) => (
                                                     <tr key={link.id} className="group transition-colors duration-300 hover:bg-white/30 dark:hover:bg-white/5">
                                                         <td className="px-5 py-4 whitespace-nowrap">
                                                             <div className="flex items-center gap-3">
@@ -322,8 +324,9 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
 
                                 {/* Mobile/Tablet View */}
                                 <div className="flex flex-col gap-4 lg:hidden">
-                                    {recent_links.map((link) => {
+                                    {linksList.map((link) => {
                                         const expired = isLinkExpired(link.expires_at);
+
                                         return (
                                             <div key={link.id} className="glass-panel p-5 rounded-2xl border border-white/30 dark:border-white/10 shadow-sm flex flex-col gap-4">
                                                 <div className="flex items-center justify-between">

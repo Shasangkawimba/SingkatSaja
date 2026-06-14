@@ -1,13 +1,13 @@
 import { Head, Link, useForm } from '@inertiajs/react';
 import { Loader2 } from 'lucide-react';
 import * as React from 'react';
-import { FormEvent } from 'react';
+import type { FormEvent } from 'react';
+import { login } from '@/generated/routes';
 import InputError from '@/shared/components/input-error';
+import { AuthSplitLayout } from '@/shared/layouts/auth/auth-split-layout';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { Label } from '@/shared/ui/label';
-import { AuthSplitLayout } from '@/shared/layouts/auth/auth-split-layout';
-import { login } from '@/generated/routes';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({

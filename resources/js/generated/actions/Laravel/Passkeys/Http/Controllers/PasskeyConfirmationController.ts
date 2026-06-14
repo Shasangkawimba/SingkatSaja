@@ -1,4 +1,5 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../../wayfinder'
+import { queryParams   } from './../../../../../wayfinder'
+import type {RouteQueryOptions, RouteDefinition} from './../../../../../wayfinder';
 /**
 * @see \Laravel\Passkeys\Http\Controllers\PasskeyConfirmationController::index
  * @see vendor/laravel/passkeys/src/Http/Controllers/PasskeyConfirmationController.php:27
