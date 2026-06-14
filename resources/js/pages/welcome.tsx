@@ -33,7 +33,7 @@ export default function Welcome() {
                     
                     <h1 className="text-balance text-6xl font-extrabold tracking-tight text-foreground sm:text-7xl lg:text-8xl mix-blend-normal">
                         Short links. <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600 dark:from-blue-400 dark:to-violet-400 drop-shadow-sm">
+                        <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-violet-600 dark:from-blue-400 dark:to-violet-400 drop-shadow-sm">
                             Light speed.
                         </span>
                     </h1>
@@ -173,7 +173,7 @@ export default function Welcome() {
                 
                 <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-8 px-6 text-center">
                     <h2 className="text-5xl font-extrabold tracking-tight sm:text-7xl text-balance">
-                        Start routing <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600 dark:from-blue-400 dark:to-violet-400 drop-shadow-sm">faster.</span>
+                        Start routing <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-violet-600 dark:from-blue-400 dark:to-violet-400 drop-shadow-sm">faster.</span>
                     </h2>
                     <p className="text-xl text-muted-foreground max-w-2xl font-medium">
                         Join developers and teams building better routing experiences with SingkatSaja.

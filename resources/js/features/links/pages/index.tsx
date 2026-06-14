@@ -113,17 +113,16 @@ return false;
             <Head title="My Links" />
 
             {linksData.length === 0 ? (
-                <div className="glass-panel mt-8 border border-white/40 dark:border-white/20">
-                    <EmptyState
-                        title="No links created yet"
-                        description="Generate your first shortened Base62 link to start tracking clicks."
-                        action={
-                            <Button asChild className="mt-4 font-bold rounded-xl shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]">
-                                <Link href="/links/create">Create your first link</Link>
-                            </Button>
-                        }
-                    />
-                </div>
+                <EmptyState
+                    title="No links created yet"
+                    description="Generate your first shortened Base62 link to start tracking clicks."
+                    className="mt-8 border border-white/40 dark:border-white/20"
+                    action={
+                        <Button asChild className="mt-4 font-bold rounded-xl shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:shadow-[0_0_25px_rgba(59,130,246,0.4)]">
+                            <Link href="/links/create">Create your first link</Link>
+                        </Button>
+                    }
+                />
             ) : (
                 <div className="flex flex-col gap-6 pt-6">
                     {/* Toolbar */}
@@ -387,7 +386,7 @@ return false;
                                         disabled={!pageLink.url || pageLink.active}
                                         variant={pageLink.active ? 'default' : 'outline'}
                                         size="sm"
-                                        className={`h-10 min-w-[2.5rem] rounded-xl font-bold ${pageLink.active ? 'shadow-[0_0_15px_rgba(59,130,246,0.3)]' : 'bg-white/40 dark:bg-white/10 border-white/50 dark:border-white/10 hover:bg-white/60 dark:hover:bg-white/20'}`}
+                                        className={`h-10 min-w-10 rounded-xl font-bold ${pageLink.active ? 'shadow-[0_0_15px_rgba(59,130,246,0.3)]' : 'bg-white/40 dark:bg-white/10 border-white/50 dark:border-white/10 hover:bg-white/60 dark:hover:bg-white/20'}`}
                                     >
                                         {pageLink.url ? (
                                             <Link href={pageLink.url} preserveState>

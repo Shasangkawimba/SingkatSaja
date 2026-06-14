@@ -106,7 +106,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                 {/* Greeting Header */}
                 <div className="flex flex-col gap-1.5 pl-1 mb-2">
                     <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-                        Good {isMounted ? (new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 18 ? 'afternoon' : 'evening') : 'day'}, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">{auth?.user?.name ? auth.user.name.split(' ')[0] : 'user'}</span>
+                        Good {isMounted ? (new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 18 ? 'afternoon' : 'evening') : 'day'}, <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-blue-500">{auth?.user?.name ? auth.user.name.split(' ')[0] : 'user'}</span>
                     </h1>
                     <p className="text-muted-foreground text-sm sm:text-base font-medium">
                         Here's what's happening with your links today.
