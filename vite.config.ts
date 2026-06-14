@@ -26,9 +26,10 @@ export default defineConfig({
         tailwindcss(),
         wayfinder({
             formVariants: true,
+            path: 'resources/js/generated',
             command: (process.env.NODE_ENV === 'production' || process.env.VERCEL)
                 ? 'echo "Skipping wayfinder generation"'
-                : 'php artisan wayfinder:generate',
+                : 'php artisan wayfinder:generate --path=resources/js/generated',
         }),
     ],
 });

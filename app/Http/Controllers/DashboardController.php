@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\GetDashboardStatsAction;
+use App\Actions\Dashboard\GetDashboardStatsAction;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;

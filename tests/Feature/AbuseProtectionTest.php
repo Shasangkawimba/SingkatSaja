@@ -4,7 +4,7 @@ use App\Models\Link;
 use App\Models\User;
 use App\Models\ClickEvent;
 use App\Models\DailyStat;
-use App\Actions\CreateLinkAction;
+use App\Actions\Link\CreateLinkAction;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Testing\RefreshDatabase;

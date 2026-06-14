@@ -1,9 +1,9 @@
 <?php
 
-use App\Actions\GenerateShortCodeAction;
-use App\Actions\CreateLinkAction;
-use App\Actions\UpdateLinkAction;
-use App\Actions\DeleteLinkAction;
+use App\Actions\Link\GenerateShortCodeAction;
+use App\Actions\Link\CreateLinkAction;
+use App\Actions\Link\UpdateLinkAction;
+use App\Actions\Link\DeleteLinkAction;
 use App\Models\Link;
 use App\Models\User;
 use Illuminate\Support\Facades\Redis;

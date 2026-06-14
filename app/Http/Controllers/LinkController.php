@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\CreateLinkAction;
-use App\Actions\DeleteLinkAction;
-use App\Actions\GetLinkAnalyticsAction;
-use App\Actions\GetLinksAction;
-use App\Actions\UpdateLinkAction;
+use App\Actions\Link\CreateLinkAction;
+use App\Actions\Link\DeleteLinkAction;
+use App\Actions\Analytics\GetLinkAnalyticsAction;
+use App\Actions\Link\GetLinksAction;
+use App\Actions\Link\UpdateLinkAction;
 use App\Http\Requests\StoreLinkRequest;
 use App\Http\Requests\UpdateLinkRequest;
 use App\Models\Link;

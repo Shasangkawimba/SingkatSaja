@@ -9,11 +9,11 @@ import {
     Wrench,
 } from 'lucide-react';
 import React from 'react';
-import { PageContainer } from '@/components/page-container';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { PublicLayout } from '@/layouts/public-layout';
+import { PageContainer } from '@/shared/components/page-container';
+import { Badge } from '@/shared/ui/badge';
+import { Button } from '@/shared/ui/button';
+import { Card } from '@/shared/ui/card';
+import { PublicLayout } from '@/shared/layouts/public-layout';
 
 interface ErrorProps {
     status: number;

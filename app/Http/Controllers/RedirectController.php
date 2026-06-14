@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\ResolveShortCodeAction;
+use App\Actions\Link\ResolveShortCodeAction;
 use App\Services\AnalyticsService;
 use Illuminate\Http\Request;
 
