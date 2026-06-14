@@ -4,10 +4,13 @@ use App\Models\Link;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
+use Illuminate\Support\Facades\Redis;
 
 uses(RefreshDatabase::class);
 
 test('a 404 exception renders custom inertia error page', function () {
+    Redis::shouldReceive('get')->andReturn(null);
+
     $response = $this->get('/some-non-existent-wildcard-route-that-doesnt-exist');
 
     // Asserts HTTP status 404
