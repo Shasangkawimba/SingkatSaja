@@ -46,9 +46,7 @@ const addNestedParams = (
     params: URLSearchParams,
 ) => {
     Object.entries(obj).forEach(([subKey, value]) => {
-        if (value === undefined) {
-return;
-}
+        if (value === undefined) return;
 
         const paramKey = `${prefix}[${subKey}]`;
 

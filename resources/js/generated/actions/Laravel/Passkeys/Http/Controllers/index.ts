@@ -1,5 +1,5 @@
-import PasskeyConfirmationController from './PasskeyConfirmationController'
 import PasskeyLoginController from './PasskeyLoginController'
+import PasskeyConfirmationController from './PasskeyConfirmationController'
 import PasskeyRegistrationController from './PasskeyRegistrationController'
 const Controllers = {
     PasskeyLoginController: Object.assign(PasskeyLoginController, PasskeyLoginController),

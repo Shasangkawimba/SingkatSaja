@@ -1,5 +1,4 @@
-import { queryParams   } from './../../../../wayfinder'
-import type {RouteQueryOptions, RouteDefinition} from './../../../../wayfinder';
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\HealthController::show
  * @see app/Http/Controllers/HealthController.php:14
@@ -42,6 +41,42 @@ show.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show.url(options),
     method: 'head',
 })
+
+    /**
+* @see \App\Http\Controllers\HealthController::show
+ * @see app/Http/Controllers/HealthController.php:14
+ * @route '/api/health'
+ */
+    const showForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: show.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\HealthController::show
+ * @see app/Http/Controllers/HealthController.php:14
+ * @route '/api/health'
+ */
+        showForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: show.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\HealthController::show
+ * @see app/Http/Controllers/HealthController.php:14
+ * @route '/api/health'
+ */
+        showForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: show.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    show.form = showForm
 const HealthController = { show }
 
 export default HealthController

@@ -1,9 +1,9 @@
 import DashboardController from './DashboardController'
-import HealthController from './HealthController'
 import LinkController from './LinkController'
-import RedirectController from './RedirectController'
-import SeoController from './SeoController'
 import Settings from './Settings'
+import HealthController from './HealthController'
+import SeoController from './SeoController'
+import RedirectController from './RedirectController'
 const Controllers = {
     DashboardController: Object.assign(DashboardController, DashboardController),
 LinkController: Object.assign(LinkController, LinkController),

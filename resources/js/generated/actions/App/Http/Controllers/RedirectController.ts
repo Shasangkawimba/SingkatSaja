@@ -1,5 +1,4 @@
-import { queryParams,   applyUrlDefaults } from './../../../../wayfinder'
-import type {RouteQueryOptions, RouteDefinition} from './../../../../wayfinder';
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\RedirectController::redirect
  * @see app/Http/Controllers/RedirectController.php:14
@@ -61,6 +60,42 @@ redirect.head = (args: { short_code: string | number } | [short_code: string | n
     url: redirect.url(args, options),
     method: 'head',
 })
+
+    /**
+* @see \App\Http\Controllers\RedirectController::redirect
+ * @see app/Http/Controllers/RedirectController.php:14
+ * @route '/{short_code}'
+ */
+    const redirectForm = (args: { short_code: string | number } | [short_code: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: redirect.url(args, options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\RedirectController::redirect
+ * @see app/Http/Controllers/RedirectController.php:14
+ * @route '/{short_code}'
+ */
+        redirectForm.get = (args: { short_code: string | number } | [short_code: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: redirect.url(args, options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\RedirectController::redirect
+ * @see app/Http/Controllers/RedirectController.php:14
+ * @route '/{short_code}'
+ */
+        redirectForm.head = (args: { short_code: string | number } | [short_code: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: redirect.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    redirect.form = redirectForm
 const RedirectController = { redirect }
 
 export default RedirectController
