@@ -1,0 +1,62 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e7]:
+      - button [ref=e9]:
+        - img [ref=e10]
+      - link "SingkatSaja Logo" [ref=e11] [cursor=pointer]:
+        - /url: /dashboard
+        - img "SingkatSaja Logo" [ref=e13]
+      - generic [ref=e14]:
+        - button "Toggle theme" [ref=e16]:
+          - img [ref=e17]
+          - img
+        - button "TU" [ref=e23]:
+          - generic [ref=e25]: TU
+    - main [ref=e26]:
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - heading "Good day, Test" [level=1] [ref=e31]
+          - paragraph [ref=e32]: Here's what's happening with your links today.
+        - generic [ref=e35]:
+          - generic [ref=e36]:
+            - img [ref=e37]
+            - text: Quick Shorten
+          - generic [ref=e39]:
+            - generic [ref=e40]:
+              - img [ref=e41]
+              - textbox "Paste your long URL here (e.g. https://example.com/some/long/path)" [ref=e44]
+            - button "Shorten URL" [ref=e45]
+        - generic [ref=e46]:
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - generic [ref=e50]: Total Links
+              - img [ref=e52]
+            - generic [ref=e56]: ...
+          - generic [ref=e58]:
+            - generic [ref=e59]:
+              - generic [ref=e60]: Active Links
+              - img [ref=e62]
+            - generic [ref=e64]:
+              - generic [ref=e65]: ...
+              - generic [ref=e66]: LIVE
+          - generic [ref=e68]:
+            - generic [ref=e69]:
+              - generic [ref=e70]: Total Clicks
+              - img [ref=e72]
+            - generic [ref=e76]: ...
+          - generic [ref=e78]:
+            - generic [ref=e79]:
+              - generic [ref=e80]: Clicks Today
+              - img [ref=e82]
+            - generic [ref=e85]:
+              - generic [ref=e86]: ...
+              - generic [ref=e87]: "--"
+        - generic [ref=e88]:
+          - generic [ref=e89]:
+            - heading "Recent Links" [level=2] [ref=e90]
+            - link "View all" [ref=e91] [cursor=pointer]:
+              - /url: /links
+              - text: View all
+              - img [ref=e92]
+          - generic [ref=e95]: Loading links...
+  - region "Notifications alt+T"

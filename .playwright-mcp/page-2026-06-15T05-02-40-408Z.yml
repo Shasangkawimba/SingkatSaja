@@ -1,0 +1,31 @@
+- generic [ref=e2]:
+  - generic [ref=e5]:
+    - link "SingkatSaja Logo" [ref=e7] [cursor=pointer]:
+      - /url: /
+      - img "SingkatSaja Logo" [ref=e9]
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - heading "Welcome back" [level=1] [ref=e12]
+        - paragraph [ref=e13]: Enter your credentials to access your account.
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - generic [ref=e17]: Email address
+          - textbox "Email address" [ref=e18]
+        - generic [ref=e19]:
+          - generic [ref=e20]:
+            - generic [ref=e21]: Password
+            - link "Forgot password?" [ref=e22] [cursor=pointer]:
+              - /url: /forgot-password
+          - textbox "Password" [ref=e23]
+        - generic [ref=e24]:
+          - checkbox "Remember me for 30 days" [checked] [active] [ref=e25]:
+            - generic:
+              - img
+          - checkbox [checked]
+          - generic [ref=e26] [cursor=pointer]: Remember me for 30 days
+        - button "Sign in" [ref=e27]
+        - generic [ref=e28]:
+          - text: Don't have an account?
+          - link "Sign up" [ref=e29] [cursor=pointer]:
+            - /url: /register
+  - region "Notifications alt+T"

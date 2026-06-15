@@ -27,6 +27,7 @@ import {
     CardTitle
 } from '@/shared/ui/card';
 import { Input } from '@/shared/ui/input';
+import { Skeleton } from '@/shared/ui/skeleton';
 
 export default function Dashboard({ stats, recent_links }: DashboardProps) {
     const auth = (usePage().props as any).auth;
@@ -162,7 +163,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                         </CardHeader>
                         <CardContent>
                             <div className="text-4xl font-extrabold tracking-tight text-foreground mt-2">
-                                {stats ? stats.total_links : <span className="text-muted-foreground/40 text-2xl font-medium">...</span>}
+                                {stats ? stats.total_links : <Skeleton className="h-9 w-20 bg-primary/10 mt-1.5" />}
                             </div>
                         </CardContent>
                     </Card>
@@ -177,7 +178,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                         </CardHeader>
                         <CardContent className="flex items-baseline justify-between relative z-10">
                             <div className="text-4xl font-extrabold tracking-tight text-foreground mt-2">
-                                {stats ? stats.active_links : <span className="text-muted-foreground/40 text-2xl font-medium">...</span>}
+                                {stats ? stats.active_links : <Skeleton className="h-9 w-20 bg-primary/10 mt-1.5" />}
                             </div>
                             <Badge variant="secondary" className="bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-3 py-1 font-bold">
                                 LIVE
@@ -194,7 +195,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                         </CardHeader>
                         <CardContent>
                             <div className="text-4xl font-extrabold tracking-tight text-foreground mt-2">
-                                {stats ? stats.total_clicks : <span className="text-muted-foreground/40 text-2xl font-medium">...</span>}
+                                {stats ? stats.total_clicks : <Skeleton className="h-9 w-20 bg-primary/10 mt-1.5" />}
                             </div>
                         </CardContent>
                     </Card>
@@ -209,7 +210,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                         </CardHeader>
                         <CardContent className="flex items-baseline justify-between relative z-10">
                             <div className="text-4xl font-extrabold tracking-tight text-foreground mt-2">
-                                {stats ? stats.clicks_today : <span className="text-muted-foreground/40 text-2xl font-medium">...</span>}
+                                {stats ? stats.clicks_today : <Skeleton className="h-9 w-20 bg-primary/10 mt-1.5" />}
                             </div>
                             {stats && stats.clicks_today > 0 ? (
                                 <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/20 border border-emerald-500/20 px-3 py-1 rounded-full shadow-sm">
@@ -239,8 +240,46 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
 
                     <div className="p-1">
                         {recent_links === undefined ? (
-                            <div className="glass-panel p-12 text-center text-base font-medium text-muted-foreground rounded-2xl border border-white/20 animate-pulse">
-                                Loading links...
+                            <div className="flex flex-col gap-4">
+                                {/* Desktop view skeletons */}
+                                <div className="hidden lg:block glass-panel rounded-3xl border border-white/50 dark:border-white/20 shadow-sm overflow-hidden animate-pulse">
+                                    <div className="h-12 border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20" />
+                                    <div className="divide-y divide-white/20 dark:divide-white/5">
+                                        {Array.from({ length: 3 }).map((_, i) => (
+                                            <div key={i} className="flex items-center justify-between px-5 py-5">
+                                                <Skeleton className="h-8 w-24 bg-primary/10" />
+                                                <Skeleton className="h-5 w-48 bg-primary/10" />
+                                                <Skeleton className="h-6.5 w-12 bg-primary/10 rounded-full" />
+                                                <Skeleton className="h-6.5 w-16 bg-primary/10 rounded-full" />
+                                                <Skeleton className="h-5 w-24 bg-primary/10" />
+                                                <Skeleton className="h-9 w-9 bg-primary/10 rounded-full" />
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                
+                                {/* Mobile view skeletons */}
+                                <div className="flex flex-col gap-4 lg:hidden">
+                                    {Array.from({ length: 3 }).map((_, i) => (
+                                        <div key={i} className="glass-panel p-5 rounded-2xl border border-white/30 dark:border-white/10 shadow-sm flex flex-col gap-4 animate-pulse">
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center gap-2">
+                                                    <Skeleton className="h-8 w-24 bg-primary/10" />
+                                                    <Skeleton className="h-8 w-8 bg-primary/10 rounded-full" />
+                                                </div>
+                                                <Skeleton className="h-6.5 w-16 bg-primary/10 rounded-full" />
+                                            </div>
+                                            <div className="flex flex-col gap-2">
+                                                <Skeleton className="h-3 w-16 bg-primary/10" />
+                                                <Skeleton className="h-5 w-3/4 bg-primary/10" />
+                                            </div>
+                                            <div className="flex items-center justify-between border-t border-white/10 dark:border-white/5 pt-4">
+                                                <Skeleton className="h-4.5 w-32 bg-primary/10" />
+                                                <Skeleton className="h-9 w-9 bg-primary/10 rounded-xl" />
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         ) : linksList.length === 0 ? (
                             <div className="glass-panel p-16 text-center text-base font-medium text-muted-foreground rounded-2xl border border-white/20">

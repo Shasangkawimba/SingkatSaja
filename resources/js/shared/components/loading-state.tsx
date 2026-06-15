@@ -21,7 +21,7 @@ export function LoadingState({
         return (
             <div
                 className={cn(
-                    'grid w-full grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3',
+                    'grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3',
                     className,
                 )}
                 {...props}
@@ -29,14 +29,14 @@ export function LoadingState({
                 {Array.from({ length: count }).map((_, i) => (
                     <Card
                         key={i}
-                        className="border border-slate/20 bg-pure-white p-20"
+                        className="border border-white/20 dark:border-white/5 bg-white/30 dark:bg-black/20 backdrop-blur-md p-6 rounded-2xl"
                     >
-                        <CardContent className="flex flex-col gap-16 p-0">
-                            <Skeleton className="h-16 w-1/3 bg-slate/10" />
-                            <Skeleton className="h-32 w-2/3 bg-slate/10" />
-                            <div className="mt-4 flex flex-col gap-8">
-                                <Skeleton className="h-12 w-full bg-slate/5" />
-                                <Skeleton className="h-12 w-5/6 bg-slate/5" />
+                        <CardContent className="flex flex-col gap-4 p-0">
+                            <Skeleton className="h-4 w-1/3" />
+                            <Skeleton className="h-8 w-2/3" />
+                            <div className="mt-4 flex flex-col gap-2">
+                                <Skeleton className="h-4 w-full opacity-60" />
+                                <Skeleton className="h-4 w-5/6 opacity-60" />
                             </div>
                         </CardContent>
                     </Card>
@@ -48,24 +48,63 @@ export function LoadingState({
     if (variant === 'table') {
         return (
             <div
-                className={cn('flex w-full flex-col gap-16', className)}
+                className={cn('flex w-full flex-col gap-4', className)}
                 {...props}
             >
-                {Array.from({ length: count }).map((_, i) => (
-                    <div
-                        key={i}
-                        className="flex items-center justify-between border-b border-slate/10 py-16"
-                    >
-                        <div className="flex w-1/2 flex-col gap-8">
-                            <Skeleton className="h-16 w-1/3 bg-slate/10" />
-                            <Skeleton className="h-12 w-2/3 bg-slate/5" />
+                {/* Desktop view skeletons */}
+                <div className="hidden lg:flex flex-col">
+                    {Array.from({ length: count }).map((_, i) => (
+                        <div
+                            key={i}
+                            className="flex items-center justify-between border-b border-white/10 dark:border-white/5 py-4"
+                        >
+                            <div className="flex w-1/3 flex-col gap-1.5">
+                                <Skeleton className="h-5 w-1/2" />
+                                <Skeleton className="h-4 w-3/4 opacity-60" />
+                            </div>
+                            <div className="flex flex-1 items-center justify-between pl-8">
+                                <div className="flex flex-1 items-center justify-center">
+                                    <Skeleton className="h-5 w-12" />
+                                </div>
+                                <div className="flex flex-1 items-center justify-center">
+                                    <Skeleton className="h-6.5 w-16 rounded-full" />
+                                </div>
+                                <div className="flex flex-1 items-center justify-start pl-4">
+                                    <Skeleton className="h-5 w-24" />
+                                </div>
+                                <div className="flex w-24 items-center justify-end">
+                                    <Skeleton className="h-9 w-9 rounded-full" />
+                                </div>
+                            </div>
                         </div>
-                        <div className="flex items-center gap-16">
-                            <Skeleton className="h-16 w-48 bg-slate/10" />
-                            <Skeleton className="h-20 w-20 rounded-full bg-slate/10" />
+                    ))}
+                </div>
+
+                {/* Mobile view skeletons */}
+                <div className="flex flex-col gap-4 lg:hidden">
+                    {Array.from({ length: count }).map((_, i) => (
+                        <div
+                            key={i}
+                            className="glass-panel p-5 rounded-2xl border border-white/30 dark:border-white/10 shadow-sm flex flex-col gap-4"
+                        >
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2">
+                                    <Skeleton className="h-8 w-24" />
+                                    <Skeleton className="h-8 w-8 rounded-full" />
+                                </div>
+                                <Skeleton className="h-6.5 w-16 rounded-full" />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <Skeleton className="h-3 w-16" />
+                                <Skeleton className="h-5 w-3/4" />
+                            </div>
+                            <div className="flex items-center justify-between border-t border-white/10 dark:border-white/5 pt-4">
+                                <Skeleton className="h-4.5 w-32" />
+                                <Skeleton className="h-9 w-9 rounded-xl" />
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         );
     }
@@ -73,14 +112,14 @@ export function LoadingState({
     return (
         <div
             className={cn(
-                'flex min-h-52 w-full flex-col items-center justify-center gap-12 text-center',
+                'flex min-h-52 w-full flex-col items-center justify-center gap-6 text-center',
                 className,
             )}
             {...props}
         >
-            <Spinner className="size-24 text-vivid-indigo" />
+            <Spinner className="size-10 text-vivid-indigo" />
             {message && (
-                <span className="animate-pulse text-body font-medium text-slate">
+                <span className="animate-pulse text-sm font-medium text-muted-foreground">
                     {message}
                 </span>
             )}

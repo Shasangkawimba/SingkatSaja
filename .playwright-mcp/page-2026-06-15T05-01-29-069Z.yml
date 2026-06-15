@@ -1,0 +1,121 @@
+- generic:
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - button:
+                - img
+            - link:
+              - /url: /dashboard
+              - generic:
+                - img
+            - generic:
+              - generic:
+                - button:
+                  - img
+              - button [expanded]:
+                - generic:
+                  - generic: TU
+        - main:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=1]: Good afternoon, Test
+                  - paragraph: Here's what's happening with your links today.
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                        - text: Quick Shorten
+                      - generic:
+                        - generic:
+                          - img
+                          - textbox:
+                            - /placeholder: Paste your long URL here (e.g. https://example.com/some/long/path)
+                        - button: Shorten URL
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: Total Links
+                        - generic:
+                          - img
+                      - generic:
+                        - generic: "1"
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: Active Links
+                        - generic:
+                          - img
+                      - generic:
+                        - generic: "1"
+                        - generic: LIVE
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: Total Clicks
+                        - generic:
+                          - img
+                      - generic:
+                        - generic: "224"
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: Clicks Today
+                        - generic:
+                          - img
+                      - generic:
+                        - generic: "12"
+                        - generic: + 12
+                - generic:
+                  - generic:
+                    - heading [level=2]: Recent Links
+                    - link:
+                      - /url: /links
+                      - text: View all
+                      - img
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: google
+                            - button:
+                              - img
+                          - generic: Active
+                        - generic:
+                          - generic: Destination
+                          - generic:
+                            - generic: https://www.google.com
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic: "224"
+                              - text: clicks
+                            - generic:
+                              - img
+                              - text: 42m ago
+                          - link:
+                            - /url: /links/1
+                            - img
+    - region "Notifications alt+T"
+  - menu "TU" [active] [ref=e118]:
+    - generic [ref=e120]:
+      - generic [ref=e122]: TU
+      - generic [ref=e123]:
+        - generic [ref=e124]: Test User
+        - generic [ref=e125]: test@example.com
+    - separator [ref=e126]
+    - group [ref=e127]:
+      - menuitem "Settings" [ref=e128] [cursor=pointer]:
+        - img
+        - text: Settings
+    - separator [ref=e129]
+    - menuitem "Log out" [ref=e130] [cursor=pointer]:
+      - img
+      - text: Log out
