@@ -1,0 +1,4 @@
+[    1653ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://[::1]:5173/node_modules/.vite/deps/@inertiajs_react.js?v=e0828c2d:20864
+[    2144ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://[::1]:5173/node_modules/.vite/deps/@inertiajs_react.js?v=e0828c2d:20864
+[   57348ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://[::1]:5173/node_modules/.vite/deps/@radix-ui_react-dialog.js?v=e0828c2d:272
+[   57353ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ http://[::1]:5173/node_modules/.vite/deps/@radix-ui_react-dialog.js?v=e0828c2d:272

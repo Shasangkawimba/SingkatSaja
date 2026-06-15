@@ -197,7 +197,7 @@ return '';
                             30 Day Performance
                         </h3>
                     </div>
-                    <div className="h-[400px] p-8 pt-10">
+                    <div className="h-[260px] sm:h-[400px] p-4 sm:p-8 pt-8 sm:pt-10">
                         <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                             <AreaChart data={stats_30_days} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                                 <defs>

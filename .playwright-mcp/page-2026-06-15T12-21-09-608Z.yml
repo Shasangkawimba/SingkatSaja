@@ -1,0 +1,56 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e7]:
+      - button [ref=e9]:
+        - img [ref=e10]
+      - link "SingkatSaja Logo SingkatSaja" [ref=e11] [cursor=pointer]:
+        - /url: /dashboard
+        - generic [ref=e12]:
+          - img "SingkatSaja Logo" [ref=e13]
+          - generic [ref=e15]: SingkatSaja
+      - generic [ref=e16]:
+        - button "Toggle theme" [ref=e18]:
+          - img
+          - img [ref=e19]
+        - button "TU" [ref=e21]:
+          - generic [ref=e23]: TU
+    - main [ref=e24]:
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - heading "Settings" [level=2] [ref=e27]
+          - paragraph [ref=e28]: Manage your profile and account settings
+        - generic [ref=e29]:
+          - complementary [ref=e30]:
+            - navigation "Settings" [ref=e31]:
+              - link "Profile" [ref=e32] [cursor=pointer]:
+                - /url: /settings/profile
+              - link "Security" [ref=e33] [cursor=pointer]:
+                - /url: /settings/security
+              - link "Appearance" [ref=e34] [cursor=pointer]:
+                - /url: /settings/appearance
+          - generic [ref=e36]:
+            - heading "Profile settings" [level=1] [ref=e37]
+            - generic [ref=e38]:
+              - generic [ref=e39]:
+                - heading "Profile" [level=2] [ref=e40]
+                - paragraph [ref=e41]: Update your name and email address
+              - generic [ref=e42]:
+                - generic [ref=e43]:
+                  - generic [ref=e44]: Name
+                  - textbox "Name" [ref=e45]:
+                    - /placeholder: Full name
+                    - text: Test User
+                - generic [ref=e46]:
+                  - generic [ref=e47]: Email address
+                  - textbox "Email address" [ref=e48]: test@example.com
+                - button "Save" [ref=e50]
+            - generic [ref=e51]:
+              - generic [ref=e52]:
+                - heading "Delete account" [level=2] [ref=e53]
+                - paragraph [ref=e54]: Delete your account and all of its resources
+              - generic [ref=e55]:
+                - generic [ref=e56]:
+                  - paragraph [ref=e57]: Warning
+                  - paragraph [ref=e58]: Please proceed with caution, this cannot be undone.
+                - button "Delete account" [ref=e59]
+  - region "Notifications alt+T"

@@ -138,12 +138,12 @@ return false;
                             />
                         </div>
 
-                        <div className="flex w-full items-center justify-end gap-3 sm:w-auto">
+                        <div className="flex w-full items-center gap-3 sm:w-auto">
                             <Select
                                 defaultValue={(typeof filters === 'object' && !Array.isArray(filters) ? filters.sort : '') || 'newest'}
                                 onValueChange={handleSortChange}
                             >
-                                <SelectTrigger className="h-12 w-[180px] rounded-xl bg-white/30 dark:bg-black/20 border-white/40 dark:border-white/10 font-medium backdrop-blur-md">
+                                <SelectTrigger className="h-12 w-full sm:w-[180px] rounded-xl bg-white/30 dark:bg-black/20 border-white/40 dark:border-white/10 font-medium backdrop-blur-md">
                                     <SelectValue placeholder="Sort option" />
                                 </SelectTrigger>
                                 <SelectContent className="rounded-xl border-white/40 dark:border-white/10 bg-white/60 dark:bg-black/40 backdrop-blur-xl">
@@ -341,13 +341,13 @@ return false;
                                                                     </div>
                                                                 )}
                                                             </div>
-                                                            <div className="flex gap-2">
-                                                                <Button asChild variant="ghost" size="icon" className="h-9 w-9 rounded-xl bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:bg-white/60 dark:hover:bg-white/20">
+                                                            <div className="flex gap-3">
+                                                                <Button asChild variant="ghost" size="icon" className="h-10 w-10 rounded-xl bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:bg-white/60 dark:hover:bg-white/20">
                                                                     <Link href={`/links/${link.id}`} title="View Analytics">
                                                                         <BarChart3 className="h-4.5 w-4.5" />
                                                                     </Link>
                                                                 </Button>
-                                                                <Button asChild variant="ghost" size="icon" className="h-9 w-9 rounded-xl bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:bg-white/60 dark:hover:bg-white/20">
+                                                                <Button asChild variant="ghost" size="icon" className="h-10 w-10 rounded-xl bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:bg-white/60 dark:hover:bg-white/20">
                                                                     <Link href={`/links/${link.id}/edit`} title="Edit Link">
                                                                         <Edit2 className="h-4 w-4" />
                                                                     </Link>
@@ -356,7 +356,7 @@ return false;
                                                                     variant="ghost"
                                                                     size="icon"
                                                                     onClick={() => setSelectedLinkToDelete(link)}
-                                                                    className="h-9 w-9 rounded-xl bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:text-destructive hover:bg-destructive/10"
+                                                                    className="h-10 w-10 rounded-xl bg-white/40 dark:bg-white/10 border border-white/50 dark:border-white/10 shadow-sm hover:text-destructive hover:bg-destructive/10"
                                                                     title="Delete Link"
                                                                 >
                                                                     <Trash2 className="h-4 w-4" />

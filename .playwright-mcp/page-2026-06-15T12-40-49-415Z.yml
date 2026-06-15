@@ -1,0 +1,96 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e5]:
+      - generic [ref=e6]:
+        - link "SingkatSaja Logo SingkatSaja" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e8]:
+            - img "SingkatSaja Logo" [ref=e9]
+            - generic [ref=e10]: SingkatSaja
+        - navigation [ref=e11]:
+          - link "Dashboard" [ref=e12] [cursor=pointer]:
+            - /url: /dashboard
+          - link "Go to app" [ref=e13] [cursor=pointer]:
+            - /url: /dashboard
+    - main [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - generic [ref=e17]: SingkatSaja v1.0 Live
+          - heading "Short links. Light speed." [level=1] [ref=e19]:
+            - text: Short links.
+            - text: Light speed.
+          - paragraph [ref=e20]: Create memorable short links instantly. Monitor real-time performance with millisecond redirect speeds backed by Redis.
+          - link "Go to Dashboard" [ref=e22] [cursor=pointer]:
+            - /url: /dashboard
+            - text: Go to Dashboard
+            - img [ref=e23]
+        - generic [ref=e26]:
+          - generic [ref=e32]: GET /shortcut.singkatsaja.com
+          - generic [ref=e42]:
+            - img [ref=e46]
+            - img [ref=e53]
+            - img [ref=e59]
+      - generic [ref=e68]:
+        - generic [ref=e69]:
+          - heading "Total Control. Zero Lag." [level=2] [ref=e70]
+          - paragraph [ref=e71]: Built for performance and reliability from day one.
+        - generic [ref=e72]:
+          - generic [ref=e73]:
+            - img [ref=e75]
+            - heading "Redis-Powered" [level=3] [ref=e77]
+            - paragraph [ref=e78]: Redirects happen in single-digit milliseconds entirely from memory.
+          - generic [ref=e79]:
+            - img [ref=e81]
+            - heading "Custom Aliases" [level=3] [ref=e84]
+            - paragraph [ref=e85]: Create memorable branded shortcodes for your important campaigns.
+          - generic [ref=e86]:
+            - img [ref=e88]
+            - heading "Async Analytics" [level=3] [ref=e90]
+            - paragraph [ref=e91]: Track every click without slowing down the redirect experience.
+          - generic [ref=e92]:
+            - img [ref=e94]
+            - heading "Scheduled Expirations" [level=3] [ref=e97]
+            - paragraph [ref=e98]: Automatically sunset links when campaigns end.
+          - generic [ref=e99]:
+            - img [ref=e101]
+            - heading "Secure by Default" [level=3] [ref=e103]
+            - paragraph [ref=e104]: Protected against abuse with built-in rate limiting.
+          - generic [ref=e105]:
+            - img [ref=e107]
+            - heading "Developer Ready" [level=3] [ref=e110]
+            - paragraph [ref=e111]: Clean architecture built on Laravel and modern React.
+      - generic [ref=e114]:
+        - heading "Start routing faster." [level=2] [ref=e115]
+        - paragraph [ref=e116]: Join developers and teams building better routing experiences with SingkatSaja.
+        - link "Create free account" [ref=e117] [cursor=pointer]:
+          - /url: /register
+    - contentinfo [ref=e118]:
+      - generic [ref=e119]:
+        - generic [ref=e120]:
+          - link "SingkatSaja Logo SingkatSaja" [ref=e121] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e122]:
+              - img "SingkatSaja Logo" [ref=e123]
+              - generic [ref=e125]: SingkatSaja
+          - paragraph [ref=e126]: High-performance URL routing and analytics. Built for developers.
+        - generic [ref=e127]:
+          - generic [ref=e128]:
+            - generic [ref=e129]: Product
+            - link "Features" [ref=e130] [cursor=pointer]:
+              - /url: /
+            - link "Dashboard" [ref=e131] [cursor=pointer]:
+              - /url: /dashboard
+          - generic [ref=e132]:
+            - generic [ref=e133]: Resources
+            - link "Laravel" [ref=e134] [cursor=pointer]:
+              - /url: https://laravel.com
+            - link "Inertia.js" [ref=e135] [cursor=pointer]:
+              - /url: https://inertiajs.com
+          - generic [ref=e136]:
+            - generic [ref=e137]: Legal
+            - link "Privacy Policy" [ref=e138] [cursor=pointer]:
+              - /url: ""
+            - link "Terms of Service" [ref=e139] [cursor=pointer]:
+              - /url: ""
+      - generic [ref=e140]: © 2026 SingkatSaja. All rights reserved.
+  - region "Notifications alt+T"

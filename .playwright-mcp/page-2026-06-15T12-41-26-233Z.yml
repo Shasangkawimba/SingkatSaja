@@ -1,0 +1,94 @@
+- generic:
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - button:
+                - img
+            - link:
+              - /url: /dashboard
+              - generic:
+                - img
+                - generic:
+                  - generic: SingkatSaja
+            - generic:
+              - generic:
+                - button:
+                  - img
+              - button [expanded]:
+                - generic:
+                  - generic: TU
+        - main:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=2]: My Links
+                  - paragraph: Manage, monitor, and configure shortened links.
+              - generic:
+                - link:
+                  - /url: /links/create
+                  - img
+                  - text: Create Link
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                    - textbox:
+                      - /placeholder: Search links or destinations...
+                  - generic:
+                    - combobox:
+                      - generic: Newest First
+                      - img
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: google
+                            - button:
+                              - img
+                          - generic: Active
+                        - generic:
+                          - generic: Destination
+                          - link:
+                            - /url: https://www.google.com
+                            - generic: https://www.google.com
+                            - img
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic: "224"
+                              - text: clicks
+                            - generic:
+                              - img
+                              - text: 7/15/2026
+                          - generic:
+                            - link:
+                              - /url: /links/1
+                              - img
+                            - link:
+                              - /url: /links/1/edit
+                              - img
+                            - button:
+                              - img
+    - region "Notifications alt+T"
+  - menu "TU" [active] [ref=e85]:
+    - generic [ref=e87]:
+      - generic [ref=e89]: TU
+      - generic [ref=e90]:
+        - generic [ref=e91]: Test User
+        - generic [ref=e92]: test@example.com
+    - separator [ref=e93]
+    - group [ref=e94]:
+      - menuitem "Settings" [ref=e95] [cursor=pointer]:
+        - img
+        - text: Settings
+    - separator [ref=e96]
+    - menuitem "Log out" [ref=e97] [cursor=pointer]:
+      - img
+      - text: Log out

@@ -7,7 +7,6 @@ import {
 import { dashboard } from '@/generated/routes';
 import links from '@/generated/routes/links';
 import AppLogo from '@/shared/components/app-logo';
-import AppLogoIcon from '@/shared/components/app-logo-icon';
 import { AppearanceToggle } from '@/shared/components/appearance-toggle';
 import { Breadcrumbs } from '@/shared/components/breadcrumbs';
 import { UserMenuContent } from '@/shared/components/user-menu-content';
@@ -91,24 +90,35 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                             <SheetTitle className="sr-only">
                                 Navigation menu
                             </SheetTitle>
-                            <SheetHeader className="flex justify-start text-left">
-                                <AppLogoIcon className="h-6 w-auto self-start brightness-0 dark:invert transition-all" />
+                            <SheetHeader className="flex justify-start text-left mb-4">
+                                <div className="bg-white/30 dark:bg-black/30 backdrop-blur-xl p-3 rounded-2xl border border-white/40 shadow-sm inline-block w-fit">
+                                    <AppLogo />
+                                </div>
                             </SheetHeader>
                             <div className="flex h-full flex-1 flex-col space-y-4 p-4">
                                 <div className="flex h-full flex-col justify-between text-sm">
-                                    <div className="flex flex-col space-y-4">
-                                        {mainNavItems.map((item) => (
-                                            <Link
-                                                key={item.title}
-                                                href={item.href}
-                                                className="flex items-center space-x-2 font-medium text-muted-foreground hover:text-foreground transition-colors"
-                                            >
-                                                {item.icon && (
-                                                    <item.icon className="h-5 w-5" />
-                                                )}
-                                                <span>{item.title}</span>
-                                            </Link>
-                                        ))}
+                                    <div className="flex flex-col space-y-2.5">
+                                        {mainNavItems.map((item) => {
+                                            const active = page.url === item.href || page.url.startsWith(item.href + '/');
+
+                                            return (
+                                                <Link
+                                                    key={item.title}
+                                                    href={item.href}
+                                                    className={cn(
+                                                        "flex items-center space-x-3 font-bold px-4 py-3 rounded-xl transition-all duration-300",
+                                                        active
+                                                            ? "bg-primary/10 text-primary border border-primary/20 shadow-xs"
+                                                            : "text-muted-foreground hover:text-foreground hover:bg-white/10 dark:hover:bg-white/5"
+                                                    )}
+                                                >
+                                                    {item.icon && (
+                                                        <item.icon className="h-5 w-5" />
+                                                    )}
+                                                    <span>{item.title}</span>
+                                                </Link>
+                                            );
+                                        })}
                                     </div>
 
                                     <div className="flex flex-col space-y-4">

@@ -1,0 +1,123 @@
+- generic:
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - button [expanded]:
+                - img
+            - link:
+              - /url: /dashboard
+              - generic:
+                - img
+                - generic:
+                  - generic: SingkatSaja
+            - generic:
+              - generic:
+                - button:
+                  - img
+              - button:
+                - generic:
+                  - generic: TU
+        - main:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - heading [level=1]: Good evening, Test
+                  - paragraph: Here's what's happening with your links today.
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - img
+                        - text: Quick Shorten
+                      - generic:
+                        - generic:
+                          - img
+                          - textbox:
+                            - /placeholder: Paste your long URL here (e.g. https://example.com/some/long/path)
+                        - button: Shorten URL
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: Total Links
+                        - generic:
+                          - img
+                      - generic:
+                        - generic: "1"
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: Active Links
+                        - generic:
+                          - img
+                      - generic:
+                        - generic: "1"
+                        - generic: LIVE
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: Total Clicks
+                        - generic:
+                          - img
+                      - generic:
+                        - generic: "224"
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: Clicks Today
+                        - generic:
+                          - img
+                      - generic:
+                        - generic: "12"
+                        - generic: + 12
+                - generic:
+                  - generic:
+                    - heading [level=2]: Recent Links
+                    - link:
+                      - /url: /links
+                      - text: View all
+                      - img
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - generic: google
+                            - button:
+                              - img
+                          - generic: Active
+                        - generic:
+                          - generic: Destination
+                          - generic:
+                            - generic: https://www.google.com
+                        - generic:
+                          - generic:
+                            - generic:
+                              - generic: "224"
+                              - text: clicks
+                            - generic:
+                              - img
+                              - text: 8h ago
+                          - link:
+                            - /url: /links/1
+                            - img
+    - region "Notifications alt+T"
+  - dialog "Navigation menu" [ref=e226]:
+    - heading "Navigation menu" [level=2] [ref=e227]
+    - img "SingkatSaja Logo" [ref=e229]
+    - generic [ref=e232]:
+      - link "Dashboard" [ref=e233] [cursor=pointer]:
+        - /url: /dashboard
+        - img [ref=e234]
+        - generic [ref=e239]: Dashboard
+      - link "My Links" [ref=e240] [cursor=pointer]:
+        - /url: /links
+        - img [ref=e241]
+        - generic [ref=e244]: My Links
+    - button "Close" [active] [ref=e245]:
+      - img [ref=e246]
+      - generic [ref=e249]: Close

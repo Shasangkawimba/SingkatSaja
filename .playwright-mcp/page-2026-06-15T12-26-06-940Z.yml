@@ -1,0 +1,47 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e7]:
+      - button [ref=e9]:
+        - img [ref=e10]
+      - link "SingkatSaja Logo SingkatSaja" [ref=e11] [cursor=pointer]:
+        - /url: /dashboard
+        - generic [ref=e12]:
+          - img "SingkatSaja Logo" [ref=e13]
+          - generic [ref=e15]: SingkatSaja
+      - generic [ref=e16]:
+        - button "Toggle theme" [ref=e18]:
+          - img
+          - img [ref=e19]
+        - button "TU" [ref=e21]:
+          - generic [ref=e23]: TU
+    - main [ref=e24]:
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - heading "Settings" [level=2] [ref=e27]
+          - paragraph [ref=e28]: Manage your profile and account settings
+        - generic [ref=e29]:
+          - complementary [ref=e30]:
+            - navigation "Settings" [ref=e31]:
+              - link "Profile" [ref=e32] [cursor=pointer]:
+                - /url: /settings/profile
+              - link "Security" [ref=e33] [cursor=pointer]:
+                - /url: /settings/security
+              - link "Appearance" [ref=e34] [cursor=pointer]:
+                - /url: /settings/appearance
+          - generic [ref=e36]:
+            - heading "Appearance settings" [level=1] [ref=e37]
+            - generic [ref=e38]:
+              - generic [ref=e39]:
+                - heading "Appearance settings" [level=2] [ref=e40]
+                - paragraph [ref=e41]: Update the appearance settings for your account
+              - generic [ref=e42]:
+                - button "Light" [ref=e43] [cursor=pointer]:
+                  - img [ref=e44]
+                  - generic [ref=e50]: Light
+                - button "Dark" [ref=e51] [cursor=pointer]:
+                  - img [ref=e52]
+                  - generic [ref=e54]: Dark
+                - button "System" [ref=e55] [cursor=pointer]:
+                  - img [ref=e56]
+                  - generic [ref=e58]: System
+  - region "Notifications alt+T"
