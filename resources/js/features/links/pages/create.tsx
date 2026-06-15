@@ -70,8 +70,8 @@ export default function Create() {
                             <Label htmlFor="short_code" className="flex items-center gap-1 text-base font-bold text-foreground">
                                 Custom Alias <span className="text-muted-foreground font-medium text-xs ml-1">(Optional)</span>
                             </Label>
-                            <div className="relative flex items-center group">
-                                <div className="flex h-14 items-center rounded-l-2xl border border-white/10 border-r-0 bg-background/30 px-4 text-sm font-bold text-muted-foreground shadow-inner">
+                            <div className="relative flex items-center group w-full">
+                                <div className="hidden sm:flex h-14 items-center rounded-l-2xl border border-white/10 border-r-0 bg-background/30 px-4 text-sm font-bold text-muted-foreground shadow-inner shrink-0">
                                     singkat.saja/
                                 </div>
                                 <Input
@@ -80,7 +80,7 @@ export default function Create() {
                                     placeholder="summer-sale"
                                     value={data.short_code}
                                     onChange={(e) => setData('short_code', e.target.value)}
-                                    className="h-14 rounded-l-none pl-4 rounded-r-2xl bg-background/50 border-white/10 focus-visible:ring-primary/50 text-base shadow-inner"
+                                    className="h-14 rounded-l-2xl sm:rounded-l-none pl-4 pr-12 rounded-r-2xl bg-background/50 border-white/10 focus-visible:ring-primary/50 text-base shadow-inner w-full"
                                 />
                                 <Zap className="absolute right-4 h-5 w-5 text-primary/50 group-focus-within:text-primary transition-colors" />
                             </div>

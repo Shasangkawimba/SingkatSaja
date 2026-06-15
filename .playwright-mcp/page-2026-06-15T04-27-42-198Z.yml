@@ -1,0 +1,54 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e7]:
+      - button [ref=e9]:
+        - img [ref=e10]
+      - link "SingkatSaja Logo" [ref=e11] [cursor=pointer]:
+        - /url: /dashboard
+        - img "SingkatSaja Logo" [ref=e13]
+      - generic [ref=e14]:
+        - button "Toggle theme" [ref=e16]:
+          - img
+          - img [ref=e17]
+        - button "TU" [ref=e19]:
+          - generic [ref=e21]: TU
+    - main [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e24]:
+          - heading "Settings" [level=2] [ref=e25]
+          - paragraph [ref=e26]: Manage your profile and account settings
+        - generic [ref=e27]:
+          - complementary [ref=e28]:
+            - navigation "Settings" [ref=e29]:
+              - link "Profile" [ref=e30] [cursor=pointer]:
+                - /url: /settings/profile
+              - link "Security" [ref=e31] [cursor=pointer]:
+                - /url: /settings/security
+              - link "Appearance" [ref=e32] [cursor=pointer]:
+                - /url: /settings/appearance
+          - generic [ref=e34]:
+            - heading "Profile settings" [level=1] [ref=e35]
+            - generic [ref=e36]:
+              - generic [ref=e37]:
+                - heading "Profile" [level=2] [ref=e38]
+                - paragraph [ref=e39]: Update your name and email address
+              - generic [ref=e40]:
+                - generic [ref=e41]:
+                  - generic [ref=e42]: Name
+                  - textbox "Name" [ref=e43]:
+                    - /placeholder: Full name
+                    - text: Test User
+                - generic [ref=e44]:
+                  - generic [ref=e45]: Email address
+                  - textbox "Email address" [ref=e46]: test@example.com
+                - button "Save" [ref=e48]
+            - generic [ref=e49]:
+              - generic [ref=e50]:
+                - heading "Delete account" [level=2] [ref=e51]
+                - paragraph [ref=e52]: Delete your account and all of its resources
+              - generic [ref=e53]:
+                - generic [ref=e54]:
+                  - paragraph [ref=e55]: Warning
+                  - paragraph [ref=e56]: Please proceed with caution, this cannot be undone.
+                - button "Delete account" [ref=e57]
+  - region "Notifications alt+T"

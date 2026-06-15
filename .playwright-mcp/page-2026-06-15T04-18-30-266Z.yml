@@ -1,0 +1,62 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e7]:
+      - button [ref=e9]:
+        - img [ref=e10]
+      - link "SingkatSaja Logo" [ref=e11] [cursor=pointer]:
+        - /url: /dashboard
+        - img "SingkatSaja Logo" [ref=e13]
+      - generic [ref=e14]:
+        - button "Toggle theme" [ref=e16]:
+          - img [ref=e17]
+          - img
+        - button "TU" [ref=e23]:
+          - generic [ref=e25]: TU
+    - main [ref=e26]:
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e30]:
+            - heading "My Links" [level=2] [ref=e31]
+            - paragraph [ref=e32]: Manage, monitor, and configure shortened links.
+          - link "Create Link" [ref=e34] [cursor=pointer]:
+            - /url: /links/create
+            - img [ref=e35]
+            - text: Create Link
+        - generic [ref=e37]:
+          - generic [ref=e38]:
+            - generic [ref=e39]:
+              - img [ref=e40]
+              - textbox "Search links or destinations..." [ref=e43]
+            - generic [ref=e44]:
+              - combobox [ref=e45]:
+                - img
+              - combobox [ref=e46]
+          - generic [ref=e50]:
+            - generic [ref=e51]:
+              - generic [ref=e52]:
+                - generic [ref=e53]: google
+                - button "Copy URL" [ref=e54]:
+                  - img [ref=e55]
+              - generic [ref=e58]: Active
+            - generic [ref=e60]:
+              - generic [ref=e61]: Destination
+              - link "https://www.google.com" [ref=e62] [cursor=pointer]:
+                - /url: https://www.google.com
+                - generic [ref=e63]: https://www.google.com
+                - img [ref=e64]
+            - generic [ref=e68]:
+              - generic [ref=e69]:
+                - generic [ref=e70]:
+                  - generic [ref=e71]: "224"
+                  - text: clicks
+                - img [ref=e73]
+              - generic [ref=e76]:
+                - link "View Analytics" [ref=e77] [cursor=pointer]:
+                  - /url: /links/1
+                  - img [ref=e78]
+                - link "Edit Link" [ref=e80] [cursor=pointer]:
+                  - /url: /links/1/edit
+                  - img [ref=e81]
+                - button "Delete Link" [ref=e83]:
+                  - img [ref=e84]
+  - region "Notifications alt+T"

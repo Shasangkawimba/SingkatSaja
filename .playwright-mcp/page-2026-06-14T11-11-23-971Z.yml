@@ -1,0 +1,16 @@
+- generic [ref=e2]:
+  - button "Confirm with passkey" [ref=e4]:
+    - img [ref=e5]
+    - text: Confirm with passkey
+  - generic [ref=e11]: Or confirm with password
+  - generic [ref=e13]:
+    - generic [ref=e14]:
+      - generic [ref=e15]: Password
+      - generic [ref=e16]:
+        - textbox "Password" [ref=e17]: P@ssw0rd_For_Playwr1ght_Test_992!
+        - button "Show password" [ref=e18]:
+          - img [ref=e19]
+    - button "Loading Confirm password" [disabled]:
+      - status "Loading"
+      - text: Confirm password
+  - region "Notifications alt+T"

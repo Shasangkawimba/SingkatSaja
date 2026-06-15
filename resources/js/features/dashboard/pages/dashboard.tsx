@@ -1,4 +1,4 @@
-import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import { Head, Link, useForm, usePage, router } from '@inertiajs/react';
 import {
     Link2,
     Eye,
@@ -43,6 +43,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
     React.useEffect(() => {
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsMounted(true);
+        router.reload({ only: ['stats', 'recent_links'] });
     }, []);
 
     const submit = (e: React.FormEvent) => {
@@ -161,7 +162,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                         </CardHeader>
                         <CardContent>
                             <div className="text-4xl font-extrabold tracking-tight text-foreground mt-2">
-                                {stats.total_links}
+                                {stats ? stats.total_links : <span className="text-muted-foreground/40 text-2xl font-medium">...</span>}
                             </div>
                         </CardContent>
                     </Card>
@@ -176,7 +177,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                         </CardHeader>
                         <CardContent className="flex items-baseline justify-between relative z-10">
                             <div className="text-4xl font-extrabold tracking-tight text-foreground mt-2">
-                                {stats.active_links}
+                                {stats ? stats.active_links : <span className="text-muted-foreground/40 text-2xl font-medium">...</span>}
                             </div>
                             <Badge variant="secondary" className="bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-3 py-1 font-bold">
                                 LIVE
@@ -193,7 +194,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                         </CardHeader>
                         <CardContent>
                             <div className="text-4xl font-extrabold tracking-tight text-foreground mt-2">
-                                {stats.total_clicks}
+                                {stats ? stats.total_clicks : <span className="text-muted-foreground/40 text-2xl font-medium">...</span>}
                             </div>
                         </CardContent>
                     </Card>
@@ -208,9 +209,9 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                         </CardHeader>
                         <CardContent className="flex items-baseline justify-between relative z-10">
                             <div className="text-4xl font-extrabold tracking-tight text-foreground mt-2">
-                                {stats.clicks_today}
+                                {stats ? stats.clicks_today : <span className="text-muted-foreground/40 text-2xl font-medium">...</span>}
                             </div>
-                            {stats.clicks_today > 0 ? (
+                            {stats && stats.clicks_today > 0 ? (
                                 <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/20 border border-emerald-500/20 px-3 py-1 rounded-full shadow-sm">
                                     + {stats.clicks_today}
                                 </span>
@@ -237,7 +238,11 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                     </div>
 
                     <div className="p-1">
-                        {linksList.length === 0 ? (
+                        {recent_links === undefined ? (
+                            <div className="glass-panel p-12 text-center text-base font-medium text-muted-foreground rounded-2xl border border-white/20 animate-pulse">
+                                Loading links...
+                            </div>
+                        ) : linksList.length === 0 ? (
                             <div className="glass-panel p-16 text-center text-base font-medium text-muted-foreground rounded-2xl border border-white/20">
                                 No links created yet. Use the input above to get started.
                             </div>

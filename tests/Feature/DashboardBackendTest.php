@@ -43,14 +43,17 @@ test('dashboard stats loads correctly via Inertia index page', function () {
     ]);
 
     $response = $this->actingAs($user)->get(route('dashboard'));
-
     $response->assertStatus(200);
     $response->assertInertia(fn (Assert $page) => $page
         ->component('dashboard')
-        ->where('stats.total_links', 3)
-        ->where('stats.active_links', 2)
-        ->where('stats.total_clicks', 15)
-        ->where('stats.clicks_today', 10)
+        ->missing('stats')
+        ->missing('recent_links')
+        ->reloadOnly(['stats', 'recent_links'], fn (Assert $page) => $page
+            ->where('stats.total_links', 3)
+            ->where('stats.active_links', 2)
+            ->where('stats.total_clicks', 15)
+            ->where('stats.clicks_today', 10)
+        )
     );
 });
 

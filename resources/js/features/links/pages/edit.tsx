@@ -70,8 +70,8 @@ export default function Edit({ link }: LinkEditProps) {
                             <Label htmlFor="short_code" className="flex items-center gap-2 text-base font-bold text-muted-foreground">
                                 Custom Alias <Lock className="h-4 w-4 text-muted-foreground/70" />
                             </Label>
-                            <div className="relative flex items-center">
-                                <div className="flex h-14 items-center rounded-l-2xl border border-white/10 border-r-0 bg-background/20 px-4 text-sm font-bold text-muted-foreground/70 shadow-inner">
+                            <div className="relative flex items-center w-full">
+                                <div className="hidden sm:flex h-14 items-center rounded-l-2xl border border-white/10 border-r-0 bg-background/20 px-4 text-sm font-bold text-muted-foreground/70 shadow-inner shrink-0">
                                     singkat.saja/
                                 </div>
                                 <Input
@@ -79,7 +79,7 @@ export default function Edit({ link }: LinkEditProps) {
                                     type="text"
                                     value={link.short_code}
                                     disabled
-                                    className="h-14 rounded-l-none pl-4 rounded-r-2xl bg-background/20 border-white/10 text-base shadow-inner cursor-not-allowed opacity-70"
+                                    className="h-14 rounded-l-2xl sm:rounded-l-none pl-4 pr-12 rounded-r-2xl bg-background/20 border-white/10 text-base shadow-inner cursor-not-allowed opacity-70 w-full"
                                 />
                                 <Zap className="absolute right-4 h-5 w-5 text-muted-foreground/30" />
                             </div>

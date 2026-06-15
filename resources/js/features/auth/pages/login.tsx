@@ -83,7 +83,7 @@ export default function Login({ status }: { status?: string }) {
                         name="remember"
                         checked={data.remember}
                         onCheckedChange={(checked) => setData('remember', checked as boolean)}
-                        className="h-5 w-5 rounded-md border-white/40 dark:border-white/20 bg-white/30 dark:bg-black/30 backdrop-blur-sm data-[state=checked]:bg-primary"
+                        className="h-5 w-5 rounded-md border-white/40 dark:border-white/20 bg-white/30 dark:bg-black/30 backdrop-blur-sm data-[state=checked]:bg-vivid-indigo"
                     />
                     <Label htmlFor="remember" className="font-medium text-muted-foreground cursor-pointer text-sm">
                         Remember me for 30 days

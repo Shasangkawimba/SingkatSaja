@@ -8,6 +8,6 @@ export type DashboardStats = {
 };
 
 export type DashboardProps = {
-    readonly stats: DashboardStats;
-    readonly recent_links: LinkType[];
+    readonly stats?: DashboardStats;
+    readonly recent_links?: LinkType[];
 };

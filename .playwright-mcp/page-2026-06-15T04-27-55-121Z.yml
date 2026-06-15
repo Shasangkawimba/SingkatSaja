@@ -1,0 +1,58 @@
+- generic [ref=e2]:
+  - generic [ref=e4]:
+    - generic [ref=e7]:
+      - button [ref=e9]:
+        - img [ref=e10]
+      - link "SingkatSaja Logo" [ref=e11] [cursor=pointer]:
+        - /url: /dashboard
+        - img "SingkatSaja Logo" [ref=e13]
+      - generic [ref=e14]:
+        - button "Toggle theme" [ref=e16]:
+          - img
+          - img [ref=e17]
+        - button "TU" [ref=e19]:
+          - generic [ref=e21]: TU
+    - main [ref=e22]:
+      - generic [ref=e24]:
+        - link "Back to Links" [ref=e26] [cursor=pointer]:
+          - /url: /links
+          - img [ref=e27]
+          - text: Back to Links
+        - generic [ref=e29]:
+          - generic [ref=e30]:
+            - heading "Create Link" [level=1] [ref=e31]
+            - paragraph [ref=e32]: Generate a new high-speed redirect.
+          - generic [ref=e33]:
+            - generic [ref=e34]:
+              - generic [ref=e35]:
+                - text: Destination URL
+                - generic [ref=e36]: "*"
+              - generic [ref=e37]:
+                - img [ref=e38]
+                - textbox "Destination URL *" [active] [ref=e41]:
+                  - /placeholder: https://example.com/very-long-url
+              - paragraph [ref=e42]: The original URL you want to route visitors to.
+            - generic [ref=e43]:
+              - generic [ref=e44]:
+                - generic [ref=e45]:
+                  - text: Custom Alias
+                  - generic [ref=e46]: (Optional)
+                - generic [ref=e47]:
+                  - generic [ref=e48]: singkat.saja/
+                  - textbox "Custom Alias (Optional)" [ref=e49]:
+                    - /placeholder: summer-sale
+                  - img [ref=e50]
+                - paragraph [ref=e52]: Leave empty for a random code.
+              - generic [ref=e53]:
+                - generic [ref=e54]:
+                  - text: Expiration Date
+                  - generic [ref=e55]: (Optional)
+                - generic [ref=e56]:
+                  - img [ref=e57]
+                  - textbox "Expiration Date (Optional)" [ref=e60]
+                - paragraph [ref=e61]: Auto-expire this link.
+            - generic [ref=e62]:
+              - link "Cancel" [ref=e63] [cursor=pointer]:
+                - /url: /links
+              - button "Create Link" [ref=e64]
+  - region "Notifications alt+T"

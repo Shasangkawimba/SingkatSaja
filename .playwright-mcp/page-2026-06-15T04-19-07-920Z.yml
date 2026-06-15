@@ -1,0 +1,82 @@
+- generic:
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - button [expanded]:
+                - img
+            - link:
+              - /url: /dashboard
+              - generic:
+                - img
+            - generic:
+              - generic:
+                - button:
+                  - img
+              - button:
+                - generic:
+                  - generic: TU
+        - main:
+          - generic:
+            - generic:
+              - generic:
+                - link:
+                  - /url: /links
+                  - img
+                  - text: Back to Links
+              - generic:
+                - generic:
+                  - heading [level=1]: Create Link
+                  - paragraph: Generate a new high-speed redirect.
+                - generic:
+                  - generic:
+                    - generic:
+                      - text: Destination URL
+                      - generic: "*"
+                    - generic:
+                      - img
+                      - textbox:
+                        - /placeholder: https://example.com/very-long-url
+                    - paragraph: The original URL you want to route visitors to.
+                  - generic:
+                    - generic:
+                      - generic:
+                        - text: Custom Alias
+                        - generic: (Optional)
+                      - generic:
+                        - generic: singkat.saja/
+                        - textbox:
+                          - /placeholder: summer-sale
+                        - img
+                      - paragraph: Leave empty for a random code.
+                    - generic:
+                      - generic:
+                        - text: Expiration Date
+                        - generic: (Optional)
+                      - generic:
+                        - img
+                        - textbox
+                      - paragraph: Auto-expire this link.
+                  - generic:
+                    - link:
+                      - /url: /links
+                      - text: Cancel
+                    - button: Create Link
+    - region "Notifications alt+T"
+  - dialog "Navigation menu" [ref=e130]:
+    - heading "Navigation menu" [level=2] [ref=e131]
+    - img "SingkatSaja Logo" [ref=e133]
+    - generic [ref=e136]:
+      - link "Dashboard" [ref=e137] [cursor=pointer]:
+        - /url: /dashboard
+        - img [ref=e138]
+        - generic [ref=e143]: Dashboard
+      - link "My Links" [ref=e144] [cursor=pointer]:
+        - /url: /links
+        - img [ref=e145]
+        - generic [ref=e148]: My Links
+    - button "Close" [active] [ref=e149]:
+      - img [ref=e150]
+      - generic [ref=e153]: Close

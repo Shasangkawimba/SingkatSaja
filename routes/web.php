@@ -23,5 +23,8 @@ Route::get('api/health', [\App\Http\Controllers\HealthController::class, 'show']
 Route::get('robots.txt', [\App\Http\Controllers\SeoController::class, 'robots'])->name('seo.robots');
 Route::get('sitemap.xml', [\App\Http\Controllers\SeoController::class, 'sitemap'])->name('seo.sitemap');
 
+Route::get('/ping', fn () => response('pong'))->withoutMiddleware([\App\Http\Middleware\HandleInertiaRequests::class, \App\Http\Middleware\HandleAppearance::class]);
+
 Route::get('/{short_code}', [\App\Http\Controllers\RedirectController::class, 'redirect'])->name('redirect');
+
 
