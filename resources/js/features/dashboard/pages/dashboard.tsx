@@ -154,7 +154,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
 
                 {/* MIDDLE SECTION: KPI Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:grid-cols-4">
-                    <Card className="hover:-translate-y-1 transition-transform duration-500 border border-white/40 dark:border-white/10">
+                    <Card className="hover:-translate-y-1 transition-transform duration-500 border border-white/40 dark:border-white/10 glass-panel">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Total Links</CardTitle>
                             <div className="p-2 rounded-full bg-primary/10 border border-primary/10 text-primary backdrop-blur-sm">
@@ -168,7 +168,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                         </CardContent>
                     </Card>
 
-                    <Card className="hover:-translate-y-1 transition-transform duration-500 relative overflow-hidden border border-white/40 dark:border-white/10">
+                    <Card className="hover:-translate-y-1 transition-transform duration-500 relative overflow-hidden border border-white/40 dark:border-white/10 glass-panel">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 relative z-10">
                             <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Active Links</CardTitle>
@@ -186,7 +186,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                         </CardContent>
                     </Card>
 
-                    <Card className="hover:-translate-y-1 transition-transform duration-500 border border-white/40 dark:border-white/10">
+                    <Card className="hover:-translate-y-1 transition-transform duration-500 border border-white/40 dark:border-white/10 glass-panel">
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Total Clicks</CardTitle>
                             <div className="p-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-500 backdrop-blur-sm">
@@ -200,7 +200,7 @@ export default function Dashboard({ stats, recent_links }: DashboardProps) {
                         </CardContent>
                     </Card>
 
-                    <Card className="hover:-translate-y-1 transition-transform duration-500 relative overflow-hidden border border-white/40 dark:border-white/10">
+                    <Card className="hover:-translate-y-1 transition-transform duration-500 relative overflow-hidden border border-white/40 dark:border-white/10 glass-panel">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 relative z-10">
                             <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Clicks Today</CardTitle>
